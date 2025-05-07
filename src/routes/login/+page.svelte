@@ -1,9 +1,10 @@
 <script lang="ts">
-	import type { ActionData } from './$types';
+	import type { PageProps } from './$types';
 	import { enhance } from '$app/forms';
-	export let form: ActionData;
 
-	let submitting = false;
+	let { form }: PageProps = $props();
+
+	let submitting = $state(false);
 </script>
 
 <div>

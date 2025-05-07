@@ -7,10 +7,10 @@ import type { Actions } from './$types';
 
 const LOGIN_VERIFY_EMAIL_COOKIE = 'sk_login_verify_email';
 
-export const actions: Actions = {
-	default: async ({ request, cookies }) => {
-		const formData = await request.formData();
-		const email = formData.get('email')?.toString()?.trim().toLowerCase();
+export const actions = {
+	default: async ({ cookies, request }) => {
+		const data = await request.formData();
+		const email = data.get('email')?.toString()?.trim().toLowerCase();
 
 		if (!email) {
 			return fail(400, { email, error: 'Email is required.' });
@@ -43,4 +43,4 @@ export const actions: Actions = {
 
 		redirect(303, '/login/verify');
 	}
-};
+} satisfies Actions;

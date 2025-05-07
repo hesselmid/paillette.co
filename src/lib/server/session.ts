@@ -4,12 +4,9 @@ import { eq, and, gt } from 'drizzle-orm';
 import crypto from 'crypto';
 import type { Cookies } from '@sveltejs/kit';
 
-export const SESSION_COOKIE_NAME = 'session_id';
-const SESSION_DURATION_DAYS = 30;
-
 export async function createSession(userId: number, cookies: Cookies): Promise<string> {
 	const sessionId = crypto.randomBytes(32).toString('hex');
-	const expiresAt = new Date(Date.now() + SESSION_DURATION_DAYS * 24 * 60 * 60 * 1000);
+	const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
 
 	await db.insert(sessionsTable).values({
 		id: sessionId,
@@ -17,7 +14,7 @@ export async function createSession(userId: number, cookies: Cookies): Promise<s
 		expiresAt
 	});
 
-	cookies.set(SESSION_COOKIE_NAME, sessionId, {
+	cookies.set('session', sessionId, {
 		path: '/',
 		httpOnly: true,
 		secure: process.env.NODE_ENV === 'production',
@@ -57,5 +54,5 @@ export async function getSessionUser(sessionId: string | undefined) {
 
 export async function deleteSession(sessionId: string, cookies: Cookies) {
 	await db.delete(sessionsTable).where(eq(sessionsTable.id, sessionId));
-	cookies.delete(SESSION_COOKIE_NAME, { path: '/' });
+	cookies.delete('session', { path: '/' });
 }

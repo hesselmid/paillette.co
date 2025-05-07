@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { ActionData, PageData } from './$types';
+	import type { PageProps } from './$types';
 	import { enhance } from '$app/forms';
-	export let form: ActionData;
-	export let data: PageData;
 
-	let submitting = false;
+	let { data, form }: PageProps = $props();
+
+	let submitting = $state(false);
 </script>
 
 <div>
@@ -22,11 +22,19 @@
 	>
 		<div>
 			<label for="otp">OTP:</label>
-			<input
+			<!-- <input
 				type="text"
 				id="otp"
 				name="otp"
 				pattern="\d{6}"
+				title="Enter 6-digit OTP"
+				required
+				disabled={submitting}
+			/> -->
+			<input
+				type="text"
+				id="otp"
+				name="otp"
 				title="Enter 6-digit OTP"
 				required
 				disabled={submitting}

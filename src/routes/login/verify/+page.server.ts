@@ -19,10 +19,10 @@ export const load: PageServerLoad = async ({ cookies }) => {
 	};
 };
 
-export const actions: Actions = {
+export const actions = {
 	default: async ({ request, cookies }) => {
-		const formData = await request.formData();
-		const code = formData.get('otp')?.toString()?.trim();
+		const data = await request.formData();
+		const code = data.get('otp')?.toString()?.trim();
 		const email = cookies.get(LOGIN_VERIFY_EMAIL_COOKIE);
 
 		if (!email) {
@@ -60,4 +60,4 @@ export const actions: Actions = {
 
 		redirect(303, '/dashboard');
 	}
-};
+} satisfies Actions;
