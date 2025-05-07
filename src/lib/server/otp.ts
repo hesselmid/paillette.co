@@ -2,8 +2,12 @@ import { db } from './db';
 import { otpsTable } from './db/schema';
 import { eq, and, gt, desc } from 'drizzle-orm';
 import crypto from 'crypto';
+import { env } from '$env/dynamic/private';
+import { LoopsClient } from 'loops';
 
 const OTP_EXPIRY_MINUTES = 5;
+
+const loops = new LoopsClient(env.LOOPS_API_KEY!);
 
 export async function generateOtp(userId: number): Promise<string> {
 	const code = crypto.randomInt(100000, 999999).toString();
@@ -41,4 +45,14 @@ export async function verifyOtp(userId: number, code: string): Promise<boolean> 
 
 export async function sendOtpEmail(email: string, otp: string): Promise<void> {
 	console.log(`DEMO: Sending OTP ${otp} to ${email}`);
+
+	const response = await loops.sendTransactionalEmail({
+		transactionalId: 'cmae39blz4yvv13n6wpvgyzl9',
+		email,
+		dataVariables: {
+			otp
+		}
+	});
+
+	console.log(response);
 }
