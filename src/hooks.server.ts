@@ -1,5 +1,5 @@
 import { redirect, type Handle, error } from '@sveltejs/kit';
-import { getSessionUser, SESSION_COOKIE_NAME } from '$lib/server/session';
+import { getSessionUser } from '$lib/server/session';
 import type { UserRole } from '$lib/server/db/schema';
 
 const PROTECTED_ROUTES: Record<string, UserRole[]> = {
@@ -10,13 +10,15 @@ const PROTECTED_ROUTES: Record<string, UserRole[]> = {
 };
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const sessionId = event.cookies.get(SESSION_COOKIE_NAME);
+	const sessionId = event.cookies.get('session');
 	event.locals.user = await getSessionUser(sessionId);
+
+	console.log(event.locals.user);
 
 	const pathname = event.url.pathname;
 
 	if (event.locals.user && (pathname === '/login' || pathname.startsWith('/login/'))) {
-		redirect(303, '/dashboard');
+		redirect(303, '/');
 	}
 	for (const routeBase in PROTECTED_ROUTES) {
 		if (pathname.startsWith(routeBase)) {
