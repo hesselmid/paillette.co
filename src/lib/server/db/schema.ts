@@ -7,6 +7,8 @@ export type UserRole = (typeof USER_ROLES)[number];
 export const usersTable = sqliteTable('users', {
 	id: integer('id').primaryKey(),
 	email: text('email').notNull().unique(),
+	firstName: text('first_name').notNull(),
+	lastName: text('last_name').notNull(),
 	role: text('role', { enum: USER_ROLES }).notNull(),
 	createdAt: integer('created_at', { mode: 'timestamp_ms' })
 		.notNull()

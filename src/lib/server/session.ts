@@ -35,6 +35,8 @@ export async function getSessionUser(sessionId: string | undefined) {
 		.select({
 			id: usersTable.id,
 			email: usersTable.email,
+			firstName: usersTable.firstName,
+			lastName: usersTable.lastName,
 			role: usersTable.role
 		})
 		.from(sessionsTable)
@@ -46,6 +48,8 @@ export async function getSessionUser(sessionId: string | undefined) {
 		return {
 			id: result[0].id,
 			email: result[0].email,
+			firstName: result[0].firstName,
+			lastName: result[0].lastName,
 			role: result[0].role as UserRole
 		};
 	}

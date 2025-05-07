@@ -2,12 +2,9 @@ import { db } from './db';
 import { otpsTable } from './db/schema';
 import { eq, and, gt, desc } from 'drizzle-orm';
 import crypto from 'crypto';
-import { env } from '$env/dynamic/private';
-import { LoopsClient } from 'loops';
+import { loops } from './loops';
 
 const OTP_EXPIRY_MINUTES = 5;
-
-const loops = new LoopsClient(env.LOOPS_API_KEY!);
 
 export async function generateOtp(userId: number): Promise<string> {
 	const code = crypto.randomInt(100000, 999999).toString();

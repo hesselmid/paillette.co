@@ -30,7 +30,6 @@ export const actions = {
 				error: 'Session expired or email not found. Please try logging in again.'
 			});
 		}
-
 		if (!code) {
 			return fail(400, { email, error: 'OTP is required.' });
 		}
@@ -39,7 +38,7 @@ export const actions = {
 		}
 
 		const userQuery = await db
-			.select({ id: usersTable.id })
+			.select({ id: usersTable.id, role: usersTable.role })
 			.from(usersTable)
 			.where(eq(usersTable.email, email))
 			.limit(1);
@@ -58,6 +57,19 @@ export const actions = {
 		await createSession(user.id, cookies);
 		cookies.delete(LOGIN_VERIFY_EMAIL_COOKIE, { path: '/login/verify' });
 
-		redirect(303, '/dashboard');
+		let redirectPath: string;
+		switch (user.role) {
+			case 'member':
+				redirectPath = '/member/dashboard';
+				break;
+			case 'customer':
+				redirectPath = '/account/dashboard';
+				break;
+			case 'admin':
+				redirectPath = '/admin/dashboard';
+				break;
+		}
+
+		redirect(303, redirectPath);
 	}
 } satisfies Actions;

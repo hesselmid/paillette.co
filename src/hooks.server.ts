@@ -4,16 +4,17 @@ import type { UserRole } from '$lib/server/db/schema';
 
 const PROTECTED_ROUTES: Record<string, UserRole[]> = {
 	'/admin': ['admin'],
-	'/member-area': ['member', 'admin'],
-	'/orders': ['customer', 'admin'],
-	'/dashboard': ['member', 'customer', 'admin']
+	'/member': ['member'],
+	'/account': ['customer'],
+	'/shop': ['customer'],
+	'/wishlist': ['customer'],
+	'/cart': ['customer'],
+	'/checkout': ['customer']
 };
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const sessionId = event.cookies.get('session');
 	event.locals.user = await getSessionUser(sessionId);
-
-	console.log(event.locals.user);
 
 	const pathname = event.url.pathname;
 

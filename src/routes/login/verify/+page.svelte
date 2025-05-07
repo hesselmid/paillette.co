@@ -22,20 +22,13 @@
 	>
 		<div>
 			<label for="otp">OTP:</label>
-			<!-- <input
-				type="text"
-				id="otp"
-				name="otp"
-				pattern="\d{6}"
-				title="Enter 6-digit OTP"
-				required
-				disabled={submitting}
-			/> -->
 			<input
 				type="text"
 				id="otp"
 				name="otp"
+				pattern="\d*"
 				title="Enter 6-digit OTP"
+				autocomplete="one-time-code"
 				required
 				disabled={submitting}
 			/>
