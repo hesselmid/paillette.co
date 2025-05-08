@@ -35,7 +35,7 @@
 								{user.role}
 							</td>
 							<td>
-								{new Date(user.createdAt).toLocaleDateString()}
+								{new Date(user.createdAt).toLocaleDateString('en-GB')}
 							</td>
 							<td>
 								<a href="/admin/users/{user.id}">View/Edit</a>

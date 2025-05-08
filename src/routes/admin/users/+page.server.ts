@@ -1,7 +1,7 @@
 import { db } from '$lib/server/db';
 import { usersTable } from '$lib/server/db/schema';
 import { error } from '@sveltejs/kit';
-import { asc } from 'drizzle-orm';
+import { desc } from 'drizzle-orm';
 
 export const load = async ({ locals }) => {
 	if (!locals.user || locals.user.role !== 'admin') {
@@ -19,7 +19,7 @@ export const load = async ({ locals }) => {
 				createdAt: usersTable.createdAt
 			})
 			.from(usersTable)
-			.orderBy(asc(usersTable.lastName), asc(usersTable.firstName));
+			.orderBy(desc(usersTable.createdAt));
 
 		return {
 			usersList
