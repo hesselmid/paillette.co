@@ -63,6 +63,7 @@
 				stroke-width="1.5"
 				stroke="currentColor"
 				class="size-6"
+				style="width:20px"
 			>
 				<path
 					stroke-linecap="round"
