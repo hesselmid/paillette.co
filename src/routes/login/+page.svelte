@@ -1,11 +1,14 @@
 <script lang="ts">
-	import type { PageProps } from './$types';
 	import { enhance } from '$app/forms';
 
-	let { form }: PageProps = $props();
+	let { form } = $props();
 
 	let submitting = $state(false);
 </script>
+
+<svelte:head>
+	<title>Login - Paillette.co</title>
+</svelte:head>
 
 <div>
 	<h1>Login</h1>

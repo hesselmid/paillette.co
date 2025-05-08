@@ -1,15 +1,14 @@
 <script lang="ts">
-	import type { PageProps } from './$types';
 	import { enhance } from '$app/forms';
 
-	let { data, form }: PageProps = $props();
+	let { data, form } = $props();
 
 	let submitting = $state(false);
 </script>
 
 <div>
-	<h1>Verify OTP</h1>
-	<p>An OTP has been sent to {data.email}. Please enter it below.</p>
+	<h1>Verification</h1>
+	<p>If you have an account, we have sent a code to {data.email}. Enter it below.</p>
 	<form
 		method="POST"
 		use:enhance={() => {

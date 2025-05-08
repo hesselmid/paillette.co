@@ -1,23 +1,39 @@
 import { fail, redirect } from '@sveltejs/kit';
+import { eq } from 'drizzle-orm';
+import { z } from 'zod';
+import type { Actions } from './$types';
 import { db } from '$lib/server/db';
 import { usersTable } from '$lib/server/db/schema';
-import { eq } from 'drizzle-orm';
 import { generateOtp, sendOtpEmail } from '$lib/server/otp';
-import type { Actions } from './$types';
 
 const LOGIN_VERIFY_EMAIL_COOKIE = 'sk_login_verify_email';
 
+const LoginSchema = z.object({
+	email: z
+		.string({ required_error: 'Email is required.' })
+		.min(1, { message: 'Email is required.' })
+		.email({ message: 'Invalid email format.' })
+		.transform((val) => val.trim().toLowerCase())
+});
+
 export const actions = {
 	default: async ({ cookies, request }) => {
-		const data = await request.formData();
-		const email = data.get('email')?.toString()?.trim().toLowerCase();
+		const formData = await request.formData();
+		const data = Object.fromEntries(formData);
 
-		if (!email) {
-			return fail(400, { email, error: 'Email is required.' });
+		const validationResult = LoginSchema.safeParse(data);
+
+		if (!validationResult.success) {
+			const errors = validationResult.error.flatten().fieldErrors;
+			return fail(400, {
+				email: data.email,
+				errors: {
+					email: errors.email?.[0]
+				}
+			});
 		}
-		if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-			return fail(400, { email, error: 'Invalid email format.' });
-		}
+
+		const { email } = validationResult.data;
 
 		const existingUserQuery = await db
 			.select({ id: usersTable.id })
