@@ -1,7 +1,7 @@
 import { db } from './db';
 import { sessionsTable, usersTable, type UserRole } from './db/schema';
 import { eq, and, gt } from 'drizzle-orm';
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 import type { Cookies } from '@sveltejs/kit';
 
 export async function createSession(userId: number, cookies: Cookies): Promise<string> {
