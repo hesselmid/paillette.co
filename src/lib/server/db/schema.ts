@@ -1,4 +1,4 @@
-import { relations, sql } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 
 export const USER_ROLES = ['member', 'customer', 'admin'] as const;
@@ -69,30 +69,3 @@ export const customerProfilesTable = sqliteTable('customer_profiles', {
 		.default(sql`(cast(strftime('%s', 'now') as integer) * 1000)`)
 		.$onUpdate(() => new Date())
 });
-
-export const usersRelations = relations(usersTable, ({ many, one }) => ({
-	otps: many(otpsTable),
-	sessions: many(sessionsTable),
-	memberProfile: one(memberProfilesTable, {
-		fields: [usersTable.id],
-		references: [memberProfilesTable.userId]
-	}),
-	customerProfile: one(customerProfilesTable, {
-		fields: [usersTable.id],
-		references: [customerProfilesTable.userId]
-	})
-}));
-
-export const otpsRelations = relations(otpsTable, ({ one }) => ({
-	user: one(usersTable, {
-		fields: [otpsTable.userId],
-		references: [usersTable.id]
-	})
-}));
-
-export const sessionsRelations = relations(sessionsTable, ({ one }) => ({
-	user: one(usersTable, {
-		fields: [sessionsTable.userId],
-		references: [usersTable.id]
-	})
-}));
