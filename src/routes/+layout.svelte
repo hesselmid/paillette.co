@@ -35,7 +35,8 @@
 </script>
 
 <nav>
-	<a href="/">Home</a>
+	<a href="/">Paillette</a>
+
 	<a href={loginHref} aria-label={loginLabel}
 		><svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -53,6 +54,19 @@
 			/>
 		</svg>
 	</a>
+	<ul>
+		<li><a href="/services">Services</a></li>
+		<li><a href="/about">About</a></li>
+		<li><a href="/community">Community</a></li>
+		<li><a href="/threads-and-thoughts">Threads & Thoughts</a></li>
+		<li><a href="/contact">Contact</a></li>
+		<li><a href="/faq">FAQ</a></li>
+	</ul>
 </nav>
 
 {@render children()}
+
+<footer>
+	<a href="/terms-and-conditions">Terms & Conditions</a>
+	<a href="/privacy-policy">Privacy Policy</a>
+</footer>
