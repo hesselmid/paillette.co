@@ -22,6 +22,8 @@
 
 	<p>Here you can manage your account, view orders, and more.</p>
 
+	<a href="/account/profile">Edit Profile</a>
+
 	<hr />
 
 	<form method="POST" action="/logout">
