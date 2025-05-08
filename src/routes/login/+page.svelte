@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { superForm } from 'sveltekit-superforms';
 
-	let { form } = $props();
+	let { data } = $props();
 
-	let submitting = $state(false);
+	const { form, enhance, errors, message, submitting } = superForm(data.form);
 </script>
 
 <svelte:head>
@@ -12,32 +12,30 @@
 
 <div>
 	<h1>Login</h1>
-	<form
-		method="POST"
-		use:enhance={() => {
-			submitting = true;
-			return async ({ update }) => {
-				await update();
-				submitting = false;
-			};
-		}}
-	>
+	<form method="POST" use:enhance>
 		<div>
 			<label for="email">Email:</label>
 			<input
 				type="email"
 				id="email"
 				name="email"
-				value={form?.email ?? ''}
+				bind:value={$form.email}
 				required
-				disabled={submitting}
+				disabled={$submitting}
+				aria-invalid={$errors.email ? 'true' : undefined}
+				placeholder="your@email.com"
 			/>
+			{#if $errors.email}
+				<p>{$errors.email[0]}</p>
+			{/if}
 		</div>
-		{#if form?.error}
-			<p>{form.error}</p>
+
+		{#if $message}
+			<p>{$message}</p>
 		{/if}
-		<button type="submit" disabled={submitting}>
-			{#if submitting}Sending OTP...{:else}Send OTP{/if}
+
+		<button type="submit" disabled={$submitting}>
+			{#if $submitting}Sending OTP...{:else}Send OTP{/if}
 		</button>
 	</form>
 </div>

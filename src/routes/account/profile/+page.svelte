@@ -1,25 +1,9 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { superForm } from 'sveltekit-superforms';
 
-	let { data, form } = $props();
+	let { data } = $props();
 
-	let formFirstName = $state(form?.data?.firstName ?? data.currentUser.firstName ?? '');
-	let formLastName = $state(form?.data?.lastName ?? data.currentUser.lastName ?? '');
-	let formCompanyName = $state(form?.data?.companyName ?? data.currentUser.companyName ?? '');
-
-	let submitting = $state(false);
-
-	$effect(() => {
-		if (form?.data) {
-			formFirstName = form.data.firstName ?? data.currentUser.firstName ?? '';
-			formLastName = form.data.lastName ?? data.currentUser.lastName ?? '';
-			formCompanyName = form.data.companyName ?? data.currentUser.companyName ?? '';
-		} else if (form?.success && form.updatedData) {
-			formFirstName = form.updatedData.firstName;
-			formLastName = form.updatedData.lastName;
-			formCompanyName = form.updatedData.companyName ?? '';
-		}
-	});
+	const { form, enhance, errors, message, submitting, constraints } = superForm(data.form);
 </script>
 
 <svelte:head>
@@ -28,29 +12,24 @@
 
 <div>
 	<h1>Edit Your Profile</h1>
+	{#if data.userEmail}
+		<p>Editing profile for: {data.userEmail}</p>
+	{/if}
 
-	<form
-		method="POST"
-		use:enhance={() => {
-			submitting = true;
-			return async ({ update }) => {
-				await update();
-				submitting = false;
-			};
-		}}
-	>
+	<form method="POST" use:enhance>
 		<div>
 			<label for="firstName">First Name:</label>
 			<input
 				type="text"
 				id="firstName"
 				name="firstName"
-				bind:value={formFirstName}
-				required
-				disabled={submitting}
+				bind:value={$form.firstName}
+				disabled={$submitting}
+				aria-invalid={$errors.firstName ? 'true' : undefined}
+				required={$constraints.firstName?.required}
 			/>
-			{#if form?.errors?.firstName}
-				<p>{form.errors.firstName[0]}</p>
+			{#if $errors.firstName}
+				<p>{$errors.firstName[0]}</p>
 			{/if}
 		</div>
 
@@ -60,12 +39,13 @@
 				type="text"
 				id="lastName"
 				name="lastName"
-				bind:value={formLastName}
-				required
-				disabled={submitting}
+				bind:value={$form.lastName}
+				disabled={$submitting}
+				aria-invalid={$errors.lastName ? 'true' : undefined}
+				required={$constraints.lastName?.required}
 			/>
-			{#if form?.errors?.lastName}
-				<p>{form.errors.lastName[0]}</p>
+			{#if $errors.lastName}
+				<p>{$errors.lastName[0]}</p>
 			{/if}
 		</div>
 
@@ -75,23 +55,21 @@
 				type="text"
 				id="companyName"
 				name="companyName"
-				bind:value={formCompanyName}
-				disabled={submitting}
+				bind:value={$form.companyName}
+				disabled={$submitting}
+				aria-invalid={$errors.companyName ? 'true' : undefined}
 			/>
-			{#if form?.errors?.companyName}
-				<p>{form.errors.companyName[0]}</p>
+			{#if $errors.companyName}
+				<p>{$errors.companyName[0]}</p>
 			{/if}
 		</div>
 
-		{#if form?.message && !form.success && !form.errors}
-			<p>{form.message}</p>
-		{/if}
-		{#if form?.success && form.message}
-			<p>{form.message}</p>
+		{#if $message}
+			<p>{$message}</p>
 		{/if}
 
-		<button type="submit" disabled={submitting}>
-			{#if submitting}Saving...{:else}Save Changes{/if}
+		<button type="submit" disabled={$submitting}>
+			{#if $submitting}Saving...{:else}Save Changes{/if}
 		</button>
 	</form>
 

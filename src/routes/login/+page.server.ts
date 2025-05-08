@@ -5,6 +5,8 @@ import type { Actions } from './$types';
 import { db } from '$lib/server/db';
 import { usersTable } from '$lib/server/db/schema';
 import { generateOtp, sendOtpEmail } from '$lib/server/otp';
+import { superValidate, message } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 
 const LOGIN_VERIFY_EMAIL_COOKIE = 'sk_login_verify_email';
 
@@ -13,27 +15,24 @@ const LoginSchema = z.object({
 		.string({ required_error: 'Email is required.' })
 		.min(1, { message: 'Email is required.' })
 		.email({ message: 'Invalid email format.' })
-		.transform((val) => val.trim().toLowerCase())
+		.trim()
+		.toLowerCase()
 });
+
+export const load = async () => {
+	const form = await superValidate(zod(LoginSchema));
+	return { form };
+};
 
 export const actions = {
 	default: async ({ cookies, request }) => {
-		const formData = await request.formData();
-		const data = Object.fromEntries(formData);
+		const form = await superValidate(request, zod(LoginSchema));
 
-		const validationResult = LoginSchema.safeParse(data);
-
-		if (!validationResult.success) {
-			const errors = validationResult.error.flatten().fieldErrors;
-			return fail(400, {
-				email: data.email,
-				errors: {
-					email: errors.email?.[0]
-				}
-			});
+		if (!form.valid) {
+			return fail(400, { form });
 		}
 
-		const { email } = validationResult.data;
+		const { email } = form.data;
 
 		const existingUserQuery = await db
 			.select({ id: usersTable.id })
@@ -42,12 +41,21 @@ export const actions = {
 			.limit(1);
 
 		if (!existingUserQuery.length) {
-			return fail(404, { email, error: 'This email is not registered.' });
+			return message(form, 'This email is not registered.', {
+				status: 404
+			});
 		}
 
 		const userId = existingUserQuery[0].id;
-		const otp = await generateOtp(userId);
-		await sendOtpEmail(email, otp);
+		try {
+			const otp = await generateOtp(userId);
+			await sendOtpEmail(email, otp);
+		} catch (error) {
+			console.error('Error generating or sending OTP:', error);
+			return message(form, 'Could not send OTP. Please try again later.', {
+				status: 500
+			});
+		}
 
 		cookies.set(LOGIN_VERIFY_EMAIL_COOKIE, email, {
 			path: '/login/verify',

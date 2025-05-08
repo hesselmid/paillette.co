@@ -4,6 +4,8 @@ import { usersTable, customerProfilesTable } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { z } from 'zod';
 import type { Actions } from './$types';
+import { superValidate, message } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 
 const ProfileUpdateSchema = z.object({
 	firstName: z
@@ -44,40 +46,34 @@ export const load = async ({ locals }) => {
 		console.error('Error fetching customer profile data:', e);
 	}
 
+	const initialData = {
+		firstName: locals.user.firstName,
+		lastName: locals.user.lastName,
+		companyName: currentCompanyName
+	};
+
+	const form = await superValidate(initialData, zod(ProfileUpdateSchema));
+
 	return {
-		currentUser: {
-			firstName: locals.user.firstName,
-			lastName: locals.user.lastName,
-			email: locals.user.email,
-			companyName: currentCompanyName
-		}
+		form,
+		userEmail: locals.user.email
 	};
 };
 
 export const actions = {
 	default: async ({ request, locals }) => {
 		if (!locals.user || locals.user.role !== 'customer') {
-			return fail(403, { message: 'Forbidden' });
+			const form = await superValidate(request, zod(ProfileUpdateSchema));
+			return fail(403, { form, message: 'Forbidden' });
 		}
 
-		const formData = await request.formData();
-		const dataToValidate = {
-			firstName: formData.get('firstName')?.toString(),
-			lastName: formData.get('lastName')?.toString(),
-			companyName: formData.get('companyName')?.toString()
-		};
+		const form = await superValidate(request, zod(ProfileUpdateSchema));
 
-		const validationResult = ProfileUpdateSchema.safeParse(dataToValidate);
-
-		if (!validationResult.success) {
-			const errors = validationResult.error.flatten().fieldErrors;
-			return fail(400, {
-				data: dataToValidate,
-				errors
-			});
+		if (!form.valid) {
+			return fail(400, { form });
 		}
 
-		const { firstName, lastName, companyName } = validationResult.data;
+		const { firstName, lastName, companyName } = form.data;
 
 		try {
 			await db.transaction(async (tx) => {
@@ -105,16 +101,12 @@ export const actions = {
 					});
 			});
 
-			return {
-				success: true,
-				message: 'Profile updated successfully.',
-				updatedData: { firstName, lastName, companyName }
-			};
+			form.data = { firstName, lastName, companyName };
+			return message(form, 'Profile updated successfully.');
 		} catch (e) {
 			console.error('Error updating profile:', e);
-			return fail(500, {
-				data: dataToValidate,
-				message: 'Failed to update profile. Please try again.'
+			return message(form, 'Failed to update profile. Please try again.', {
+				status: 500
 			});
 		}
 	}
