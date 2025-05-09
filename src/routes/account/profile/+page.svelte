@@ -3,7 +3,9 @@
 
 	let { data } = $props();
 
-	const { form, enhance, errors, message, submitting, constraints } = superForm(data.form);
+	const { form, enhance, errors, message, submitting, constraints } = superForm(data.form, {
+		resetForm: false
+	});
 </script>
 
 <svelte:head>

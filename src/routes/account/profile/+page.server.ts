@@ -59,6 +59,7 @@ const ProfileUpdateSchema = z.object({
 });
 
 export const load = async ({ locals }) => {
+	console.log('load function');
 	if (!locals.user || locals.user.role !== 'customer') {
 		error(403, 'Forbidden');
 	}
@@ -114,6 +115,8 @@ export const load = async ({ locals }) => {
 		region: customerProfileData.region,
 		country: customerProfileData.country
 	};
+
+	console.log('initialData', initialData);
 
 	const form = await superValidate(initialData, zod(ProfileUpdateSchema));
 
