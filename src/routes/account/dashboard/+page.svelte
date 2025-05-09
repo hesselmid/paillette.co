@@ -22,7 +22,9 @@
 
 	<p>Here you can manage your account, view orders, and more.</p>
 
-	<a href="/account/profile">Edit Profile</a>
+	<a href="/account/orders">My Orders</a>
+	<a href="/wishlist">Wish List</a>
+	<a href="/account/profile">Account Details</a>
 
 	<hr />
 
