@@ -14,13 +14,10 @@
 
 <div>
 	<h1>Edit Your Profile</h1>
-	{#if data.userEmail}
-		<p>Editing profile for: {data.userEmail}</p>
-	{/if}
 
 	<form method="POST" use:enhance>
 		<div>
-			<label for="firstName">First Name:</label>
+			<label for="firstName">First Name</label>
 			<input
 				type="text"
 				id="firstName"
@@ -36,7 +33,7 @@
 		</div>
 
 		<div>
-			<label for="lastName">Last Name:</label>
+			<label for="lastName">Last Name</label>
 			<input
 				type="text"
 				id="lastName"
@@ -52,7 +49,7 @@
 		</div>
 
 		<div>
-			<label for="companyName">Company Name (Optional):</label>
+			<label for="companyName">Company Name</label>
 			<input
 				type="text"
 				id="companyName"
@@ -66,11 +63,11 @@
 			{/if}
 		</div>
 
-		<hr />
-		<h2>Address (Optional for profile, may be required for orders)</h2>
+		<h2>Billing Address</h2>
+		<p>If you’d like to add a postal address to every invoice, enter it here.</p>
 
 		<div>
-			<label for="streetAndNumber">Street and Number:</label>
+			<label for="streetAndNumber">Street and Number</label>
 			<input
 				type="text"
 				id="streetAndNumber"
@@ -85,7 +82,7 @@
 		</div>
 
 		<div>
-			<label for="streetAdditional">Additional Address Line (e.g., Apt, Suite):</label>
+			<label for="streetAdditional">Additional Address Line (e.g., Apt, Suite)</label>
 			<input
 				type="text"
 				id="streetAdditional"
@@ -100,7 +97,7 @@
 		</div>
 
 		<div>
-			<label for="postalCode">Postal Code:</label>
+			<label for="postalCode">Postal Code</label>
 			<input
 				type="text"
 				id="postalCode"
@@ -115,7 +112,7 @@
 		</div>
 
 		<div>
-			<label for="city">City:</label>
+			<label for="city">City</label>
 			<input
 				type="text"
 				id="city"
@@ -130,7 +127,7 @@
 		</div>
 
 		<div>
-			<label for="region">Region/State/Province (Optional):</label>
+			<label for="region">Region/State/Province (Optional)</label>
 			<input
 				type="text"
 				id="region"
@@ -145,7 +142,7 @@
 		</div>
 
 		<div>
-			<label for="country">Country (2-letter ISO code, e.g., US, GB):</label>
+			<label for="country">Country (2-letter ISO code, e.g., US, GB)</label>
 			<input
 				type="text"
 				id="country"
@@ -168,7 +165,7 @@
 		{/if}
 
 		<button type="submit" disabled={$submitting}>
-			{#if $submitting}Saving...{:else}Save Changes{/if}
+			{#if $submitting}Saving...{:else}Save{/if}
 		</button>
 	</form>
 
