@@ -64,6 +64,103 @@
 			{/if}
 		</div>
 
+		<hr />
+		<h2>Address (Optional for profile, may be required for orders)</h2>
+
+		<div>
+			<label for="streetAndNumber">Street and Number:</label>
+			<input
+				type="text"
+				id="streetAndNumber"
+				name="streetAndNumber"
+				bind:value={$form.streetAndNumber}
+				disabled={$submitting}
+				aria-invalid={$errors.streetAndNumber ? 'true' : undefined}
+			/>
+			{#if $errors.streetAndNumber}
+				<p>{$errors.streetAndNumber[0]}</p>
+			{/if}
+		</div>
+
+		<div>
+			<label for="streetAdditional">Additional Address Line (e.g., Apt, Suite):</label>
+			<input
+				type="text"
+				id="streetAdditional"
+				name="streetAdditional"
+				bind:value={$form.streetAdditional}
+				disabled={$submitting}
+				aria-invalid={$errors.streetAdditional ? 'true' : undefined}
+			/>
+			{#if $errors.streetAdditional}
+				<p>{$errors.streetAdditional[0]}</p>
+			{/if}
+		</div>
+
+		<div>
+			<label for="postalCode">Postal Code:</label>
+			<input
+				type="text"
+				id="postalCode"
+				name="postalCode"
+				bind:value={$form.postalCode}
+				disabled={$submitting}
+				aria-invalid={$errors.postalCode ? 'true' : undefined}
+			/>
+			{#if $errors.postalCode}
+				<p>{$errors.postalCode[0]}</p>
+			{/if}
+		</div>
+
+		<div>
+			<label for="city">City:</label>
+			<input
+				type="text"
+				id="city"
+				name="city"
+				bind:value={$form.city}
+				disabled={$submitting}
+				aria-invalid={$errors.city ? 'true' : undefined}
+			/>
+			{#if $errors.city}
+				<p>{$errors.city[0]}</p>
+			{/if}
+		</div>
+
+		<div>
+			<label for="region">Region/State/Province (Optional):</label>
+			<input
+				type="text"
+				id="region"
+				name="region"
+				bind:value={$form.region}
+				disabled={$submitting}
+				aria-invalid={$errors.region ? 'true' : undefined}
+			/>
+			{#if $errors.region}
+				<p>{$errors.region[0]}</p>
+			{/if}
+		</div>
+
+		<div>
+			<label for="country">Country (2-letter ISO code, e.g., US, GB):</label>
+			<input
+				type="text"
+				id="country"
+				name="country"
+				bind:value={$form.country}
+				minlength="2"
+				maxlength="2"
+				title="Enter a 2-letter ISO country code"
+				disabled={$submitting}
+				aria-invalid={$errors.country ? 'true' : undefined}
+				style="text-transform: uppercase;"
+			/>
+			{#if $errors.country}
+				<p>{$errors.country[0]}</p>
+			{/if}
+		</div>
+
 		{#if $message}
 			<p>{$message}</p>
 		{/if}
