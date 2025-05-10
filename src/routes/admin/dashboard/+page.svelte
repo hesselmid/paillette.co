@@ -16,6 +16,9 @@
 	<p>Hello, {data.currentUser.firstName}!</p>
 {/if}
 
+<a href="/admin/applications">Applications</a>
+<a href="/admin/orders">Orders</a>
+<a href="/admin/prints">Prints</a>
 <a href="/admin/users">Users</a>
 
 <hr />
