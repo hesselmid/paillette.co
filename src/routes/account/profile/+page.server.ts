@@ -1,13 +1,16 @@
-import { error, fail } from '@sveltejs/kit';
-import { db } from '$lib/server/db';
-import { usersTable, customerProfilesTable } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { z } from 'zod';
-import type { Actions } from './$types';
 import { superValidate, message } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
-const ProfileUpdateSchema = z.object({
+import { error, fail } from '@sveltejs/kit';
+import type { Actions } from './$types';
+
+import { countries } from '$lib/countries';
+import { db } from '$lib/server/db';
+import { usersTable, customerProfilesTable } from '$lib/server/db/schema';
+
+const PersonalInfoSchema = z.object({
 	firstName: z
 		.string({ required_error: 'First name is required.' })
 		.trim()
@@ -15,46 +18,45 @@ const ProfileUpdateSchema = z.object({
 	lastName: z
 		.string({ required_error: 'Last name is required.' })
 		.trim()
-		.min(1, { message: 'Last name cannot be empty.' }),
+		.min(1, { message: 'Last name cannot be empty.' })
+});
+
+const CompanyNameSchema = z.object({
 	companyName: z
-		.string()
+		.string({ required_error: 'Company name is required.' })
 		.trim()
-		.transform((val) => (val === '' ? null : val))
-		.nullable(),
+		.min(1, { message: 'Company name cannot be empty.' })
+});
+
+const BillingAddressSchema = z.object({
 	streetAndNumber: z
-		.string()
+		.string({ required_error: 'Street and number are required.' })
 		.trim()
-		.transform((val) => (val === '' ? null : val))
-		.nullable(),
+		.min(1, { message: 'Street and number cannot be empty.' }),
 	streetAdditional: z
 		.string()
 		.trim()
 		.transform((val) => (val === '' ? null : val))
 		.nullable(),
 	postalCode: z
-		.string()
+		.string({ required_error: 'Postal code is required.' })
 		.trim()
-		.transform((val) => (val === '' ? null : val))
-		.nullable(),
+		.min(1, { message: 'Postal code cannot be empty.' }),
 	city: z
-		.string()
+		.string({ required_error: 'City is required.' })
 		.trim()
-		.transform((val) => (val === '' ? null : val))
-		.nullable(),
+		.min(1, { message: 'City cannot be empty.' }),
 	region: z
 		.string()
 		.trim()
 		.transform((val) => (val === '' ? null : val))
 		.nullable(),
 	country: z
-		.string()
+		.string({ required_error: 'Country is required.' })
 		.trim()
-		.length(2, { message: 'Country must be a 2-letter ISO code (e.g., US, GB).' })
 		.toUpperCase()
-		.transform((val) => (val === '' ? null : val))
-		.nullable()
-		.refine((val) => val === null || /^[A-Z]{2}$/.test(val), {
-			message: 'Country must be a 2-letter ISO code (e.g., US, GB).'
+		.refine((val) => val !== '' && countries.some((c) => c.code === val), {
+			message: 'Please select a valid country from the list.'
 		})
 });
 
@@ -63,135 +65,160 @@ export const load = async ({ locals }) => {
 		error(403, 'Forbidden');
 	}
 
-	let customerProfileData: {
-		companyName: string | null;
-		streetAndNumber: string | null;
-		streetAdditional: string | null;
-		postalCode: string | null;
-		city: string | null;
-		region: string | null;
-		country: string | null;
-	} = {
-		companyName: null,
-		streetAndNumber: null,
-		streetAdditional: null,
-		postalCode: null,
-		city: null,
-		region: null,
-		country: null
-	};
+	const userId = locals.user.id;
 
-	try {
-		const profileResult = await db
-			.select({
-				companyName: customerProfilesTable.companyName,
-				streetAndNumber: customerProfilesTable.streetAndNumber,
-				streetAdditional: customerProfilesTable.streetAdditional,
-				postalCode: customerProfilesTable.postalCode,
-				city: customerProfilesTable.city,
-				region: customerProfilesTable.region,
-				country: customerProfilesTable.country
-			})
-			.from(customerProfilesTable)
-			.where(eq(customerProfilesTable.userId, locals.user.id))
-			.limit(1);
+	const userPromise = db
+		.select({
+			firstName: usersTable.firstName,
+			lastName: usersTable.lastName
+		})
+		.from(usersTable)
+		.where(eq(usersTable.id, userId))
+		.limit(1);
 
-		if (profileResult.length > 0) {
-			customerProfileData = profileResult[0];
-		}
-	} catch (e) {
-		console.error('Error fetching customer profile data:', e);
-	}
+	const profilePromise = db
+		.select({
+			companyName: customerProfilesTable.companyName,
+			streetAndNumber: customerProfilesTable.streetAndNumber,
+			streetAdditional: customerProfilesTable.streetAdditional,
+			postalCode: customerProfilesTable.postalCode,
+			city: customerProfilesTable.city,
+			region: customerProfilesTable.region,
+			country: customerProfilesTable.country
+		})
+		.from(customerProfilesTable)
+		.where(eq(customerProfilesTable.userId, userId))
+		.limit(1);
 
-	const initialData = {
-		firstName: locals.user.firstName,
-		lastName: locals.user.lastName,
-		companyName: customerProfileData.companyName,
-		streetAndNumber: customerProfileData.streetAndNumber,
-		streetAdditional: customerProfileData.streetAdditional,
-		postalCode: customerProfileData.postalCode,
-		city: customerProfileData.city,
-		region: customerProfileData.region,
-		country: customerProfileData.country
-	};
+	const [userResult, profileResult] = await Promise.all([userPromise, profilePromise]);
 
-	const form = await superValidate(initialData, zod(ProfileUpdateSchema));
+	const userData = userResult[0] || { firstName: '', lastName: '' };
+	const profileData = profileResult[0] || {};
+
+	const personalInfoForm = await superValidate(
+		{
+			firstName: userData.firstName,
+			lastName: userData.lastName
+		},
+		zod(PersonalInfoSchema),
+		{ id: 'personalInfoForm' }
+	);
+
+	const companyNameForm = await superValidate(
+		{
+			companyName: profileData.companyName ?? ''
+		},
+		zod(CompanyNameSchema),
+		{ id: 'companyNameForm' }
+	);
+
+	const billingAddressForm = await superValidate(
+		{
+			streetAndNumber: profileData.streetAndNumber ?? '',
+			streetAdditional: profileData.streetAdditional ?? null,
+			postalCode: profileData.postalCode ?? '',
+			city: profileData.city ?? '',
+			region: profileData.region ?? null,
+			country: profileData.country ?? ''
+		},
+		zod(BillingAddressSchema),
+		{ id: 'billingAddressForm' }
+	);
 
 	return {
-		form
+		personalInfoForm,
+		companyNameForm,
+		billingAddressForm,
+		countries
 	};
 };
 
-export const actions = {
-	default: async ({ request, locals }) => {
-		if (!locals.user || locals.user.role !== 'customer') {
-			const form = await superValidate(request, zod(ProfileUpdateSchema));
-			return fail(403, { form, message: 'Forbidden' });
-		}
-
-		const form = await superValidate(request, zod(ProfileUpdateSchema));
-
+export const actions: Actions = {
+	updatePersonalInfo: async ({ request, locals }) => {
+		if (!locals.user || locals.user.role !== 'customer') error(403, 'Forbidden');
+		const form = await superValidate(request, zod(PersonalInfoSchema), { id: 'personalInfoForm' });
 		if (!form.valid) {
 			return fail(400, { form });
 		}
-
-		const {
-			firstName,
-			lastName,
-			companyName,
-			streetAndNumber,
-			streetAdditional,
-			postalCode,
-			city,
-			region,
-			country
-		} = form.data;
-
 		try {
-			await db.transaction(async (tx) => {
-				await tx
-					.update(usersTable)
-					.set({
-						firstName,
-						lastName,
-						updatedAt: new Date()
-					})
-					.where(eq(usersTable.id, locals.user!.id));
-
-				await tx
-					.insert(customerProfilesTable)
-					.values({
-						userId: locals.user!.id,
-						companyName,
-						streetAndNumber,
-						streetAdditional,
-						postalCode,
-						city,
-						region,
-						country,
-						createdAt: new Date()
-					})
-					.onConflictDoUpdate({
-						target: customerProfilesTable.userId,
-						set: {
-							companyName,
-							streetAndNumber,
-							streetAdditional,
-							postalCode,
-							city,
-							region,
-							country,
-							updatedAt: new Date()
-						}
-					});
-			});
-
-			return message(form, 'Profile updated successfully.');
+			await db
+				.update(usersTable)
+				.set({
+					firstName: form.data.firstName,
+					lastName: form.data.lastName,
+					updatedAt: new Date()
+				})
+				.where(eq(usersTable.id, locals.user.id));
+			return message(form, 'Personal information updated successfully.');
 		} catch (e) {
-			console.error('Error updating profile:', e);
-			return message(form, 'Failed to update profile. Please try again.', {
-				status: 500
-			});
+			console.error('Error updating personal info:', e);
+			return message(form, 'Failed to update personal information.', { status: 500 });
+		}
+	},
+
+	updateCompanyName: async ({ request, locals }) => {
+		if (!locals.user || locals.user.role !== 'customer') error(403, 'Forbidden');
+		const form = await superValidate(request, zod(CompanyNameSchema), { id: 'companyNameForm' });
+		if (!form.valid) {
+			return fail(400, { form });
+		}
+		try {
+			await db
+				.insert(customerProfilesTable)
+				.values({
+					userId: locals.user.id,
+					companyName: form.data.companyName
+				})
+				.onConflictDoUpdate({
+					target: customerProfilesTable.userId,
+					set: {
+						companyName: form.data.companyName,
+						updatedAt: new Date()
+					}
+				});
+			return message(form, 'Company name updated successfully.');
+		} catch (e) {
+			console.error('Error updating company name:', e);
+			return message(form, 'Failed to update company name.', { status: 500 });
+		}
+	},
+
+	updateBillingAddress: async ({ request, locals }) => {
+		if (!locals.user || locals.user.role !== 'customer') error(403, 'Forbidden');
+		const form = await superValidate(request, zod(BillingAddressSchema), {
+			id: 'billingAddressForm'
+		});
+		if (!form.valid) {
+			return fail(400, { form });
+		}
+		try {
+			await db
+				.insert(customerProfilesTable)
+				.values({
+					userId: locals.user.id,
+					streetAndNumber: form.data.streetAndNumber,
+					streetAdditional: form.data.streetAdditional,
+					postalCode: form.data.postalCode,
+					city: form.data.city,
+					region: form.data.region,
+					country: form.data.country
+				})
+				.onConflictDoUpdate({
+					target: customerProfilesTable.userId,
+					set: {
+						streetAndNumber: form.data.streetAndNumber,
+						streetAdditional: form.data.streetAdditional,
+						postalCode: form.data.postalCode,
+						city: form.data.city,
+						region: form.data.region,
+						country: form.data.country,
+						updatedAt: new Date()
+					}
+				});
+			return message(form, 'Billing address updated successfully.');
+		} catch (e) {
+			console.error('Error updating billing address:', e);
+			return message(form, 'Failed to update billing address.', { status: 500 });
 		}
 	}
-} satisfies Actions;
+};
