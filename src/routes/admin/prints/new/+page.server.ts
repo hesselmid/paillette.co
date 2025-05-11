@@ -136,9 +136,13 @@ export const actions: Actions = {
 					}
 				}
 			});
-		} catch (e: any) {
+		} catch (e: unknown) {
 			console.error('Error creating print:', e);
-			return message(form, `Failed to create print: ${e.message}`, { status: 500 });
+			let errorMessage = 'Unknown error';
+			if (e instanceof Error) {
+				errorMessage = e.message;
+			}
+			return message(form, `Failed to create print: ${errorMessage}`, { status: 500 });
 		}
 		redirect(303, '/admin/dashboard');
 	}
