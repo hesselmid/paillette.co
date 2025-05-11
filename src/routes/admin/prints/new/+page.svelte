@@ -130,7 +130,7 @@
 			<legend>Colorways*</legend>
 			{#if $errors.colorways?._errors}<p>{$errors.colorways._errors[0]}</p>{/if}
 
-			{#each $form.colorways as colorwayItem, i (i)}
+			{#each $form.colorways as _, i (i)}
 				<div>
 					<h4>Colorway {i + 1}</h4>
 					<div>
@@ -139,11 +139,11 @@
 							type="text"
 							id={`colorways-${i}-name`}
 							name={`colorways[${i}].name`}
-							bind:value={colorwayItem.name}
+							bind:value={$form.colorways[i].name}
 							aria-invalid={$errors.colorways?.[i]?.name ? 'true' : undefined}
-							required={$constraints.colorways?.[i]?.name?.required}
+							required={$constraints.colorways?.name?.required}
 						/>
-						{#if $errors.colorways?.[i]?.name}<p>{$errors.colorways[i].name[0]}</p>{/if}
+						{#if $errors.colorways?.[i]?.name}<p>{$errors.colorways?.[i]?.name?.[0]}</p>{/if}
 					</div>
 					<div>
 						<label for={`colorways-${i}-imageUrl`}>Image URL</label>
@@ -151,10 +151,12 @@
 							type="url"
 							id={`colorways-${i}-imageUrl`}
 							name={`colorways[${i}].imageUrl`}
-							bind:value={colorwayItem.imageUrl}
+							bind:value={$form.colorways[i].imageUrl}
 							aria-invalid={$errors.colorways?.[i]?.imageUrl ? 'true' : undefined}
 						/>
-						{#if $errors.colorways?.[i]?.imageUrl}<p>{$errors.colorways[i].imageUrl[0]}</p>{/if}
+						{#if $errors.colorways?.[i]?.imageUrl}<p>
+								{$errors.colorways?.[i]?.imageUrl?._errors?.[0]}
+							</p>{/if}
 					</div>
 					<div>
 						<label for={`colorways-${i}-colorIds`}>Colors* (select multiple)</label>
@@ -162,12 +164,12 @@
 							id={`colorways-${i}-colorIds`}
 							name={`colorways[${i}].colorIds`}
 							multiple
-							bind:value={colorwayItem.colorIds}
+							bind:value={$form.colorways[i].colorIds}
 							aria-invalid={$errors.colorways?.[i]?.colorIds?._errors ||
 							$errors.colorways?.[i]?.colorIds?.[0]
 								? 'true'
 								: undefined}
-							required={$constraints.colorways?.[i]?.colorIds?.required}
+							required={$constraints.colorways?.colorIds?.required}
 						>
 							{#each data.allColors as color (color.id)}
 								<option value={color.id}>{color.name}</option>
@@ -175,9 +177,9 @@
 						</select>
 						{#if $errors.colorways?.[i]?.colorIds}
 							<p>
-								{$errors.colorways[i].colorIds._errors
+								{$errors.colorways?.[i]?.colorIds?._errors
 									? $errors.colorways[i].colorIds._errors[0]
-									: $errors.colorways[i].colorIds[0] || $errors.colorways[i].colorIds}
+									: $errors.colorways?.[i]?.colorIds?.[0]}
 							</p>
 						{/if}
 					</div>
