@@ -66,14 +66,14 @@
 			</div>
 
 			<div>
-				<label for="priceCents">Price (in cents)*</label>
+				<label for="priceCents">Price (e.g., 19.99)*</label>
 				<input
-					type="number"
+					type="text"
 					id="priceCents"
 					name="priceCents"
 					bind:value={$form.priceCents}
 					aria-invalid={$errors.priceCents ? 'true' : undefined}
-					min="0"
+					placeholder="e.g., 19.99"
 					required={$constraints.priceCents?.required}
 				/>
 				{#if $errors.priceCents}<p>{$errors.priceCents[0]}</p>{/if}
@@ -130,6 +130,7 @@
 			<legend>Colorways*</legend>
 			{#if $errors.colorways?._errors}<p>{$errors.colorways._errors[0]}</p>{/if}
 
+			<!-- eslint-disable @typescript-eslint/no-unused-vars -->
 			{#each $form.colorways as _, i (i)}
 				<div>
 					<h4>Colorway {i + 1}</h4>
