@@ -29,10 +29,11 @@ const newPrintSchema = z.object({
 	priceCents: z
 		.string()
 		.min(1, { message: 'Price is required.' })
-		.regex(/^\d*\.?\d{0,2}$/, {
-			message: 'Invalid price format. Use up to two decimal places (e.g., 19.99).'
+		.regex(/^\d+([.,]\d{1,2})?$/, {
+			message:
+				'Invalid price format. Use numbers, optionally with a dot or comma and up to two decimal places (e.g., 19.99 or 19,99).'
 		})
-		.transform((valStr) => Math.round(parseFloat(valStr) * 100))
+		.transform((valStr) => Math.round(parseFloat(valStr.replace(',', '.')) * 100))
 		.refine((valNum) => valNum >= 0, {
 			message: 'Price must be a non-negative value.'
 		}),
