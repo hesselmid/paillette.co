@@ -1,5 +1,79 @@
+<!-- src/routes/wishlist/+page.svelte -->
+<script lang="ts">
+	import { enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation'; // Used to refresh the list after removal
+
+	let { data, form } = $props(); // Use form for potential error messages
+
+	const DEFAULT_WISHLIST_IMAGE_URL = 'https://placehold.co/200x133.png?text=Print+Image';
+	let actionInProgressForId: number | null = $state(null);
+</script>
+
 <svelte:head>
-	<title>Wishlist - Paillette</title>
+	<title>My Wishlist - Paillette.co</title>
 </svelte:head>
 
-<h1>Wishlist</h1>
+<h1>My Wishlist</h1>
+
+{#if form?.message}
+	<!-- Display general error messages from actions -->
+	<p style="color: red;">{form.message}</p>
+{/if}
+
+{#if data.wishlistItems && data.wishlistItems.length > 0}
+	<div
+		style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem;"
+	>
+		{#each data.wishlistItems as item (item.printId)}
+			<article style="border: 1px solid #eee; padding: 1rem; opacity: {item.isSold ? 0.6 : 1};">
+				<a href={`/shop/${item.printId}`}>
+					<img
+						src={item.imageUrl ?? DEFAULT_WISHLIST_IMAGE_URL}
+						alt={`Preview of ${item.printName}`}
+						style="width: 100%; height: auto; aspect-ratio: 3/2; object-fit: cover; margin-bottom: 0.5rem;"
+					/>
+					<h2>{item.printName}</h2>
+				</a>
+				<p>Designer: {item.designerFullName}</p>
+				<p>Price: {item.priceFormatted}</p>
+				{#if item.isSold}
+					<p style="color: red; font-weight: bold;">(Sold)</p>
+				{/if}
+
+				<!-- Remove Button Form -->
+				<form
+					method="POST"
+					action="?/remove"
+					use:enhance={() => {
+						actionInProgressForId = item.printId;
+						// --- MODIFIED LINE (Removed 'update' from destructuring) ---
+						return async ({ result }) => {
+							// --- END MODIFIED LINE ---
+							if (result.type === 'success') {
+								// Successfully removed on server, invalidate data to refresh the list
+								await invalidateAll(); // Safest way to ensure the list reflects the removal
+							} else if (result.type === 'failure') {
+								console.error('Failed to remove:', result.data?.message);
+								alert(result.data?.message || 'Could not remove item.');
+							}
+							// Reset loading state regardless of outcome
+							actionInProgressForId = null;
+						};
+					}}
+				>
+					<input type="hidden" name="printId" value={item.printId} />
+					<button type="submit" disabled={actionInProgressForId === item.printId}>
+						{#if actionInProgressForId === item.printId}
+							Removing...
+						{:else}
+							Remove from Wishlist
+						{/if}
+					</button>
+				</form>
+			</article>
+		{/each}
+	</div>
+{:else}
+	<p>Your wishlist is currently empty.</p>
+	<p><a href="/shop">Browse the shop</a> to find prints you love!</p>
+{/if}

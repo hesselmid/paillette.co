@@ -1,15 +1,27 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
+	// --- MODIFIED LINE (Removed invalidateAll) ---
 	import { goto } from '$app/navigation';
+	// --- END MODIFIED LINE ---
+	import { enhance } from '$app/forms';
 
-	let { data } = $props();
+	let { data, form } = $props();
 
 	const DEFAULT_COLORWAY_IMAGE_URL = 'https://placehold.co/300x200.png?text=Print+Image';
 
 	let formElement: HTMLFormElement | undefined = $state();
 	let isDesktop: boolean = $state(false);
 	const DESKTOP_BREAKPOINT = '(min-width: 1024px)';
+
+	// Wishlist State
+	let wishlistedPrintIds = $state(new Set(data.wishlistedPrintIds || []));
+	let wishlistActionInProgressForId: number | null = $state(null);
+
+	// Sync wishlist state if data reloads from server (e.g., pagination)
+	$effect(() => {
+		wishlistedPrintIds = new Set(data.wishlistedPrintIds || []);
+	});
 
 	onMount(() => {
 		const mediaQuery = window.matchMedia(DESKTOP_BREAKPOINT);
@@ -49,29 +61,29 @@
 	function handleFilterChange() {
 		if (isDesktop && formElement) {
 			const formData = new FormData(formElement);
-			const params = new URLSearchParams(formData as any); // Cast needed for FormData to URLSearchParams
+			const formDataEntries = Array.from(formData.entries()) as [string, string][];
+			const params = new URLSearchParams(formDataEntries);
 
-			// Always reset to page 1 when filters change on desktop via immediate update
-			params.set('page', '1');
-
-			// Optional: Clean up URL by removing empty parameters (if any checkbox group becomes unchecked)
-			// This is handled implicitly if unchecked boxes are not part of FormData.
-			// But if you had other empty inputs, you might want this:
-			// for (const [key, value] of Array.from(params.entries())) {
-			//   if (value === '') {
-			//     params.delete(key);
-			//   }
-			// }
+			params.set('page', '1'); // Always reset to page 1 on filter change
 
 			goto(`/shop?${params.toString()}`, {
-				invalidateAll: true, // Crucial: re-runs the load function
-				noScroll: true, // Prevents page from scrolling to the top on filter change
-				keepFocus: true, // Helps maintain focus on the element that triggered the change
-				replaceState: false // Creates a new history entry for each filter change. Set to true if you prefer not to.
+				invalidateAll: true, // Re-run load function
+				noScroll: true,
+				keepFocus: true,
+				replaceState: false // Add new history entry for filter changes
 			});
 		}
-		// On mobile, this function is called, but the actual filtering happens
-		// when the "Apply Filters" button is clicked (standard form submission).
+	}
+
+	// Wishlist update handler
+	function handleWishlistUpdate(printId: number, added: boolean) {
+		if (added) {
+			wishlistedPrintIds.add(printId);
+		} else {
+			wishlistedPrintIds.delete(printId);
+		}
+		wishlistedPrintIds = new Set(wishlistedPrintIds);
+		wishlistActionInProgressForId = null;
 	}
 </script>
 
@@ -83,16 +95,7 @@
 
 <aside>
 	<h2>Filters</h2>
-	<!--
-    The form element is used for both mobile submission and for desktop's FormData collection.
-    On mobile, the "Apply Filters" button (type="submit") will trigger a GET request.
-    On desktop, handleFilterChange uses FormData from this form and navigates with goto().
-  -->
 	<form bind:this={formElement} method="GET" action="/shop">
-		<!--
-      This hidden input ensures that when the form is submitted on mobile (or if JS fails),
-      the page resets to 1. For desktop, handleFilterChange also explicitly sets page=1.
-    -->
 		<input type="hidden" name="page" value="1" />
 
 		<section>
@@ -175,13 +178,26 @@
 </aside>
 
 <main>
+	<!-- --- MODIFIED BLOCK (Refined check for form and form.failedPrintId) --- -->
+	{#if form?.message}
+		<p style="color: red;">
+			{#if form && 'failedPrintId' in form && form.failedPrintId != null}
+				Error processing request for print {form.failedPrintId}:
+			{:else}
+				Notice:
+			{/if}
+			{form.message}
+		</p>
+	{/if}
+	<!-- --- END MODIFIED BLOCK --- -->
+
 	{#if data.colorways.length > 0}
 		<p>Showing {data.colorways.length} of {data.totalColorways} colorways.</p>
 		<div
 			style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem;"
 		>
 			{#each data.colorways as colorway (colorway.id)}
-				<article>
+				<article style="position: relative; border: 1px solid #eee; padding: 1rem;">
 					<a href={`/shop/${colorway.printId}`}>
 						<img
 							src={colorway.imageUrl || DEFAULT_COLORWAY_IMAGE_URL}
@@ -190,6 +206,66 @@
 						/>
 						<p>{colorway.name || 'Unnamed Colorway'}</p>
 					</a>
+
+					<!-- Wishlist Button for this Print -->
+					<div style="margin-top: 0.5rem;">
+						{#if wishlistedPrintIds.has(colorway.printId)}
+							<form
+								method="POST"
+								action="?/removeFromWishlist"
+								use:enhance={() => {
+									wishlistActionInProgressForId = colorway.printId;
+									return async ({ result }) => {
+										const currentActionId = wishlistActionInProgressForId;
+										wishlistActionInProgressForId = null; // Reset loading state
+
+										if (result.type === 'success') {
+											if (currentActionId === colorway.printId) {
+												// Ensure correct button result
+												handleWishlistUpdate(colorway.printId, false);
+											}
+										} else if (result.type === 'failure') {
+											console.error('Failed to remove from wishlist:', result.data?.message);
+											alert(result.data?.message || 'Failed to remove');
+										}
+									};
+								}}
+							>
+								<input type="hidden" name="printId" value={colorway.printId} />
+								<button type="submit" disabled={wishlistActionInProgressForId === colorway.printId}>
+									{#if wishlistActionInProgressForId === colorway.printId}Removing...{:else}❤️
+										Remove{/if}
+								</button>
+							</form>
+						{:else}
+							<form
+								method="POST"
+								action="?/addToWishlist"
+								use:enhance={() => {
+									wishlistActionInProgressForId = colorway.printId;
+									return async ({ result }) => {
+										const currentActionId = wishlistActionInProgressForId;
+										wishlistActionInProgressForId = null; // Reset loading state
+
+										if (result.type === 'success') {
+											if (currentActionId === colorway.printId) {
+												// Ensure correct button result
+												handleWishlistUpdate(colorway.printId, true);
+											}
+										} else if (result.type === 'failure') {
+											console.error('Failed to add to wishlist:', result.data?.message);
+											alert(result.data?.message || 'Failed to add');
+										}
+									};
+								}}
+							>
+								<input type="hidden" name="printId" value={colorway.printId} />
+								<button type="submit" disabled={wishlistActionInProgressForId === colorway.printId}>
+									{#if wishlistActionInProgressForId === colorway.printId}Adding...{:else}🤍 Add{/if}
+								</button>
+							</form>
+						{/if}
+					</div>
 				</article>
 			{/each}
 		</div>
