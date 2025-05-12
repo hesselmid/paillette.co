@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { superForm } from 'sveltekit-superforms';
+	import Superdebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
 	let { data } = $props();
 
@@ -24,6 +25,8 @@
 		addColorway();
 	}
 </script>
+
+<Superdebug data={$form} />
 
 <svelte:head>
 	<title>Add New Print - Admin - Paillette.co</title>
@@ -89,12 +92,14 @@
 					required={$constraints.designerId?.required}
 				>
 					<option
-						value=""
+						value={0}
 						disabled
-						selected={$form.designerId === undefined ||
+						selected={$form.designerId === 0 ||
 							$form.designerId === null ||
-							$form.designerId === 0}>Select a designer</option
+							$form.designerId === undefined}
 					>
+						Select a designer
+					</option>
 					{#each data.designers as designer (designer.id)}
 						<option value={designer.id}>{designer.name}</option>
 					{/each}
