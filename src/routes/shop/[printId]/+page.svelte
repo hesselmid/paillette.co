@@ -1,7 +1,5 @@
-<!-- src/routes/shop/[printId]/+page.svelte -->
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	// import { invalidateAll } from '$app/navigation';
 
 	let { data, form } = $props();
 
@@ -31,7 +29,6 @@
 	<p>Designed by: {data.print.designer.fullName}</p>
 
 	<div>
-		<!-- Main Image Area -->
 		<img
 			src={mainImageUrl}
 			alt="Main view of {data.print.name}"
@@ -40,7 +37,6 @@
 	</div>
 
 	<div>
-		<!-- Colorway Selector/Thumbnails -->
 		<h2>Colorways</h2>
 		{#if data.colorways.length > 0}
 			<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1rem;">
@@ -68,14 +64,11 @@
 	</div>
 
 	<div>
-		<!-- Price and Description -->
 		<h2>Details</h2>
 		<p><strong>Price:</strong> {data.print.priceFormatted}</p>
 		{#if data.print.description}
 			<p><strong>Description:</strong></p>
-			<!-- --- MODIFIED LINE (Replaced {@html ...} with safe { ... }) --- -->
 			<div>{data.print.description}</div>
-			<!-- --- END MODIFIED LINE --- -->
 		{:else}
 			<p>No description available.</p>
 		{/if}
@@ -83,10 +76,8 @@
 		{#if data.print.isSold}
 			<p style="color: red; font-weight: bold;">This print has been sold.</p>
 		{:else}
-			<!-- Add to Cart Button Placeholder -->
 			<button style="margin-top: 1rem;">Add to Cart</button>
 
-			<!-- Wishlist Button/Form -->
 			<div style="display: inline-block; margin-left: 10px;">
 				{#if isInWishlist}
 					<form

@@ -1,11 +1,6 @@
 import { error, fail } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
-import {
-	printsTable,
-	colorwaysTable,
-	usersTable,
-	wishlistItemsTable // ADDED
-} from '$lib/server/db/schema';
+import { printsTable, colorwaysTable, usersTable, wishlistItemsTable } from '$lib/server/db/schema';
 import { eq, and } from 'drizzle-orm';
 import type { Actions } from './$types';
 
@@ -29,24 +24,20 @@ export const load = async ({ params, locals }) => {
 		error(400, 'Invalid Print ID');
 	}
 
-	const userId = locals.user.id; // Get user ID
+	const userId = locals.user.id;
 
 	try {
-		// Fetch print details along with the designer's name and all colorways
 		const resultsPromise = db
 			.select({
-				// Print details
 				printId: printsTable.id,
 				printName: printsTable.name,
 				printDescription: printsTable.description,
 				printPriceCents: printsTable.priceCents,
 				printIsSold: printsTable.isSold,
 				printCreatedAt: printsTable.createdAt,
-				// Designer details
 				designerId: usersTable.id,
 				designerFirstName: usersTable.firstName,
 				designerLastName: usersTable.lastName,
-				// Colorway details
 				colorwayId: colorwaysTable.id,
 				colorwayName: colorwaysTable.name,
 				colorwayImageUrl: colorwaysTable.imageUrl
@@ -56,7 +47,6 @@ export const load = async ({ params, locals }) => {
 			.leftJoin(colorwaysTable, eq(printsTable.id, colorwaysTable.printId))
 			.where(eq(printsTable.id, printId));
 
-		// Check if item is in wishlist
 		let isInWishlist = false;
 		const wishlistCheckPromise = db
 			.select({ printId: wishlistItemsTable.printId })
@@ -64,19 +54,16 @@ export const load = async ({ params, locals }) => {
 			.where(and(eq(wishlistItemsTable.userId, userId), eq(wishlistItemsTable.printId, printId)))
 			.limit(1);
 
-		// Resolve promises
 		const [results, wishlistCheck] = await Promise.all([resultsPromise, wishlistCheckPromise]);
 
 		if (results.length === 0) {
 			error(404, 'Print not found');
 		}
 
-		// Set wishlist status
 		if (wishlistCheck.length > 0) {
 			isInWishlist = true;
 		}
 
-		// Process the results: Extract unique print info and aggregate colorways
 		const firstResult = results[0];
 		const printDetails = {
 			id: firstResult.printId,
@@ -100,13 +87,12 @@ export const load = async ({ params, locals }) => {
 			}))
 			.filter((cw): cw is { id: number; name: string; imageUrl: string | null } => cw.id !== null);
 
-		// Basic deduplication
 		const uniqueColorways = Array.from(new Map(colorways.map((cw) => [cw.id, cw])).values());
 
 		return {
 			print: printDetails,
 			colorways: uniqueColorways,
-			isInWishlist // Pass wishlist status to the page
+			isInWishlist
 		};
 	} catch (e) {
 		console.error(`Error fetching print details for ID ${printId}:`, e);
@@ -114,7 +100,6 @@ export const load = async ({ params, locals }) => {
 	}
 };
 
-// Actions for Wishlist on Detail Page
 export const actions = {
 	addToWishlist: async ({ params, locals }) => {
 		if (!locals.user || locals.user.role !== 'customer') {
@@ -127,7 +112,6 @@ export const actions = {
 		const userId = locals.user.id;
 
 		try {
-			// Check if print exists (optional but good practice)
 			const printExists = await db
 				.select({ id: printsTable.id })
 				.from(printsTable)
@@ -137,10 +121,9 @@ export const actions = {
 				return fail(404, { message: 'Print not found' });
 			}
 
-			// Use INSERT OR IGNORE
 			await db.insert(wishlistItemsTable).values({ userId, printId }).onConflictDoNothing();
 
-			return { success: true, added: true }; // Indicate success
+			return { success: true, added: true };
 		} catch (e) {
 			console.error(`Error adding print ${printId} to wishlist for user ${userId}:`, e);
 			return fail(500, { message: 'Could not add to wishlist.' });
@@ -162,7 +145,7 @@ export const actions = {
 				.delete(wishlistItemsTable)
 				.where(and(eq(wishlistItemsTable.userId, userId), eq(wishlistItemsTable.printId, printId)));
 
-			return { success: true, removed: true }; // Indicate success
+			return { success: true, removed: true };
 		} catch (e) {
 			console.error(`Error removing print ${printId} from wishlist for user ${userId}:`, e);
 			return fail(500, { message: 'Could not remove from wishlist.' });

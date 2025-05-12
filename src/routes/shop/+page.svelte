@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
-	// --- MODIFIED LINE (Removed invalidateAll) ---
 	import { goto } from '$app/navigation';
-	// --- END MODIFIED LINE ---
 	import { enhance } from '$app/forms';
 
 	let { data, form } = $props();
@@ -14,11 +12,9 @@
 	let isDesktop: boolean = $state(false);
 	const DESKTOP_BREAKPOINT = '(min-width: 1024px)';
 
-	// Wishlist State
 	let wishlistedPrintIds = $state(new Set(data.wishlistedPrintIds || []));
 	let wishlistActionInProgressForId: number | null = $state(null);
 
-	// Sync wishlist state if data reloads from server (e.g., pagination)
 	$effect(() => {
 		wishlistedPrintIds = new Set(data.wishlistedPrintIds || []);
 	});
@@ -30,7 +26,7 @@
 			isDesktop = event.matches;
 		};
 
-		updateDesktopStatus(mediaQuery); // Initial check
+		updateDesktopStatus(mediaQuery);
 		mediaQuery.addEventListener('change', updateDesktopStatus);
 
 		return () => {
@@ -64,18 +60,17 @@
 			const formDataEntries = Array.from(formData.entries()) as [string, string][];
 			const params = new URLSearchParams(formDataEntries);
 
-			params.set('page', '1'); // Always reset to page 1 on filter change
+			params.set('page', '1');
 
 			goto(`/shop?${params.toString()}`, {
-				invalidateAll: true, // Re-run load function
+				invalidateAll: true,
 				noScroll: true,
 				keepFocus: true,
-				replaceState: false // Add new history entry for filter changes
+				replaceState: false
 			});
 		}
 	}
 
-	// Wishlist update handler
 	function handleWishlistUpdate(printId: number, added: boolean) {
 		if (added) {
 			wishlistedPrintIds.add(printId);
@@ -178,7 +173,6 @@
 </aside>
 
 <main>
-	<!-- --- MODIFIED BLOCK (Refined check for form and form.failedPrintId) --- -->
 	{#if form?.message}
 		<p style="color: red;">
 			{#if form && 'failedPrintId' in form && form.failedPrintId != null}
@@ -189,7 +183,6 @@
 			{form.message}
 		</p>
 	{/if}
-	<!-- --- END MODIFIED BLOCK --- -->
 
 	{#if data.colorways.length > 0}
 		<p>Showing {data.colorways.length} of {data.totalColorways} colorways.</p>
@@ -207,7 +200,6 @@
 						<p>{colorway.name || 'Unnamed Colorway'}</p>
 					</a>
 
-					<!-- Wishlist Button for this Print -->
 					<div style="margin-top: 0.5rem;">
 						{#if wishlistedPrintIds.has(colorway.printId)}
 							<form
@@ -217,11 +209,10 @@
 									wishlistActionInProgressForId = colorway.printId;
 									return async ({ result }) => {
 										const currentActionId = wishlistActionInProgressForId;
-										wishlistActionInProgressForId = null; // Reset loading state
+										wishlistActionInProgressForId = null;
 
 										if (result.type === 'success') {
 											if (currentActionId === colorway.printId) {
-												// Ensure correct button result
 												handleWishlistUpdate(colorway.printId, false);
 											}
 										} else if (result.type === 'failure') {
@@ -245,11 +236,10 @@
 									wishlistActionInProgressForId = colorway.printId;
 									return async ({ result }) => {
 										const currentActionId = wishlistActionInProgressForId;
-										wishlistActionInProgressForId = null; // Reset loading state
+										wishlistActionInProgressForId = null;
 
 										if (result.type === 'success') {
 											if (currentActionId === colorway.printId) {
-												// Ensure correct button result
 												handleWishlistUpdate(colorway.printId, true);
 											}
 										} else if (result.type === 'failure') {
