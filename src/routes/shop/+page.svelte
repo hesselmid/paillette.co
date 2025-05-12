@@ -1,4 +1,3 @@
-<!-- src/routes/shop/+page.svelte -->
 <script lang="ts">
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
@@ -8,10 +7,9 @@
 
 	const DEFAULT_COLORWAY_IMAGE_URL = 'https://placehold.co/300x200.png?text=Print+Image';
 
-	// State for responsive behavior
 	let formElement: HTMLFormElement | undefined = $state();
 	let isDesktop: boolean = $state(false);
-	const DESKTOP_BREAKPOINT = '(min-width: 1024px)'; // Example: 1024px and up is desktop
+	const DESKTOP_BREAKPOINT = '(min-width: 1024px)';
 
 	onMount(() => {
 		const mediaQuery = window.matchMedia(DESKTOP_BREAKPOINT);

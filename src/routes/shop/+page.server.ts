@@ -16,12 +16,10 @@ import type { PageServerLoad } from './$types';
 const ITEMS_PER_PAGE = 12;
 
 export const load: PageServerLoad = async ({ url, locals }) => {
-	// Ensure user is a customer (already handled by hooks.server.ts for /shop)
 	if (!locals.user || locals.user.role !== 'customer') {
 		error(403, 'Forbidden');
 	}
 
-	// Fetch filter options
 	const allColorsPromise = db
 		.select({ id: colorsTable.id, name: colorsTable.name })
 		.from(colorsTable)
@@ -47,7 +45,6 @@ export const load: PageServerLoad = async ({ url, locals }) => {
 		allDesignersPromise
 	]);
 
-	// Parse pagination and filter parameters from URL
 	const page = parseInt(url.searchParams.get('page') || '1', 10) || 1;
 	const selectedColorIds = url.searchParams
 		.getAll('colors')
@@ -62,7 +59,6 @@ export const load: PageServerLoad = async ({ url, locals }) => {
 		.map((id) => parseInt(id, 10))
 		.filter((id) => !isNaN(id) && id > 0);
 
-	// Build query conditions
 	const conditions = [eq(printsTable.isSold, false)];
 
 	if (selectedColorIds.length > 0) {
@@ -87,7 +83,6 @@ export const load: PageServerLoad = async ({ url, locals }) => {
 
 	const combinedConditions = conditions.length > 0 ? and(...conditions) : undefined;
 
-	// Fetch colorways
 	const colorwaysDataPromise = db
 		.select({
 			id: colorwaysTable.id,
@@ -99,11 +94,10 @@ export const load: PageServerLoad = async ({ url, locals }) => {
 		.from(colorwaysTable)
 		.innerJoin(printsTable, eq(colorwaysTable.printId, printsTable.id))
 		.where(combinedConditions)
-		.orderBy(desc(printsTable.createdAt), desc(colorwaysTable.id)) // Consistent ordering
+		.orderBy(desc(printsTable.createdAt), desc(colorwaysTable.id))
 		.limit(ITEMS_PER_PAGE)
 		.offset((page - 1) * ITEMS_PER_PAGE);
 
-	// Fetch total count of matching colorways
 	const totalColorwaysPromise = db
 		.select({ count: countDistinct(colorwaysTable.id) })
 		.from(colorwaysTable)
@@ -117,7 +111,7 @@ export const load: PageServerLoad = async ({ url, locals }) => {
 
 	const totalColorways = totalColorwaysResult[0]?.count || 0;
 	const totalPages = Math.max(1, Math.ceil(totalColorways / ITEMS_PER_PAGE));
-	const currentPage = Math.min(page, totalPages); // Ensure current page is not out of bounds
+	const currentPage = Math.min(page, totalPages);
 
 	return {
 		colorways: colorwaysData,
