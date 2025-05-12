@@ -1,5 +1,4 @@
-// src/routes/shop/[printId]/+page.server.ts
-import { error, fail, redirect } from '@sveltejs/kit';
+import { error, fail } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import {
 	printsTable,
@@ -8,24 +7,19 @@ import {
 	wishlistItemsTable // ADDED
 } from '$lib/server/db/schema';
 import { eq, and } from 'drizzle-orm';
-import type { PageServerLoad, Actions } from './$types';
+import type { Actions } from './$types';
 
-// Helper function to format price
 function formatPrice(cents: number): string {
 	const euros = cents / 100;
-	return new Intl.NumberFormat('de-DE', {
+	return new Intl.NumberFormat('nl-NL', {
 		style: 'currency',
 		currency: 'EUR'
 	}).format(euros);
 }
 
-export const load: PageServerLoad = async ({ params, locals, url }) => {
-	// Authorization Check
+export const load = async ({ params, locals }) => {
 	if (!locals.user || locals.user.role !== 'customer') {
-		// Consider redirecting to login if preferred
-		const redirectTo = `redirectTo=${encodeURIComponent(url.pathname)}`;
-		redirect(303, `/login?${redirectTo}`);
-		// error(403, 'Forbidden: You must be logged in as a customer to view prints.');
+		error(403, 'Forbidden');
 	}
 
 	const printIdParam = params.printId;
@@ -121,7 +115,7 @@ export const load: PageServerLoad = async ({ params, locals, url }) => {
 };
 
 // Actions for Wishlist on Detail Page
-export const actions: Actions = {
+export const actions = {
 	addToWishlist: async ({ params, locals }) => {
 		if (!locals.user || locals.user.role !== 'customer') {
 			return fail(403, { message: 'Forbidden' });
@@ -174,4 +168,4 @@ export const actions: Actions = {
 			return fail(500, { message: 'Could not remove from wishlist.' });
 		}
 	}
-};
+} satisfies Actions;

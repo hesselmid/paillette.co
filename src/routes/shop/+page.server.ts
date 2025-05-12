@@ -20,7 +20,7 @@ export const load: PageServerLoad = async ({ url, locals }) => {
 	if (!locals.user || locals.user.role !== 'customer') {
 		error(403, 'Forbidden');
 	}
-	const userId = locals.user.id; // ADDED: Get user ID early
+	const userId = locals.user.id;
 
 	// --- Existing Filter Data Fetching ---
 	const allColorsPromise = db

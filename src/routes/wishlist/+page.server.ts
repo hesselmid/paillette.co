@@ -1,26 +1,21 @@
-// src/routes/wishlist/+page.server.ts
-import { error, fail, redirect } from '@sveltejs/kit';
+import { error, fail } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { wishlistItemsTable, printsTable, colorwaysTable, usersTable } from '$lib/server/db/schema';
 import { and, eq, desc, sql } from 'drizzle-orm';
-import type { PageServerLoad, Actions } from './$types';
+import type { Actions } from './$types';
 
-// Helper function to format price (can be shared in a lib file)
 function formatPrice(cents: number): string {
 	const euros = cents / 100;
-	return new Intl.NumberFormat('de-DE', {
+	return new Intl.NumberFormat('nl-NL', {
 		style: 'currency',
 		currency: 'EUR'
 	}).format(euros);
 }
 
-export const load: PageServerLoad = async ({ locals, url }) => {
+export const load = async ({ locals }) => {
 	if (!locals.user || locals.user.role !== 'customer') {
-		// Redirect to login, preserving the intended destination
-		const redirectTo = `redirectTo=${encodeURIComponent(url.pathname)}`;
-		redirect(303, `/login?${redirectTo}`);
+		error(403, 'Forbidden');
 	}
-
 	const userId = locals.user.id;
 
 	try {
@@ -58,16 +53,15 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 				eq(printsTable.id, firstColorwaySubquery.printId)
 			)
 			.where(eq(wishlistItemsTable.userId, userId))
-			.orderBy(desc(wishlistItemsTable.createdAt)); // Show most recently added first
+			.orderBy(desc(wishlistItemsTable.createdAt));
 
-		// Format the data for the frontend
 		const formattedWishlist = wishlist.map((item) => ({
 			printId: item.printId,
 			printName: item.printName,
 			priceFormatted: formatPrice(item.printPriceCents),
 			isSold: item.printIsSold,
 			designerFullName: `${item.designerFirstName} ${item.designerLastName}`,
-			imageUrl: item.colorwayImageUrl // May be null if no colorways had images
+			imageUrl: item.colorwayImageUrl
 		}));
 
 		return {
@@ -79,7 +73,7 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 	}
 };
 
-export const actions: Actions = {
+export const actions = {
 	remove: async ({ request, locals }) => {
 		if (!locals.user || locals.user.role !== 'customer') {
 			return fail(403, { message: 'Forbidden' });
@@ -103,18 +97,16 @@ export const actions: Actions = {
 			const result = await db
 				.delete(wishlistItemsTable)
 				.where(and(eq(wishlistItemsTable.userId, userId), eq(wishlistItemsTable.printId, printId)))
-				.returning({ id: wishlistItemsTable.printId }); // Check if something was actually deleted
+				.returning({ id: wishlistItemsTable.printId });
 
 			if (result.length === 0) {
-				// Optional: Return specific feedback if item was already removed somehow
 				return fail(404, { message: 'Item not found in wishlist.' });
 			}
 
-			// Success, no need to return data as `enhance` will trigger reload via invalidateAll or page navigation
 			return { success: true };
 		} catch (e) {
 			console.error(`Error removing print ID ${printId} from wishlist for user ID ${userId}:`, e);
 			return fail(500, { message: 'Failed to remove item from wishlist.' });
 		}
 	}
-};
+} satisfies Actions;

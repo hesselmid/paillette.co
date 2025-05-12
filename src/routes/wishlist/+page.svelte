@@ -1,9 +1,8 @@
-<!-- src/routes/wishlist/+page.svelte -->
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { invalidateAll } from '$app/navigation'; // Used to refresh the list after removal
+	import { invalidateAll } from '$app/navigation';
 
-	let { data, form } = $props(); // Use form for potential error messages
+	let { data, form } = $props();
 
 	const DEFAULT_WISHLIST_IMAGE_URL = 'https://placehold.co/200x133.png?text=Print+Image';
 	let actionInProgressForId: number | null = $state(null);
@@ -16,7 +15,6 @@
 <h1>My Wishlist</h1>
 
 {#if form?.message}
-	<!-- Display general error messages from actions -->
 	<p style="color: red;">{form.message}</p>
 {/if}
 
@@ -40,23 +38,18 @@
 					<p style="color: red; font-weight: bold;">(Sold)</p>
 				{/if}
 
-				<!-- Remove Button Form -->
 				<form
 					method="POST"
 					action="?/remove"
 					use:enhance={() => {
 						actionInProgressForId = item.printId;
-						// --- MODIFIED LINE (Removed 'update' from destructuring) ---
 						return async ({ result }) => {
-							// --- END MODIFIED LINE ---
 							if (result.type === 'success') {
-								// Successfully removed on server, invalidate data to refresh the list
-								await invalidateAll(); // Safest way to ensure the list reflects the removal
+								await invalidateAll();
 							} else if (result.type === 'failure') {
 								console.error('Failed to remove:', result.data?.message);
 								alert(result.data?.message || 'Could not remove item.');
 							}
-							// Reset loading state regardless of outcome
 							actionInProgressForId = null;
 						};
 					}}
