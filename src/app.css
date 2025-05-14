@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+@font-face {
+	font-family: Evolventa;
+	src: url('$lib/fonts/Evolventa-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@theme {
+	--color-black-sheep: #0f0e0e;
+	--color-enoki: #f7f9f2;
+	--font-evolventa: Evolventa, sans-serif;
+}

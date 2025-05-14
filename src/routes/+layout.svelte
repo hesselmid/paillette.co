@@ -1,17 +1,23 @@
 <script lang="ts">
+	import '../app.css';
+
 	let { data, children } = $props();
 
 	let loginHref = $derived.by(() => {
 		if (!data.user) {
 			return '/login';
 		}
+
 		switch (data.user.role) {
 			case 'admin':
 				return '/admin/dashboard';
+
 			case 'customer':
 				return '/account/dashboard';
+
 			case 'member':
 				return '/member/dashboard';
+
 			default:
 				return '/login';
 		}
@@ -21,13 +27,17 @@
 		if (!data.user) {
 			return 'Login';
 		}
+
 		switch (data.user.role) {
 			case 'admin':
 				return 'Admin Dashboard';
+
 			case 'customer':
 				return 'Account Dashboard';
+
 			case 'member':
 				return 'Member Dashboard';
+
 			default:
 				return 'Login';
 		}
