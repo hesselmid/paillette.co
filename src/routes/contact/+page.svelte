@@ -20,3 +20,82 @@
 		</div>
 	</div>
 </section>
+
+<section class={['bg-enoki py-16', 'xl:py-20']}>
+	<form
+		method="POST"
+		class={[
+			'mx-auto flex max-w-[356px] flex-col gap-y-5',
+			'sm:max-w-[510px]',
+			'md:max-w-[612px]',
+			'md:max-w-[684px]'
+		]}
+	>
+		<div>
+			<label for="name" class="sr-only">Name</label>
+			<input
+				type="text"
+				name="name"
+				id="name"
+				placeholder="name*"
+				class={[
+					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full px-[38px] py-[20px] text-base/[21px]',
+					'sm:text-lg/[24px]',
+					'md:text-xl/[27px]',
+					'lg:text-2xl/[32px]'
+				]}
+			/>
+		</div>
+		<div>
+			<label for="company" class="sr-only">Company</label>
+			<input
+				type="text"
+				name="company"
+				id="company"
+				placeholder="which company do you represent*"
+				class={[
+					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full px-[38px] py-[20px] text-base/[21px]',
+					'sm:text-lg/[24px]',
+					'md:text-xl/[27px]',
+					'lg:text-2xl/[32px]'
+				]}
+			/>
+		</div>
+		<div>
+			<label for="email" class="sr-only">Email</label>
+			<input
+				type="email"
+				name="email"
+				id="email"
+				placeholder="e-mail address*"
+				class={[
+					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full px-[38px] py-[20px] text-base/[21px]',
+					'sm:text-lg/[24px]',
+					'md:text-xl/[27px]',
+					'lg:text-2xl/[32px]'
+				]}
+			/>
+		</div>
+		<div>
+			<label for="message" class="sr-only">Message</label>
+			<textarea
+				name="message"
+				id="message"
+				placeholder="message*"
+				class={[
+					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep h-[241px] w-full rounded-[40px] px-[38px] py-[20px] text-base/[21px]',
+					'sm:h-[369px] sm:text-lg/[24px]',
+					'md:text-xl/[27px]',
+					'lg:text-2xl/[32px]'
+				]}
+			></textarea>
+		</div>
+		<button
+			type="submit"
+			class={[
+				'font-evolventa border-black-sheep text-black-sheep cursor-pointer self-start rounded-full border px-[37px] py-[19px] text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px] disabled:cursor-not-allowed disabled:border disabled:bg-[#ececec] disabled:px-[37px] disabled:py-[19px]',
+				'sm:text-lg/6'
+			]}>Send</button
+		>
+	</form>
+</section>
