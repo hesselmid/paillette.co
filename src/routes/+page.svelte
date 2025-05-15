@@ -40,7 +40,7 @@
 	</div>
 </section>
 
-<section class="bg-enoki py-[60px]">
+<section class={['bg-enoki py-[60px]', 'lg:py-20']}>
 	<div class="container mx-auto">
 		<div
 			class={[
@@ -104,3 +104,5 @@
 		</div>
 	</div>
 </section>
+
+<section class="bg-white py-[60px]"></section>
