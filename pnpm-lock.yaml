@@ -24,6 +24,9 @@ importers:
       '@eslint/js':
         specifier: ^9.18.0
         version: 9.26.0
+      '@fontsource/cormorant':
+        specifier: ^5.2.5
+        version: 5.2.5
       '@sveltejs/adapter-cloudflare':
         specifier: ^7.0.0
         version: 7.0.3(@sveltejs/kit@2.20.8(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.14)(jiti@2.4.2)(lightningcss@1.29.2)))(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.14)(jiti@2.4.2)(lightningcss@1.29.2)))(wrangler@4.14.3(@cloudflare/workers-types@4.20250508.0))
@@ -506,6 +509,9 @@ packages:
   '@fastify/busboy@2.1.1':
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
+
+  '@fontsource/cormorant@5.2.5':
+    resolution: {integrity: sha512-AZznc/lC3ZT5DNAYLJy1U18HvDEQ0jFArLlI7GHlfuZvxE9nHeuYRGWrNhlnzQaTIEjewgkR2qQtcTSOx2IATw==}
 
   '@gcornut/valibot-json-schema@0.31.0':
     resolution: {integrity: sha512-3xGptCurm23e7nuPQkdrE5rEs1FeTPHhAUsBuwwqG4/YeZLwJOoYZv+fmsppUEfo5y9lzUwNQrNqLS/q7HMc7g==}
@@ -2967,6 +2973,8 @@ snapshots:
     optional: true
 
   '@fastify/busboy@2.1.1': {}
+
+  '@fontsource/cormorant@5.2.5': {}
 
   '@gcornut/valibot-json-schema@0.31.0':
     dependencies:
