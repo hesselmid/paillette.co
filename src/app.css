@@ -1,6 +1,16 @@
 @import 'tailwindcss';
 
 @font-face {
+	font-family: Apfel Grotezk Brukt;
+	src:
+		url('$lib/fonts/ApfelGrotezk-Brukt.woff2') format('woff2'),
+		url('$lib/fonts/ApfelGrotezk-Brukt.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
 	font-family: Evolventa;
 	src: url('$lib/fonts/Evolventa-Regular.woff') format('woff');
 	font-weight: 400;
@@ -9,8 +19,10 @@
 }
 
 @theme {
+	--breakpoint-xs: 390px;
 	--color-black-sheep: #0f0e0e;
 	--color-foundation-white: #ebeaff;
 	--color-enoki: #f7f9f2;
+	--font-apfel-grotezk-brukt: Apfel Grotezk Brukt, sans-serif;
 	--font-evolventa: Evolventa, sans-serif;
 }

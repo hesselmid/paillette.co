@@ -10,9 +10,22 @@
 	<title>Login - Paillette.co</title>
 </svelte:head>
 
-<div>
-	<h1>Login</h1>
-	<form method="POST" class="flex flex-col gap-y-5" use:enhance>
+<div class={['bg-white py-16', 'lg:py-20']}>
+	<h1
+		class={[
+			'font-apfel-grotezk-brukt text-black-sheep text-center text-3xl/[38px]',
+			'sm:text-4xl/[46px]',
+			'md:text-5xl/[62px]',
+			'lg:text-6xl/[77px]'
+		]}
+	>
+		Log in to Paillette
+	</h1>
+	<form
+		method="POST"
+		class={['mx-auto mt-16 flex max-w-[324px] flex-col gap-y-5', 'sm:max-w-[490px]', 'lg:mt-20']}
+		use:enhance
+	>
 		<div>
 			<label for="email" class="sr-only">Email:</label>
 			<input
