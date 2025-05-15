@@ -11,7 +11,7 @@
 	{@render children()}
 </main>
 
-<footer class="bg-enoki">
+<footer>
 	<p>© {new Date().getFullYear()} Paillette</p>
 	<a href="/terms-and-conditions">Terms & Conditions</a>
 	<a href="/privacy-policy">Privacy Policy</a>
