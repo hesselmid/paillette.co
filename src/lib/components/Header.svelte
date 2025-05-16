@@ -169,6 +169,8 @@
 								'font-evolventa hover:text-black-sheep text-base/[21px]',
 								link.href === '/'
 									? page.url.pathname === '/'
+										? 'text-black-sheep'
+										: 'text-[#b1b2ae]'
 									: page.url.pathname.startsWith(link.href)
 										? 'text-black-sheep'
 										: 'text-[#b1b2ae]'
