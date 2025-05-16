@@ -21,13 +21,6 @@
 		faqIndex = faqIndex === index ? null : index;
 	}
 
-	function handleKeyDown(event: KeyboardEvent, index: number) {
-		if (event.key === 'Enter' || event.key === ' ') {
-			event.preventDefault();
-			toggleFaq(index);
-		}
-	}
-
 	const totalVisibleItems = $derived(items.length + (intro ? 1 : 0));
 
 	function getColor(i: number, total: number): string {
@@ -60,14 +53,8 @@
 
 	{#each items as faq, i (faq.question)}
 		<div
-			role="button"
-			aria-controls={`faq-item-${i}`}
-			aria-expanded={i === faqIndex}
-			tabindex="0"
-			class={['cursor-pointer p-[50px]', 'md:px-[94px] md:py-14']}
+			class={['relative p-[50px]', 'md:px-[94px] md:py-14']}
 			style="background-color: {getColor(i + (intro ? 1 : 0), totalVisibleItems)}"
-			onclick={() => toggleFaq(i)}
-			onkeydown={(event) => handleKeyDown(event, i)}
 		>
 			<dt
 				class={[
@@ -92,6 +79,14 @@
 			>
 				{faq.answer}
 			</dd>
+			<button
+				type="button"
+				aria-controls={`faq-item-${i}`}
+				aria-expanded={i === faqIndex}
+				class="absolute inset-0 cursor-pointer"
+				onclick={() => toggleFaq(i)}
+				aria-label={`Toggle answer for ${faq.question}`}
+			></button>
 		</div>
 	{/each}
 </dl>
