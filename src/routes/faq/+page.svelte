@@ -129,7 +129,117 @@
 		FAQ
 	</h1>
 
-	<Faq items={brandFaqs} baseColor="#ee66a6" initialOpenIndex={0} />
-	<Faq items={designerFaqs} baseColor="#ff5249" initialOpenIndex={0} />
-	<Faq items={otherFaqs} baseColor="#6ae367" initialOpenIndex={0} />
+	<section
+		class={[
+			'mx-auto mt-[9px] max-w-[358px] space-y-5',
+			'sm:mt-[2px] sm:max-w-[535px]',
+			'md:-mt-[6px] md:max-w-[646px]',
+			'lg:-mt-[2px] lg:max-w-[806px]',
+			'xl:-mt-[17px] xl:max-w-[956px]',
+			'2xl:max-w-[1142px]'
+		]}
+	>
+		<h2
+			class={[
+				'font-apfel-grotezk-brukt text-black-sheep text-2xl/[31px]',
+				'sm:text-3xl/[38px]',
+				'md:text-4xl/[46px]',
+				'lg:text-5xl/[62px]',
+				'2xl:text-6xl/[77px]'
+			]}
+		>
+			Brands
+		</h2>
+		<Faq items={brandFaqs} baseColor="#ee66a6" initialOpenIndex={0} />
+	</section>
+	<section
+		class={[
+			'mx-auto mt-[60px] max-w-[358px] space-y-5',
+			'sm:max-w-[535px]',
+			'md:max-w-[646px]',
+			'lg:mt-20 lg:max-w-[806px]',
+			'xl:max-w-[956px]',
+			'2xl:max-w-[1142px]'
+		]}
+	>
+		<h2
+			class={[
+				'font-apfel-grotezk-brukt text-black-sheep text-2xl/[31px]',
+				'sm:text-3xl/[38px]',
+				'md:text-4xl/[46px]',
+				'lg:text-5xl/[62px]',
+				'2xl:text-6xl/[77px]'
+			]}
+		>
+			Designers
+		</h2>
+		<Faq items={designerFaqs} baseColor="#ff5249" initialOpenIndex={0} />
+	</section>
+	<section
+		class={[
+			'mx-auto mt-[60px] max-w-[358px] space-y-5',
+			'sm:max-w-[535px]',
+			'md:max-w-[646px]',
+			'lg:mt-20 lg:max-w-[806px]',
+			'xl:max-w-[956px]',
+			'2xl:max-w-[1142px]'
+		]}
+	>
+		<h2
+			class={[
+				'font-apfel-grotezk-brukt text-black-sheep text-2xl/[31px]',
+				'sm:text-3xl/[38px]',
+				'md:text-4xl/[46px]',
+				'lg:text-5xl/[62px]',
+				'2xl:text-6xl/[77px]'
+			]}
+		>
+			Others
+		</h2>
+		<Faq items={otherFaqs} baseColor="#6ae367" initialOpenIndex={0} />
+	</section>
 </div>
+
+<section class={['bg-enoki pt-9 pb-[60px]', 'lg:pt-12 lg:pb-20']}>
+	<div class="container mx-auto">
+		<div
+			class={[
+				'flex flex-col items-center gap-y-9',
+				'lg:flex-row lg:justify-center lg:gap-x-[57px] lg:gap-y-0',
+				'xl:gap-x-[69px]',
+				'2xl:gap-x-[255px]'
+			]}
+		>
+			<enhanced:img
+				src="$lib/assets/FAQ_drawing 3.png?w=358;409;716;818"
+				alt=""
+				sizes="(min-width: 640px) 409px, 358px"
+				class={['h-auto w-[358px]', 'sm:w-[409px]']}
+			/>
+			<div class={['flex flex-col items-center gap-y-9', 'lg:gap-y-12']}>
+				<p
+					class={[
+						'font-cormorant text-black-sheep max-w-[239px] text-center text-lg/[64px] font-light',
+						'sm:max-w-[319px] sm:text-2xl/[64px]',
+						'md:max-w-[398px] md:text-3xl/[64px]',
+						'lg:max-w-[478px] lg:text-left lg:text-4xl/[64px]'
+					]}
+				>
+					"Every paillette catches the light—<br />
+					let your collection do the same."
+				</p>
+				<a
+					href="/contact"
+					class={[
+						'font-evolventa border-black-sheep text-black-sheep rounded-full border px-[37px] py-[19px] text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px]',
+						'sm:text-lg/6',
+						'md:-translate-x-[6px] md:self-end',
+						'lg:translate-x-0',
+						'xl:-translate-x-[45px]',
+						'2xl:translate-x-0'
+					]}>Get in touch</a
+				>
+			</div>
+		</div>
+	</div>
+</section>
