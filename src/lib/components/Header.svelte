@@ -167,7 +167,11 @@
 							href={link.href}
 							class={[
 								'font-evolventa hover:text-black-sheep text-base/[21px]',
-								page.url.pathname.startsWith(link.href) ? 'text-black-sheep' : 'text-[#b1b2ae]'
+								link.href === '/'
+									? page.url.pathname === '/'
+									: page.url.pathname.startsWith(link.href)
+										? 'text-black-sheep'
+										: 'text-[#b1b2ae]'
 							]}>{link.label}</a
 						>
 					</li>
