@@ -8,7 +8,7 @@
 
 <Header user={data.user} />
 
-<main>
+<main class="flex-1">
 	{@render children()}
 </main>
 
