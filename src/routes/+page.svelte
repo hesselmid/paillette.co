@@ -1,5 +1,5 @@
 <script lang="ts">
-	import chroma from 'chroma-js';
+	import Faq from '$lib/components/Faq.svelte';
 
 	const faqs = [
 		{
@@ -33,26 +33,6 @@
 				'Through Paillette, brands can collaborate with an evolving talent pool of design students and recent graduates, gaining access to innovative print designs without the constraints of permanent contracts. If you’re impressed by a designer’s work and decide to hire them, it’s a perfect outcome—a young creative finds their path, and your brand benefits from a skilled designer who knows your vision and aesthetic.'
 		}
 	];
-
-	let faqIndex: number | null = null;
-
-	function toggleFaq(index: number) {
-		faqIndex = faqIndex === index ? null : index;
-	}
-
-	function handleKeyDown(event: KeyboardEvent, index: number) {
-		if (event.key === 'Enter' || event.key === ' ') {
-			event.preventDefault();
-			toggleFaq(index);
-		}
-	}
-
-	const baseColor = '#cdc526';
-
-	function getColor(i: number, total: number): string {
-		const ratio = (i / Math.max(1, total - 1)) * 0.9;
-		return chroma.mix(baseColor, 'white', ratio, 'lab').hex();
-	}
 </script>
 
 <svelte:head>
@@ -163,20 +143,8 @@
 </section>
 
 <section class={['bg-white py-[60px]', 'lg:py-20']}>
-	<dl
-		class={[
-			'mx-auto max-w-[358px] overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
-			'sm:max-w-[535px]',
-			'md:max-w-[646px]',
-			'lg:max-w-[806px]',
-			'xl:max-w-[956px]',
-			'2xl:max-w-[1142px]'
-		]}
-	>
-		<div
-			class={['p-[50px]', 'md:px-[94px] md:py-14']}
-			style="background-color: {getColor(0, faqs.length + 1)}"
-		>
+	<Faq items={faqs} baseColor="#cdc526">
+		{#snippet intro()}
 			<dt
 				class={[
 					'font-apfel-grotezk text-black-sheep text-2xl/[31px]',
@@ -202,42 +170,6 @@
 				meaningful connections that empower creativity, foster innovation, and bring fresh energy
 				into every brand’s journey.
 			</dd>
-		</div>
-		{#each faqs as faq, i (faq.question)}
-			<div
-				role="button"
-				aria-controls={`faq-${i}`}
-				aria-expanded={i === faqIndex}
-				tabindex="0"
-				class={['cursor-pointer p-[50px]', 'md:px-[94px] md:py-14']}
-				style="background-color: {getColor(i + 1, faqs.length + 1)}"
-				on:click={() => toggleFaq(i)}
-				on:keydown={(event) => handleKeyDown(event, i)}
-			>
-				<dt
-					class={[
-						'font-cormorant text-black-sheep text-lg/[22px]',
-						'sm:text-2xl/[29px]',
-						'md:text-3xl/[36px]',
-						'lg:text-4xl/[44px]'
-					]}
-				>
-					{faq.question}
-				</dt>
-				<dd
-					id={`faq-${i}`}
-					aria-hidden={i !== faqIndex}
-					class={[
-						'font-evolventa text-black-sheep overflow-hidden text-base/[21px] transition-[height,margin] duration-300 ease-in-out [interpolate-size:allow-keywords]',
-						'sm:text-lg/[24px]',
-						'md:text-xl/[27px]',
-						'lg:text-2xl/[32px]',
-						i === faqIndex ? 'mt-[46px] h-auto' : 'h-0'
-					]}
-				>
-					{faq.answer}
-				</dd>
-			</div>
-		{/each}
-	</dl>
+		{/snippet}
+	</Faq>
 </section>
