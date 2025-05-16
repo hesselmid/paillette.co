@@ -1,3 +1,4 @@
+@import '@fontsource/apfel-grotezk';
 @import '@fontsource/cormorant/300.css';
 @import '@fontsource/cormorant/300-italic.css';
 @import '@fontsource/cormorant/400.css';
@@ -26,8 +27,10 @@
 @theme {
 	--breakpoint-xs: 390px;
 	--color-black-sheep: #0f0e0e;
-	--color-foundation-white: #ebeaff;
 	--color-enoki: #f7f9f2;
+	--color-foundation-white: #ebeaff;
+	--color-groovy-lemon-pie: #cdc526;
+	--font-apfel-grotezk: Apfel Grotezk, sans-serif;
 	--font-apfel-grotezk-brukt: Apfel Grotezk Brukt, sans-serif;
 	--font-cormorant: Cormorant, serif;
 	--font-evolventa: Evolventa, sans-serif;

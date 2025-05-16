@@ -1,3 +1,60 @@
+<script lang="ts">
+	import chroma from 'chroma-js';
+
+	const faqs = [
+		{
+			question: 'Exclusive Designs, Made by Emerging Talent',
+			answer:
+				'Every print at Paillette is a one-of-a-kind creation, crafted by emerging designers with fresh perspectives. When you buy a design, it’s yours alone—no repeats, no duplicates. Your brand gains a unique story to tell.'
+		},
+		{
+			question: 'A Distinctive Brand Aesthetic',
+			answer:
+				'From curated collections to seasonal trends, Paillette offers a visually cohesive selection that’s both unique and timeless. Let your brand stand out with designs that capture the spirit of now, shaped by tomorrow’s talent.'
+		},
+		{
+			question: 'Guided by Expertise, Shaped by Passion',
+			answer:
+				'At Paillette, each young designer is personally mentored by an industry expert, ensuring high-quality designs that balance innovation with market-ready execution. Your brand benefits from the energy of emerging talent, backed by a wealth of experience.'
+		},
+		{
+			question: 'Exclusive Rights and Full Creative Freedom',
+			answer:
+				'Our designs come with full exclusivity rights, including colorways and high-resolution files in repeat. For custom projects, collaborate with us from the beginning to create something uniquely tailored to your brand’s vision.'
+		},
+		{
+			question: 'Ethical and Impactful Collaboration',
+			answer:
+				'When you choose Paillette, you’re investing in the next generation of designers. Every purchase supports young creatives, providing them with fair pay, real-world experience, and visibility. Partner with us to make a meaningful impact in the design industry.'
+		},
+		{
+			question: 'Flexible Access to Fresh Talent Ready to Hire when your Ready',
+			answer:
+				'Through Paillette, brands can collaborate with an evolving talent pool of design students and recent graduates, gaining access to innovative print designs without the constraints of permanent contracts. If you’re impressed by a designer’s work and decide to hire them, it’s a perfect outcome—a young creative finds their path, and your brand benefits from a skilled designer who knows your vision and aesthetic.'
+		}
+	];
+
+	let faqIndex: number | null = null;
+
+	function toggleFaq(index: number) {
+		faqIndex = faqIndex === index ? null : index;
+	}
+
+	function handleKeyDown(event: KeyboardEvent, index: number) {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			toggleFaq(index);
+		}
+	}
+
+	const baseColor = '#cdc526';
+
+	function getColor(i: number, total: number): string {
+		const ratio = (i / Math.max(1, total - 1)) * 0.9;
+		return chroma.mix(baseColor, 'white', ratio, 'lab').hex();
+	}
+</script>
+
 <svelte:head>
 	<title>Paillette.co</title>
 </svelte:head>
@@ -105,4 +162,82 @@
 	</div>
 </section>
 
-<section class="bg-white py-[60px]"></section>
+<section class={['bg-white py-[60px]', 'lg:py-20']}>
+	<dl
+		class={[
+			'mx-auto max-w-[358px] overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
+			'sm:max-w-[535px]',
+			'md:max-w-[646px]',
+			'lg:max-w-[806px]',
+			'xl:max-w-[956px]',
+			'2xl:max-w-[1142px]'
+		]}
+	>
+		<div
+			class={['p-[50px]', 'md:px-[94px] md:py-14']}
+			style="background-color: {getColor(0, faqs.length + 1)}"
+		>
+			<dt
+				class={[
+					'font-apfel-grotezk text-black-sheep text-2xl/[31px]',
+					'sm:text-3xl/[38px]',
+					'md:text-4xl/[46px]',
+					'lg:text-6xl/[77px]'
+				]}
+			>
+				Why choose Paillette?
+			</dt>
+			<dd
+				class={[
+					'font-evolventa text-black-sheep mt-[46px] text-base/[21px]',
+					'sm:text-lg/[24px]',
+					'md:text-xl/[27px]',
+					'lg:text-2xl/[32px]'
+				]}
+			>
+				Paillette is more than a design platform—it’s a mission to change industry norms by
+				championing emerging talent and offering brands exclusive, story-driven designs that
+				inspire. With us, brands gain not only distinctive artwork but also the chance to support
+				fair, impactful collaborations with the next generation of designers. Together, we create
+				meaningful connections that empower creativity, foster innovation, and bring fresh energy
+				into every brand’s journey.
+			</dd>
+		</div>
+		{#each faqs as faq, i (faq.question)}
+			<div
+				role="button"
+				aria-controls={`faq-${i}`}
+				aria-expanded={i === faqIndex}
+				tabindex="0"
+				class={['cursor-pointer p-[50px]', 'md:px-[94px] md:py-14']}
+				style="background-color: {getColor(i + 1, faqs.length + 1)}"
+				on:click={() => toggleFaq(i)}
+				on:keydown={(event) => handleKeyDown(event, i)}
+			>
+				<dt
+					class={[
+						'font-cormorant text-black-sheep text-lg/[22px]',
+						'sm:text-2xl/[29px]',
+						'md:text-3xl/[36px]',
+						'lg:text-4xl/[44px]'
+					]}
+				>
+					{faq.question}
+				</dt>
+				<dd
+					id={`faq-${i}`}
+					aria-hidden={i !== faqIndex}
+					class={[
+						'font-evolventa text-black-sheep overflow-hidden text-base/[21px] transition-[height,margin] duration-300 ease-in-out [interpolate-size:allow-keywords]',
+						'sm:text-lg/[24px]',
+						'md:text-xl/[27px]',
+						'lg:text-2xl/[32px]',
+						i === faqIndex ? 'mt-[46px] h-auto' : 'h-0'
+					]}
+				>
+					{faq.answer}
+				</dd>
+			</div>
+		{/each}
+	</dl>
+</section>
