@@ -65,6 +65,14 @@
 				]}
 			>
 				{faq.question}
+				<button
+					type="button"
+					aria-controls={`faq-item-${i}`}
+					aria-expanded={i === faqIndex}
+					class="absolute inset-0 cursor-pointer"
+					onclick={() => toggleFaq(i)}
+					aria-label={`Toggle answer for ${faq.question}`}
+				></button>
 			</dt>
 			<dd
 				id={`faq-item-${i}`}
@@ -79,14 +87,6 @@
 			>
 				{faq.answer}
 			</dd>
-			<button
-				type="button"
-				aria-controls={`faq-item-${i}`}
-				aria-expanded={i === faqIndex}
-				class="absolute inset-0 cursor-pointer"
-				onclick={() => toggleFaq(i)}
-				aria-label={`Toggle answer for ${faq.question}`}
-			></button>
 		</div>
 	{/each}
 </dl>
