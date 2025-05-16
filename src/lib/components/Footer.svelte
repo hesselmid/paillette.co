@@ -1,4 +1,4 @@
-<footer class="bg-enoki py-8">
+<footer class="bg-white py-8">
 	<div class={['container mx-auto px-4', 'md:px-8', 'lg:px-10', 'xl:px-16', '2xl:px-20']}>
 		<div class={['flex gap-x-[26px]', 'sm:gap-x-11']}>
 			<span class="font-evolventa text-black-sheep text-xs/4 uppercase"

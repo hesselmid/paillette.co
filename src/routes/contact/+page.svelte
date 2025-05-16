@@ -4,14 +4,22 @@
 
 <section class={['bg-white py-16', 'xl:py-20']}>
 	<div class="container mx-auto">
-		<div class={['flex flex-col items-center', 'lg:flex-row lg:justify-center']}>
+		<div
+			class={[
+				'flex flex-col items-center gap-y-9',
+				'md:gap-y-0',
+				'lg:flex-row lg:justify-center lg:gap-x-[59px]',
+				'xl:gap-x-[45px]',
+				'2xl:gap-x-[70px]'
+			]}
+		>
 			<h1
 				class={[
 					'font-cormorant text-black-sheep max-w-[358px] text-center text-3xl/[36px] font-light italic',
-					'sm:max-w-[606px] sm:text-left sm:text-4xl/[44px]',
+					'sm:max-w-[608px] sm:text-left sm:text-4xl/[44px]',
 					'md:max-w-[704px] md:text-5xl/[58px]',
-					'lg:max-w-[570px]',
-					'xl:max-w-[692px] xl:text-6xl/[73px]',
+					'lg:max-w-[459px]',
+					'xl:max-w-[573px] xl:text-6xl/[73px]',
 					'2xl:max-w-[677px] 2xl:text-7xl/[87px]'
 				]}
 			>
@@ -22,7 +30,14 @@
 				src="$lib/assets/ContactPage_drawing 1.png?w=358;426;534;629;716;852;1068;1258"
 				alt=""
 				sizes="(min-width: 1536px) 629px, (min-width: 1280px) 534px, (min-width: 640px) 426px, 358px"
-				class={['h-auto w-[358px]', 'sm:w-[426px]', 'xl:w-[534px]', '2xl:w-[629px]']}
+				class={[
+					'h-auto w-[358px]',
+					'sm:w-[426px]',
+					'md:translate-x-[139px] md:-translate-y-3.5',
+					'lg:translate-x-0 lg:translate-y-0',
+					'xl:w-[534px]',
+					'2xl:w-[629px]'
+				]}
 			/>
 		</div>
 	</div>

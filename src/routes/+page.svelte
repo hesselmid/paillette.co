@@ -173,3 +173,54 @@
 		{/snippet}
 	</Faq>
 </section>
+
+<section class={['bg-enoki py-[60px]', 'lg:py-20']}>
+	<div class="container mx-auto">
+		<div
+			class={[
+				'flex flex-col items-center gap-y-9',
+				'lg:gap-y-12',
+				'xl:flex-row-reverse xl:justify-center xl:gap-x-9 xl:gap-y-0',
+				'2xl:gap-x-[192px]'
+			]}
+		>
+			<enhanced:img
+				src="$lib/assets/HomePage_5s 1.png?w=358;535;646;806;718;717;1070;1292;1612;1436"
+				alt=""
+				sizes="(min-width: 1536px) 718px, (min-width: 1280px) 646px, (min-width: 1024px) 806px, (min-width: 768px) 646px, (min-width: 640px) 535px, 358px"
+				class={[
+					'h-auto w-[358px]',
+					'sm:w-[535px]',
+					'md:w-[646px]',
+					'lg:w-[806px]',
+					'xl:w-[646px]',
+					'2xl:w-[718px]'
+				]}
+			/>
+			<div class={['flex flex-col items-center gap-y-9', 'lg:gap-y-12']}>
+				<p
+					class={[
+						'font-cormorant text-black-sheep max-w-[358px] text-center text-lg/[64px] font-light',
+						'sm:max-w-[455px] sm:text-2xl/[64px]',
+						'md:max-w-[568px] md:text-3xl/[64px]',
+						'lg:max-w-[682px] lg:text-4xl/[64px]',
+						'xl:max-w-[472px] xl:text-left',
+						'2xl:max-w-[466px]'
+					]}
+				>
+					"Step into a world of exclusive, curated designs. Get in touch to see how Paillette can
+					add a fresh sparkle to your collection."
+				</p>
+				<a
+					href="/contact"
+					class={[
+						'font-evolventa border-black-sheep text-black-sheep rounded-full border px-[37px] py-[19px] text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px]',
+						'sm:text-lg/6',
+						'xl:-translate-x-6 xl:self-end',
+						'2xl:-translate-x-[17px]'
+					]}>Get in touch</a
+				>
+			</div>
+		</div>
+	</div>
+</section>
