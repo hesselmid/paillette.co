@@ -4,7 +4,7 @@
 	import { goto } from '$app/navigation';
 	import { enhance } from '$app/forms';
 
-	let { data, form } = $props();
+	let { data } = $props();
 
 	const DEFAULT_COLORWAY_IMAGE_URL = 'https://placehold.co/300x200.png?text=Print+Image';
 
@@ -86,192 +86,209 @@
 	<title>Shop - Paillette.co</title>
 </svelte:head>
 
-<h1>Shop</h1>
-
-<aside>
-	<h2>Filters</h2>
-	<form bind:this={formElement} method="GET" action="/shop">
-		<input type="hidden" name="page" value="1" />
-
-		<section>
-			<h3>Colors</h3>
-			{#if data.filters.allColors.length > 0}
-				<ul>
-					{#each data.filters.allColors as color (color.id)}
-						<li>
-							<label>
-								<input
-									type="checkbox"
-									name="colors"
-									value={color.id}
-									checked={isSelected('colors', color.id)}
-									onchange={handleFilterChange}
-								/>
-								{color.name}
-							</label>
-						</li>
-					{/each}
-				</ul>
-			{:else}
-				<p>No colors available to filter by.</p>
-			{/if}
-		</section>
-
-		<section>
-			<h3>Categories</h3>
-			{#if data.filters.allCategories.length > 0}
-				<ul>
-					{#each data.filters.allCategories as category (category.id)}
-						<li>
-							<label>
-								<input
-									type="checkbox"
-									name="categories"
-									value={category.id}
-									checked={isSelected('categories', category.id)}
-									onchange={handleFilterChange}
-								/>
-								{category.name}
-							</label>
-						</li>
-					{/each}
-				</ul>
-			{:else}
-				<p>No categories available to filter by.</p>
-			{/if}
-		</section>
-
-		<section>
-			<h3>Designers</h3>
-			{#if data.filters.allDesigners.length > 0}
-				<ul>
-					{#each data.filters.allDesigners as designer (designer.id)}
-						<li>
-							<label>
-								<input
-									type="checkbox"
-									name="designers"
-									value={designer.id}
-									checked={isSelected('designers', designer.id)}
-									onchange={handleFilterChange}
-								/>
-								{designer.name}
-							</label>
-						</li>
-					{/each}
-				</ul>
-			{:else}
-				<p>No designers available to filter by.</p>
-			{/if}
-		</section>
-
-		{#if !isDesktop}
-			<button type="submit">Apply Filters</button>
-		{/if}
-		<a href="/shop">Clear Filters</a>
-	</form>
-</aside>
-
-<main>
-	{#if form?.message}
-		<p style="color: red;">
-			{#if form && 'failedPrintId' in form && form.failedPrintId != null}
-				Error processing request for print {form.failedPrintId}:
-			{:else}
-				Notice:
-			{/if}
-			{form.message}
-		</p>
-	{/if}
-
-	{#if data.colorways.length > 0}
-		<p>Showing {data.colorways.length} of {data.totalColorways} colorways.</p>
-		<div
-			style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem;"
+<div class={['bg-white py-[60px]', 'lg:py-20']}>
+	<div class="container mx-auto">
+		<h1
+			class={[
+				'font-apfel-grotezk-brukt text-black-sheep text-center text-4xl/[46px]',
+				'sm:text-5xl/[62px]',
+				'lg:text-6xl/[77px]'
+			]}
 		>
-			{#each data.colorways as colorway (colorway.id)}
-				<article style="position: relative; border: 1px solid #eee; padding: 1rem;">
-					<a href={`/shop/${colorway.printId}`}>
-						<img
-							src={colorway.imageUrl || DEFAULT_COLORWAY_IMAGE_URL}
-							alt={`Print: ${colorway.name || 'Unnamed Print'}`}
-							style="width: 100%; height: auto; aspect-ratio: 3/2; object-fit: cover;"
-						/>
-						<p>{colorway.name || 'Unnamed Colorway'}</p>
-					</a>
+			Available designs:
+		</h1>
 
-					<div style="margin-top: 0.5rem;">
-						{#if wishlistedPrintIds.has(colorway.printId)}
-							<form
-								method="POST"
-								action="?/removeFromWishlist"
-								use:enhance={() => {
-									wishlistActionInProgressForId = colorway.printId;
-									return async ({ result }) => {
-										const currentActionId = wishlistActionInProgressForId;
-										wishlistActionInProgressForId = null;
+		<div
+			class={[
+				'px-4',
+				'md:px-[33px]',
+				'lg:flex lg:gap-x-[26px] lg:px-10',
+				'xl:gap-x-[78px] xl:px-16',
+				'2xl:gap-x-[136px] 2xl:px-[70px]'
+			]}
+		>
+			<aside class={['lg:w-[218px]']}>
+				<h2>Filters</h2>
+				<p>Showing {data.colorways.length} of {data.totalColorways} colorways.</p>
 
-										if (result.type === 'success') {
-											if (currentActionId === colorway.printId) {
-												handleWishlistUpdate(colorway.printId, false);
-											}
-										} else if (result.type === 'failure') {
-											console.error('Failed to remove from wishlist:', result.data?.message);
-											alert(result.data?.message || 'Failed to remove');
-										}
-									};
-								}}
-							>
-								<input type="hidden" name="printId" value={colorway.printId} />
-								<button type="submit" disabled={wishlistActionInProgressForId === colorway.printId}>
-									{#if wishlistActionInProgressForId === colorway.printId}Removing...{:else}❤️
-										Remove{/if}
-								</button>
-							</form>
+				<form bind:this={formElement} method="GET" action="/shop" class={['hidden', 'lg:block']}>
+					<input type="hidden" name="page" value="1" />
+
+					<section>
+						<h3>Colors</h3>
+						{#if data.filters.allColors.length > 0}
+							<ul>
+								{#each data.filters.allColors as color (color.id)}
+									<li>
+										<label>
+											<input
+												type="checkbox"
+												name="colors"
+												value={color.id}
+												checked={isSelected('colors', color.id)}
+												onchange={handleFilterChange}
+											/>
+											{color.name}
+										</label>
+									</li>
+								{/each}
+							</ul>
 						{:else}
-							<form
-								method="POST"
-								action="?/addToWishlist"
-								use:enhance={() => {
-									wishlistActionInProgressForId = colorway.printId;
-									return async ({ result }) => {
-										const currentActionId = wishlistActionInProgressForId;
-										wishlistActionInProgressForId = null;
-
-										if (result.type === 'success') {
-											if (currentActionId === colorway.printId) {
-												handleWishlistUpdate(colorway.printId, true);
-											}
-										} else if (result.type === 'failure') {
-											console.error('Failed to add to wishlist:', result.data?.message);
-											alert(result.data?.message || 'Failed to add');
-										}
-									};
-								}}
-							>
-								<input type="hidden" name="printId" value={colorway.printId} />
-								<button type="submit" disabled={wishlistActionInProgressForId === colorway.printId}>
-									{#if wishlistActionInProgressForId === colorway.printId}Adding...{:else}🤍 Add{/if}
-								</button>
-							</form>
+							<p>No colors available to filter by.</p>
 						{/if}
-					</div>
-				</article>
-			{/each}
+					</section>
+
+					<section>
+						<h3>Categories</h3>
+						{#if data.filters.allCategories.length > 0}
+							<ul>
+								{#each data.filters.allCategories as category (category.id)}
+									<li>
+										<label>
+											<input
+												type="checkbox"
+												name="categories"
+												value={category.id}
+												checked={isSelected('categories', category.id)}
+												onchange={handleFilterChange}
+											/>
+											{category.name}
+										</label>
+									</li>
+								{/each}
+							</ul>
+						{:else}
+							<p>No categories available to filter by.</p>
+						{/if}
+					</section>
+
+					<section>
+						<h3>Designers</h3>
+						{#if data.filters.allDesigners.length > 0}
+							<ul>
+								{#each data.filters.allDesigners as designer (designer.id)}
+									<li>
+										<label>
+											<input
+												type="checkbox"
+												name="designers"
+												value={designer.id}
+												checked={isSelected('designers', designer.id)}
+												onchange={handleFilterChange}
+											/>
+											{designer.name}
+										</label>
+									</li>
+								{/each}
+							</ul>
+						{:else}
+							<p>No designers available to filter by.</p>
+						{/if}
+					</section>
+
+					{#if !isDesktop}
+						<button type="submit">Apply Filters</button>
+					{/if}
+					<a href="/shop">Clear Filters</a>
+				</form>
+			</aside>
+
+			<div
+				class={[
+					'mt-9 grid grid-cols-2 gap-x-[22px] gap-y-4',
+					'sm:grid-cols-3 sm:gap-y-4',
+					'md:grid-cols-4 md:gap-[10px]',
+					'lg:flex-1 lg:grid-cols-3 lg:gap-5'
+				]}
+			>
+				{#each data.colorways as colorway (colorway.id)}
+					<a
+						href={`/shop/${colorway.printId}`}
+						class={[
+							'relative h-[151px] w-full rounded-[10px] bg-cover bg-center bg-no-repeat shadow-[5px_5px_20px_rgba(0,0,0,0.05)]',
+							'sm:h-[174px]',
+							'md:h-[151px]',
+							'lg:h-[198px]',
+							'xl:h-[244px]',
+							'2xl:h-[300px]'
+						]}
+						style="background-image: url({colorway.imageUrl || DEFAULT_COLORWAY_IMAGE_URL})"
+						aria-label={colorway.name}
+					>
+						<div class="absolute right-0 bottom-0">
+							{#if wishlistedPrintIds.has(colorway.printId)}
+								<form
+									method="POST"
+									action="?/removeFromWishlist"
+									use:enhance={() => {
+										wishlistActionInProgressForId = colorway.printId;
+										return async ({ result }) => {
+											const currentActionId = wishlistActionInProgressForId;
+											wishlistActionInProgressForId = null;
+
+											if (result.type === 'success') {
+												if (currentActionId === colorway.printId) {
+													handleWishlistUpdate(colorway.printId, false);
+												}
+											} else if (result.type === 'failure') {
+												console.error('Failed to remove from wishlist:', result.data?.message);
+												alert(result.data?.message || 'Failed to remove');
+											}
+										};
+									}}
+								>
+									<input type="hidden" name="printId" value={colorway.printId} />
+									<button
+										type="submit"
+										disabled={wishlistActionInProgressForId === colorway.printId}
+									>
+										❤️
+									</button>
+								</form>
+							{:else}
+								<form
+									method="POST"
+									action="?/addToWishlist"
+									use:enhance={() => {
+										wishlistActionInProgressForId = colorway.printId;
+										return async ({ result }) => {
+											const currentActionId = wishlistActionInProgressForId;
+											wishlistActionInProgressForId = null;
+
+											if (result.type === 'success') {
+												if (currentActionId === colorway.printId) {
+													handleWishlistUpdate(colorway.printId, true);
+												}
+											} else if (result.type === 'failure') {
+												console.error('Failed to add to wishlist:', result.data?.message);
+												alert(result.data?.message || 'Failed to add');
+											}
+										};
+									}}
+								>
+									<input type="hidden" name="printId" value={colorway.printId} />
+									<button
+										type="submit"
+										disabled={wishlistActionInProgressForId === colorway.printId}
+									>
+										🤍
+									</button>
+								</form>
+							{/if}
+						</div>
+					</a>
+				{/each}
+			</div>
 		</div>
 
-		<nav aria-label="Pagination">
+		<nav aria-label="Pagination" class="mt-9">
 			{#if data.currentPage > 1}
 				<a href={getPaginationUrl(data.currentPage - 1)} rel="prev">Previous</a>
 			{/if}
-
-			<span>Page {data.currentPage} of {data.totalPages}</span>
 
 			{#if data.currentPage < data.totalPages}
 				<a href={getPaginationUrl(data.currentPage + 1)} rel="next">Next</a>
 			{/if}
 		</nav>
-	{:else}
-		<p>No colorways found matching your criteria.</p>
-	{/if}
-</main>
+	</div>
+</div>
