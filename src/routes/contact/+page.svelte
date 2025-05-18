@@ -1,3 +1,11 @@
+<script lang="ts">
+	import { superForm } from 'sveltekit-superforms';
+
+	let { data } = $props();
+
+	const { form, enhance, errors, message, submitting } = superForm(data.form);
+</script>
+
 <svelte:head>
 	<title>Contact - Paillette.co</title>
 </svelte:head>
@@ -46,6 +54,7 @@
 <section class={['bg-enoki py-16', 'xl:py-20']}>
 	<form
 		method="POST"
+		use:enhance
 		class={[
 			'mx-auto flex max-w-[356px] flex-col gap-y-5',
 			'sm:max-w-[510px]',
@@ -59,7 +68,9 @@
 				type="text"
 				name="name"
 				id="name"
+				bind:value={$form.name}
 				placeholder="name*"
+				aria-invalid={$errors.name ? 'true' : undefined}
 				class={[
 					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full px-[38px] py-[20px] text-base/[21px]',
 					'sm:text-lg/[24px]',
@@ -67,6 +78,15 @@
 					'lg:text-2xl/[32px]'
 				]}
 			/>
+			{#if $errors.name}
+				<ul aria-live="polite" class="mt-2.5 -mb-2.5 space-y-2.5">
+					{#each $errors.name as error (error)}
+						<li class="font-cormorant text-grapefruit text-xs/[18px] tracking-[1px] italic">
+							{error}
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		</div>
 		<div>
 			<label for="company" class="sr-only">Company</label>
@@ -74,7 +94,9 @@
 				type="text"
 				name="company"
 				id="company"
+				bind:value={$form.company}
 				placeholder="which company do you represent*"
+				aria-invalid={$errors.company ? 'true' : undefined}
 				class={[
 					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full px-[38px] py-[20px] text-base/[21px]',
 					'sm:text-lg/[24px]',
@@ -82,6 +104,15 @@
 					'lg:text-2xl/[32px]'
 				]}
 			/>
+			{#if $errors.company}
+				<ul aria-live="polite" class="mt-2.5 -mb-2.5 space-y-2.5">
+					{#each $errors.company as error (error)}
+						<li class="font-cormorant text-grapefruit text-xs/[18px] tracking-[1px] italic">
+							{error}
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		</div>
 		<div>
 			<label for="email" class="sr-only">Email</label>
@@ -89,7 +120,9 @@
 				type="email"
 				name="email"
 				id="email"
+				bind:value={$form.email}
 				placeholder="e-mail address*"
+				aria-invalid={$errors.email ? 'true' : undefined}
 				class={[
 					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full px-[38px] py-[20px] text-base/[21px]',
 					'sm:text-lg/[24px]',
@@ -97,13 +130,24 @@
 					'lg:text-2xl/[32px]'
 				]}
 			/>
+			{#if $errors.email}
+				<ul aria-live="polite" class="mt-2.5 -mb-2.5 space-y-2.5">
+					{#each $errors.email as error (error)}
+						<li class="font-cormorant text-grapefruit text-xs/[18px] tracking-[1px] italic">
+							{error}
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		</div>
 		<div>
 			<label for="message" class="sr-only">Message</label>
 			<textarea
 				name="message"
 				id="message"
+				bind:value={$form.message}
 				placeholder="message*"
+				aria-invalid={$errors.message ? 'true' : undefined}
 				class={[
 					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep h-[241px] w-full rounded-[40px] px-[38px] py-[20px] text-base/[21px]',
 					'sm:h-[369px] sm:text-lg/[24px]',
@@ -111,9 +155,24 @@
 					'lg:text-2xl/[32px]'
 				]}
 			></textarea>
+			{#if $errors.message}
+				<ul aria-live="polite" class="mt-2.5 -mb-2.5 space-y-2.5">
+					{#each $errors.message as error (error)}
+						<li class="font-cormorant text-grapefruit text-xs/[18px] tracking-[1px] italic">
+							{error}
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		</div>
+
+		{#if $message}
+			<p>{$message}</p>
+		{/if}
+
 		<button
 			type="submit"
+			disabled={$submitting}
 			class={[
 				'font-evolventa border-black-sheep text-black-sheep cursor-pointer self-start rounded-full border px-[37px] py-[19px] text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px] disabled:cursor-not-allowed disabled:border disabled:bg-[#ececec] disabled:px-[37px] disabled:py-[19px]',
 				'sm:text-lg/6'
