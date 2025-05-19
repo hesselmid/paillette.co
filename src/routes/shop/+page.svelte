@@ -217,18 +217,18 @@
 				<div
 					class={[
 						'mx-auto max-w-[358px]',
-						'sm:w-[calc(100%-4rem)] sm:max-w-none',
-						'md:w-[calc(100%-4rem)]',
-						'lg:mx-0 lg:w-full'
+						'sm:w-[608px] sm:max-w-none',
+						'md:w-[704px]',
+						'lg:mx-0 lg:w-[218px]'
 					]}
 				>
-					<div class={['flex justify-between px-4 sm:px-0', 'lg:hidden']}>
+					<div class={['flex justify-between', 'lg:hidden']}>
 						<span class="font-evolventa text-black-sheep text-lg/[24px] lowercase">Filter</span>
 						<button
 							type="button"
 							aria-label="Close filters"
 							onclick={() => (filtersOpen = false)}
-							class="text-black-sheep"
+							class="text-black-sheep cursor-pointer"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -248,7 +248,7 @@
 						</button>
 					</div>
 
-					<div class={['hidden px-4 sm:px-0', 'lg:flex lg:gap-x-[18px]']}>
+					<div class={['hidden', 'lg:flex lg:gap-x-[18px]']}>
 						<h2 class="font-evolventa text-black-sheep text-lg/[24px]">Filter</h2>
 						<span class="font-evolventa text-lg/[24px] text-[#b1b2ae]"
 							>{data.totalColorways} items</span
@@ -259,7 +259,7 @@
 						bind:this={formElement}
 						method="GET"
 						action="/shop"
-						class="divide-black-sheep border-black-sheep mt-8 divide-y border-t px-4 sm:px-0"
+						class="divide-black-sheep border-black-sheep mt-8 divide-y border-t"
 					>
 						<input type="hidden" name="page" value="1" />
 
@@ -296,7 +296,7 @@
 													value={color.id}
 													checked={isSelected('colors', color.id)}
 													onchange={handleFilterChange}
-													class="border-black-sheep checked:bg-black-sheep focus:ring-black-sheep size-[15px] appearance-none rounded-full checked:[background-image:none] focus:ring-2 focus:ring-offset-0"
+													class="border-black-sheep checked:bg-black-sheep size-[15px] rounded-full checked:[background-image:none]"
 												/>
 												<span
 													class="font-evolventa text-black-sheep text-base/[21px] lowercase select-none"
@@ -410,15 +410,15 @@
 							{/if}
 						</fieldset>
 
-						<div class={['mt-8 flex justify-between gap-x-4 pt-4', 'lg:hidden']}>
+						<div class={['mt-8 flex justify-between', 'lg:hidden']}>
 							<a
 								href="/shop"
-								class="font-evolventa border-black-sheep text-black-sheep flex h-12 flex-1 cursor-pointer items-center justify-center rounded-full border text-sm/[18px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[3px] disabled:cursor-not-allowed disabled:border disabled:bg-[#ececec]"
+								class="font-evolventa border-black-sheep text-black-sheep flex h-16 w-[171px] cursor-pointer items-center justify-center rounded-full border text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px]"
 								>Clear all</a
 							>
 							<button
 								type="submit"
-								class="font-evolventa border-black-sheep text-black-sheep flex h-12 flex-1 cursor-pointer items-center justify-center rounded-full border bg-gray-100 text-sm/[18px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[3px] disabled:cursor-not-allowed disabled:border disabled:bg-[#ececec]"
+								class="font-evolventa border-black-sheep text-black-sheep flex h-16 w-[171px] cursor-pointer items-center justify-center rounded-full border text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] disabled:cursor-not-allowed disabled:border disabled:bg-[#ececec] disabled:px-[37px] disabled:py-[19px]"
 								onclick={() => (filtersOpen = false)}>Apply</button
 							>
 						</div>
@@ -432,7 +432,7 @@
 						{#each selectedFilterItems as item (item.type + item.id)}
 							<a
 								href={getRemoveFilterUrl(item.type, item.id)}
-								class="font-evolventa border-black-sheep text-black-sheep hover:border-grapefruit hover:text-grapefruit flex items-center gap-x-1.5 rounded-full border px-4 py-2 text-sm/none shadow-[0_2px_2px_rgba(0,0,0,0.15)]"
+								class="font-evolventa border-black-sheep text-black-sheep hover:border-grapefruit hover:text-grapefruit flex items-center gap-x-1.5 rounded-full border px-[37px] py-[19px] text-lg/6 shadow-[0_2px_2px_rgba(0,0,0,0.15)]"
 								aria-label={`Remove filter: ${item.name}`}
 								title={`Remove filter: ${item.name}`}
 								onclick={(e) => {
@@ -449,12 +449,15 @@
 									xmlns="http://www.w3.org/2000/svg"
 									fill="none"
 									viewBox="0 0 24 24"
-									stroke-width="2"
+									stroke-width="1.5"
 									stroke="currentColor"
-									class="size-4"
-									aria-hidden="true"
+									class="size-6"
 								>
-									<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+									/>
 								</svg>
 							</a>
 						{/each}
