@@ -10,7 +10,7 @@ import {
 	usersTable,
 	wishlistItemsTable
 } from '$lib/server/db/schema';
-import { and, eq, inArray, sql, desc, countDistinct } from 'drizzle-orm';
+import { and, eq, inArray, desc, countDistinct } from 'drizzle-orm';
 import type { Actions } from './$types';
 
 const ITEMS_PER_PAGE = 12;
@@ -34,7 +34,7 @@ export const load = async ({ url, locals }) => {
 	const allDesignersPromise = db
 		.select({
 			id: usersTable.id,
-			name: sql<string>`${usersTable.firstName} || ' ' || ${usersTable.lastName}`
+			name: usersTable.firstName
 		})
 		.from(usersTable)
 		.where(eq(usersTable.role, 'member'))
