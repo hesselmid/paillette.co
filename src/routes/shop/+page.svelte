@@ -187,9 +187,10 @@
 					</section>
 
 					{#if !isDesktop}
+						<a href="/shop">Clear all</a>
+
 						<button type="submit">Apply Filters</button>
 					{/if}
-					<a href="/shop">Clear Filters</a>
 				</form>
 			</aside>
 
@@ -202,81 +203,118 @@
 				]}
 			>
 				{#each data.colorways as colorway (colorway.id)}
-					<a
-						href={`/shop/${colorway.printId}`}
-						class={[
-							'relative h-[151px] w-full rounded-[10px] bg-cover bg-center bg-no-repeat shadow-[5px_5px_20px_rgba(0,0,0,0.05)]',
-							'sm:h-[174px]',
-							'md:h-[151px]',
-							'lg:h-[198px]',
-							'xl:h-[244px]',
-							'2xl:h-[300px]'
-						]}
-						style="background-image: url({colorway.imageUrl || DEFAULT_COLORWAY_IMAGE_URL})"
-						aria-label={colorway.name}
-					>
-						<div class="absolute right-0 bottom-0">
-							{#if wishlistedPrintIds.has(colorway.printId)}
-								<form
-									method="POST"
-									action="?/removeFromWishlist"
-									use:enhance={() => {
-										wishlistActionInProgressForId = colorway.printId;
-										return async ({ result }) => {
-											const currentActionId = wishlistActionInProgressForId;
-											wishlistActionInProgressForId = null;
+					<article class="relative" oncontextmenu={(e) => e.preventDefault()}>
+						<a href={`/shop/${colorway.printId}`} aria-label={colorway.name}>
+							<img
+								src={colorway.imageUrl || DEFAULT_COLORWAY_IMAGE_URL}
+								alt={colorway.name}
+								class={[
+									'h-[151px] w-full rounded-[10px] object-cover shadow-[5px_5px_20px_rgba(0,0,0,0.05)]',
+									'sm:h-[174px]',
+									'md:h-[151px]',
+									'lg:h-[198px]',
+									'xl:h-[244px]',
+									'2xl:h-[300px]'
+								]}
+								draggable="false"
+							/>
+							<div class="absolute right-[10px] bottom-[10px] z-10">
+								{#if wishlistedPrintIds.has(colorway.printId)}
+									<form
+										method="POST"
+										action="?/removeFromWishlist"
+										use:enhance={() => {
+											wishlistActionInProgressForId = colorway.printId;
+											return async ({ result }) => {
+												const currentActionId = wishlistActionInProgressForId;
+												wishlistActionInProgressForId = null;
 
-											if (result.type === 'success') {
-												if (currentActionId === colorway.printId) {
-													handleWishlistUpdate(colorway.printId, false);
+												if (result.type === 'success') {
+													if (currentActionId === colorway.printId) {
+														handleWishlistUpdate(colorway.printId, false);
+													}
+												} else if (result.type === 'failure') {
+													console.error('Failed to remove from wishlist:', result.data?.message);
+													alert(result.data?.message || 'Failed to remove');
 												}
-											} else if (result.type === 'failure') {
-												console.error('Failed to remove from wishlist:', result.data?.message);
-												alert(result.data?.message || 'Failed to remove');
-											}
-										};
-									}}
-								>
-									<input type="hidden" name="printId" value={colorway.printId} />
-									<button
-										type="submit"
-										disabled={wishlistActionInProgressForId === colorway.printId}
+											};
+										}}
+										class="flex"
 									>
-										❤️
-									</button>
-								</form>
-							{:else}
-								<form
-									method="POST"
-									action="?/addToWishlist"
-									use:enhance={() => {
-										wishlistActionInProgressForId = colorway.printId;
-										return async ({ result }) => {
-											const currentActionId = wishlistActionInProgressForId;
-											wishlistActionInProgressForId = null;
+										<input type="hidden" name="printId" value={colorway.printId} />
+										<button
+											type="submit"
+											disabled={wishlistActionInProgressForId === colorway.printId}
+											class="cursor-pointer"
+											onclick={(e) => e.stopPropagation()}
+											aria-label="Remove from wishlist"
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												fill="currentColor"
+												viewBox="0 0 24 24"
+												stroke-width="1.5"
+												stroke="currentColor"
+												class="size-6"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+												/>
+											</svg>
+										</button>
+									</form>
+								{:else}
+									<form
+										method="POST"
+										action="?/addToWishlist"
+										use:enhance={() => {
+											wishlistActionInProgressForId = colorway.printId;
+											return async ({ result }) => {
+												const currentActionId = wishlistActionInProgressForId;
+												wishlistActionInProgressForId = null;
 
-											if (result.type === 'success') {
-												if (currentActionId === colorway.printId) {
-													handleWishlistUpdate(colorway.printId, true);
+												if (result.type === 'success') {
+													if (currentActionId === colorway.printId) {
+														handleWishlistUpdate(colorway.printId, true);
+													}
+												} else if (result.type === 'failure') {
+													console.error('Failed to add to wishlist:', result.data?.message);
+													alert(result.data?.message || 'Failed to add');
 												}
-											} else if (result.type === 'failure') {
-												console.error('Failed to add to wishlist:', result.data?.message);
-												alert(result.data?.message || 'Failed to add');
-											}
-										};
-									}}
-								>
-									<input type="hidden" name="printId" value={colorway.printId} />
-									<button
-										type="submit"
-										disabled={wishlistActionInProgressForId === colorway.printId}
+											};
+										}}
+										class="flex"
 									>
-										🤍
-									</button>
-								</form>
-							{/if}
-						</div>
-					</a>
+										<input type="hidden" name="printId" value={colorway.printId} />
+										<button
+											type="submit"
+											disabled={wishlistActionInProgressForId === colorway.printId}
+											class="cursor-pointer"
+											onclick={(e) => e.stopPropagation()}
+											aria-label="Add to wishlist"
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												fill="none"
+												viewBox="0 0 24 24"
+												stroke-width="1.5"
+												stroke="currentColor"
+												class="size-6"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+												/>
+											</svg>
+										</button>
+									</form>
+								{/if}
+							</div>
+						</a>
+					</article>
 				{/each}
 			</div>
 		</div>
