@@ -36,15 +36,41 @@
 
 			<aside
 				class={[
-					'fixed inset-0 z-10 bg-white',
-					'lg:static',
+					'fixed inset-0 z-10 bg-white pt-5',
+					'lg:static lg:pt-0',
 					filtersOpen ? 'block' : 'hidden lg:block'
 				]}
 			>
-				<div class={['mx-auto max-w-[358px]', 'lg:mx-0 lg:w-[218px] lg:max-w-none']}>
+				<div
+					class={[
+						'mx-auto max-w-[358px]',
+						'sm:w-[608px] sm:max-w-none',
+						'md:w-[704px]',
+						'lg:mx-0 lg:w-[218px]'
+					]}
+				>
 					<div class={['flex justify-between', 'lg:hidden']}>
-						<span>Filter</span>
-						<button type="button" onclick={() => (filtersOpen = false)}>x</button>
+						<span class="font-evolventa text-black-sheep text-lg/[24px] lowercase">Filter</span>
+						<button
+							type="button"
+							aria-label="Close"
+							onclick={() => (filtersOpen = false)}
+							class="text-black-sheep"
+							><svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="size-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+								/>
+							</svg>
+						</button>
 					</div>
 
 					<div class={['hidden', 'lg:flex lg:gap-x-[18px]']}>
@@ -123,18 +149,43 @@
 							</div>
 						</fieldset>
 
-						<div class="lg:hidden">
-							<button type="reset">Clear all</button>
-							<button type="submit">Apply</button>
+						<div class={['mt-8 flex justify-between', 'lg:hidden']}>
+							<button
+								type="reset"
+								class="font-evolventa border-black-sheep text-black-sheep flex h-16 w-[171px] cursor-pointer items-center justify-center rounded-full border text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px] disabled:cursor-not-allowed disabled:border disabled:bg-[#ececec] disabled:px-[37px] disabled:py-[19px]"
+								>Clear all</button
+							>
+							<button
+								type="submit"
+								class="font-evolventa border-black-sheep text-black-sheep flex h-16 w-[171px] cursor-pointer items-center justify-center rounded-full border text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px] disabled:cursor-not-allowed disabled:border disabled:bg-[#ececec] disabled:px-[37px] disabled:py-[19px]"
+								>Apply</button
+							>
 						</div>
 					</form>
 				</div>
 			</aside>
 
 			<section class={['mt-9', 'lg:mt-0 lg:flex-1']}>
-				<div>
-					<button>cat 1</button>
-					<button>cat 2</button>
+				<div class="mt-14 mb-8 flex flex-wrap gap-5">
+					{#each { length: 8 }}
+						<button
+							class="font-evolventa border-black-sheep text-black-sheep flex cursor-pointer rounded-full border px-[37px] py-[19px] text-lg/6 shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px]"
+							>cat 1<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="size-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+								/>
+							</svg>
+						</button>
+					{/each}
 				</div>
 
 				<ul
