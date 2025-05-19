@@ -134,7 +134,7 @@
 											value={color.id}
 											checked={isSelected('colors', color.id)}
 											onchange={handleFilterChange}
-											class="border-black-sheep checked:bg-black-sheep size-[15px] rounded-full"
+											class="border-black-sheep checked:bg-black-sheep size-[15px] rounded-full checked:[background-image:none]"
 										/>
 										<label
 											for={`color-${color.id}`}
@@ -163,7 +163,7 @@
 											value={category.id}
 											checked={isSelected('categories', category.id)}
 											onchange={handleFilterChange}
-											class="border-black-sheep checked:bg-black-sheep size-[15px] rounded-full"
+											class="border-black-sheep checked:bg-black-sheep size-[15px] rounded-full checked:[background-image:none]"
 										/>
 										<label
 											for={`category-${category.id}`}
@@ -192,7 +192,7 @@
 											value={designer.id}
 											checked={isSelected('designers', designer.id)}
 											onchange={handleFilterChange}
-											class="border-black-sheep checked:bg-black-sheep size-[15px] rounded-full"
+											class="border-black-sheep checked:bg-black-sheep size-[15px] rounded-full checked:[background-image:none]"
 										/>
 										<label
 											for={`designer-${designer.id}`}
