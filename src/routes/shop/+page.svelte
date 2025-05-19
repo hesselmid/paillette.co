@@ -108,27 +108,39 @@
 			]}
 		>
 			<aside class={['lg:w-[218px]']}>
-				<h2>Filters</h2>
-				<p>Showing {data.colorways.length} of {data.totalColorways} colorways.</p>
+				<div class="flex gap-x-[18px]">
+					<h2 class="font-evolventa text-black-sheep text-lg/[24px]">Filter</h2>
+					<p class="font-evolventa text-lg/[24px] text-[#b1b2ae]">{data.colorways.length} items.</p>
+				</div>
 
-				<form bind:this={formElement} method="GET" action="/shop" class={['hidden', 'lg:block']}>
+				<form
+					bind:this={formElement}
+					method="GET"
+					action="/shop"
+					class={['hidden', 'lg:mt-8 lg:block']}
+				>
 					<input type="hidden" name="page" value="1" />
 
 					<section>
-						<h3>Colors</h3>
+						<h3 class="font-evolventa text-black-sheep text-lg/[24px] lowercase">Colors</h3>
 						{#if data.filters.allColors.length > 0}
 							<ul>
 								{#each data.filters.allColors as color (color.id)}
-									<li>
-										<label>
-											<input
-												type="checkbox"
-												name="colors"
-												value={color.id}
-												checked={isSelected('colors', color.id)}
-												onchange={handleFilterChange}
-											/>
-											{color.name}
+									<li class="flex items-center gap-x-[15px]">
+										<input
+											id={`color-${color.id}`}
+											type="checkbox"
+											name="colors"
+											value={color.id}
+											checked={isSelected('colors', color.id)}
+											onchange={handleFilterChange}
+											class="border-black-sheep checked:bg-black-sheep size-[15px] rounded-full"
+										/>
+										<label
+											for={`color-${color.id}`}
+											class="font-evolventa text-black-sheep text-lg/[24px] lowercase"
+										>
+											{color.name.toLowerCase()}
 										</label>
 									</li>
 								{/each}
@@ -139,20 +151,25 @@
 					</section>
 
 					<section>
-						<h3>Categories</h3>
+						<h3 class="font-evolventa text-black-sheep text-lg/[24px] lowercase">Categories</h3>
 						{#if data.filters.allCategories.length > 0}
 							<ul>
 								{#each data.filters.allCategories as category (category.id)}
-									<li>
-										<label>
-											<input
-												type="checkbox"
-												name="categories"
-												value={category.id}
-												checked={isSelected('categories', category.id)}
-												onchange={handleFilterChange}
-											/>
-											{category.name}
+									<li class="flex items-center gap-x-[15px]">
+										<input
+											id={`category-${category.id}`}
+											type="checkbox"
+											name="categories"
+											value={category.id}
+											checked={isSelected('categories', category.id)}
+											onchange={handleFilterChange}
+											class="border-black-sheep checked:bg-black-sheep size-[15px] rounded-full"
+										/>
+										<label
+											for={`category-${category.id}`}
+											class="font-evolventa text-black-sheep text-lg/[24px] lowercase"
+										>
+											{category.name.toLowerCase()}
 										</label>
 									</li>
 								{/each}
@@ -163,20 +180,25 @@
 					</section>
 
 					<section>
-						<h3>Designers</h3>
+						<h3 class="font-evolventa text-black-sheep text-lg/[24px] lowercase">Designers</h3>
 						{#if data.filters.allDesigners.length > 0}
 							<ul>
 								{#each data.filters.allDesigners as designer (designer.id)}
-									<li>
-										<label>
-											<input
-												type="checkbox"
-												name="designers"
-												value={designer.id}
-												checked={isSelected('designers', designer.id)}
-												onchange={handleFilterChange}
-											/>
-											{designer.name}
+									<li class="flex items-center gap-x-[15px]">
+										<input
+											id={`designer-${designer.id}`}
+											type="checkbox"
+											name="designers"
+											value={designer.id}
+											checked={isSelected('designers', designer.id)}
+											onchange={handleFilterChange}
+											class="border-black-sheep checked:bg-black-sheep size-[15px] rounded-full"
+										/>
+										<label
+											for={`designer-${designer.id}`}
+											class="font-evolventa text-black-sheep text-lg/[24px] lowercase"
+										>
+											{designer.name.toLowerCase()}
 										</label>
 									</li>
 								{/each}
@@ -194,7 +216,7 @@
 				</form>
 			</aside>
 
-			<div
+			<ul
 				class={[
 					'mt-9 grid grid-cols-2 gap-x-[22px] gap-y-4',
 					'sm:grid-cols-3 sm:gap-y-4',
@@ -203,120 +225,115 @@
 				]}
 			>
 				{#each data.colorways as colorway (colorway.id)}
-					<article class="relative" oncontextmenu={(e) => e.preventDefault()}>
-						<a href={`/shop/${colorway.printId}`} aria-label={colorway.name}>
-							<img
-								src={colorway.imageUrl || DEFAULT_COLORWAY_IMAGE_URL}
-								alt={colorway.name}
-								class={[
-									'h-[151px] w-full rounded-[10px] object-cover shadow-[5px_5px_20px_rgba(0,0,0,0.05)]',
-									'sm:h-[174px]',
-									'md:h-[151px]',
-									'lg:h-[198px]',
-									'xl:h-[244px]',
-									'2xl:h-[300px]'
-								]}
-								draggable="false"
-							/>
-							<div class="absolute right-[10px] bottom-[10px] z-10">
-								{#if wishlistedPrintIds.has(colorway.printId)}
-									<form
-										method="POST"
-										action="?/removeFromWishlist"
-										use:enhance={() => {
-											wishlistActionInProgressForId = colorway.printId;
-											return async ({ result }) => {
-												const currentActionId = wishlistActionInProgressForId;
-												wishlistActionInProgressForId = null;
+					<li>
+						<article class="relative" oncontextmenu={(e) => e.preventDefault()}>
+							<a href={`/shop/${colorway.printId}`} aria-label={colorway.name}>
+								<img
+									src={colorway.imageUrl || DEFAULT_COLORWAY_IMAGE_URL}
+									alt={colorway.name}
+									class="aspect-square w-full rounded-[10px] object-cover shadow-[5px_5px_20px_rgba(0,0,0,0.05)]"
+									draggable="false"
+								/>
+								<div class="absolute right-[10px] bottom-[10px]">
+									{#if wishlistedPrintIds.has(colorway.printId)}
+										<form
+											method="POST"
+											action="?/removeFromWishlist"
+											use:enhance={() => {
+												wishlistActionInProgressForId = colorway.printId;
+												return async ({ result }) => {
+													const currentActionId = wishlistActionInProgressForId;
+													wishlistActionInProgressForId = null;
 
-												if (result.type === 'success') {
-													if (currentActionId === colorway.printId) {
-														handleWishlistUpdate(colorway.printId, false);
+													if (result.type === 'success') {
+														if (currentActionId === colorway.printId) {
+															handleWishlistUpdate(colorway.printId, false);
+														}
+													} else if (result.type === 'failure') {
+														console.error('Failed to remove from wishlist:', result.data?.message);
+														alert(result.data?.message || 'Failed to remove');
 													}
-												} else if (result.type === 'failure') {
-													console.error('Failed to remove from wishlist:', result.data?.message);
-													alert(result.data?.message || 'Failed to remove');
-												}
-											};
-										}}
-										class="flex"
-									>
-										<input type="hidden" name="printId" value={colorway.printId} />
-										<button
-											type="submit"
-											disabled={wishlistActionInProgressForId === colorway.printId}
-											class="cursor-pointer"
-											onclick={(e) => e.stopPropagation()}
-											aria-label="Remove from wishlist"
+												};
+											}}
+											class="flex"
 										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												fill="currentColor"
-												viewBox="0 0 24 24"
-												stroke-width="1.5"
-												stroke="currentColor"
-												class="size-6"
+											<input type="hidden" name="printId" value={colorway.printId} />
+											<button
+												type="submit"
+												disabled={wishlistActionInProgressForId === colorway.printId}
+												class="cursor-pointer"
+												onclick={(e) => e.stopPropagation()}
+												aria-label="Remove from wishlist"
 											>
-												<path
-													stroke-linecap="round"
-													stroke-linejoin="round"
-													d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-												/>
-											</svg>
-										</button>
-									</form>
-								{:else}
-									<form
-										method="POST"
-										action="?/addToWishlist"
-										use:enhance={() => {
-											wishlistActionInProgressForId = colorway.printId;
-											return async ({ result }) => {
-												const currentActionId = wishlistActionInProgressForId;
-												wishlistActionInProgressForId = null;
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													fill="currentColor"
+													viewBox="0 0 24 24"
+													stroke-width="1.5"
+													stroke="currentColor"
+													class="size-6"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+													/>
+												</svg>
+											</button>
+										</form>
+									{:else}
+										<form
+											method="POST"
+											action="?/addToWishlist"
+											use:enhance={() => {
+												wishlistActionInProgressForId = colorway.printId;
+												return async ({ result }) => {
+													const currentActionId = wishlistActionInProgressForId;
+													wishlistActionInProgressForId = null;
 
-												if (result.type === 'success') {
-													if (currentActionId === colorway.printId) {
-														handleWishlistUpdate(colorway.printId, true);
+													if (result.type === 'success') {
+														if (currentActionId === colorway.printId) {
+															handleWishlistUpdate(colorway.printId, true);
+														}
+													} else if (result.type === 'failure') {
+														console.error('Failed to add to wishlist:', result.data?.message);
+														alert(result.data?.message || 'Failed to add');
 													}
-												} else if (result.type === 'failure') {
-													console.error('Failed to add to wishlist:', result.data?.message);
-													alert(result.data?.message || 'Failed to add');
-												}
-											};
-										}}
-										class="flex"
-									>
-										<input type="hidden" name="printId" value={colorway.printId} />
-										<button
-											type="submit"
-											disabled={wishlistActionInProgressForId === colorway.printId}
-											class="cursor-pointer"
-											onclick={(e) => e.stopPropagation()}
-											aria-label="Add to wishlist"
+												};
+											}}
+											class="flex"
 										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												fill="none"
-												viewBox="0 0 24 24"
-												stroke-width="1.5"
-												stroke="currentColor"
-												class="size-6"
+											<input type="hidden" name="printId" value={colorway.printId} />
+											<button
+												type="submit"
+												disabled={wishlistActionInProgressForId === colorway.printId}
+												class="cursor-pointer"
+												onclick={(e) => e.stopPropagation()}
+												aria-label="Add to wishlist"
 											>
-												<path
-													stroke-linecap="round"
-													stroke-linejoin="round"
-													d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-												/>
-											</svg>
-										</button>
-									</form>
-								{/if}
-							</div>
-						</a>
-					</article>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke-width="1.5"
+													stroke="currentColor"
+													class="size-6"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+													/>
+												</svg>
+											</button>
+										</form>
+									{/if}
+								</div>
+							</a>
+						</article>
+					</li>
 				{/each}
-			</div>
+			</ul>
 		</div>
 
 		<nav aria-label="Pagination" class="mt-9">
