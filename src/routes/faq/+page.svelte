@@ -215,6 +215,9 @@
 				alt=""
 				sizes="(min-width: 640px) 409px, 358px"
 				class={['h-auto w-[358px]', 'sm:w-[409px]']}
+				draggable="false"
+				oncontextmenu={(e) => e.preventDefault()}
+				role="img"
 			/>
 			<div class={['flex flex-col items-center gap-y-9', 'lg:gap-y-12']}>
 				<p
