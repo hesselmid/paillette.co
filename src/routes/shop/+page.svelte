@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { onMount } from 'svelte';
-	// Added invalidateAll back
 	import { goto, invalidateAll } from '$app/navigation';
 	import { enhance } from '$app/forms';
+	import { MediaQuery } from 'svelte/reactivity';
 
 	type FilterItem = { id: number; name: string };
 	type SelectedFilterItem = {
@@ -48,8 +47,9 @@
 	const DEFAULT_COLORWAY_IMAGE_URL = 'https://placehold.co/300x200.png?text=Print+Image';
 
 	let formElement: HTMLFormElement | undefined = $state();
-	let isDesktop: boolean = $state(false);
-	const DESKTOP_BREAKPOINT = '(min-width: 1024px)';
+
+	const desktopMediaQuery = new MediaQuery('(min-width: 1024px)');
+	let isDesktop = $derived(desktopMediaQuery.current);
 
 	let filtersOpen = $state(false);
 	let filterSectionOpen = $state<{ colors: boolean; categories: boolean; designers: boolean }>({
@@ -61,17 +61,10 @@
 	let wishlistedPrintIds = $derived(new Set(data.wishlistedPrintIds || []));
 	let wishlistActionInProgressForId: number | null = $state(null);
 
-	onMount(() => {
-		const mediaQuery = window.matchMedia(DESKTOP_BREAKPOINT);
-		const updateDesktopStatus = (event: MediaQueryListEvent | MediaQueryList) => {
-			isDesktop = event.matches;
-			if (isDesktop && filtersOpen) {
-				filtersOpen = false;
-			}
-		};
-		updateDesktopStatus(mediaQuery);
-		mediaQuery.addEventListener('change', updateDesktopStatus);
-		return () => mediaQuery.removeEventListener('change', updateDesktopStatus);
+	$effect(() => {
+		if (isDesktop && filtersOpen) {
+			filtersOpen = false;
+		}
 	});
 
 	function getPaginationUrl(targetPage: number): string {
