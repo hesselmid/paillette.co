@@ -2,4 +2,6 @@
 	<title>Services - Paillette.co</title>
 </svelte:head>
 
-<h1>Services</h1>
+<section class="bg-white">
+	<div class="container mx-auto"></div>
+</section>

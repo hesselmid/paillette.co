@@ -175,7 +175,7 @@
 	<title>Shop - Paillette.co</title>
 </svelte:head>
 
-<div class={['bg-white py-[60px]', 'lg:py-20']}>
+<div class={['bg-white py-16', 'lg:py-20']}>
 	<div class="container mx-auto">
 		<h1
 			class={[

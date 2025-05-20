@@ -39,7 +39,7 @@
 	<title>Paillette.co</title>
 </svelte:head>
 
-<section class={['bg-white py-[60px]', 'lg:py-20']}>
+<section class={['bg-white py-16', 'lg:py-20']}>
 	<div class="container mx-auto">
 		<div
 			class={[
@@ -78,7 +78,7 @@
 	</div>
 </section>
 
-<section class={['bg-enoki py-[60px]', 'lg:py-20']}>
+<section class={['bg-enoki py-16', 'lg:py-20']}>
 	<div class="container mx-auto">
 		<div
 			class={[
@@ -143,7 +143,7 @@
 	</div>
 </section>
 
-<section class={['bg-white py-[60px]', 'lg:py-20']}>
+<section class={['bg-white py-16', 'lg:py-20']}>
 	<Faq items={faqs} baseColor="#cdc526">
 		{#snippet intro()}
 			<dt
@@ -175,7 +175,7 @@
 	</Faq>
 </section>
 
-<section class={['bg-enoki py-[60px]', 'lg:py-20']}>
+<section class={['bg-enoki py-16', 'lg:py-20']}>
 	<div class="container mx-auto">
 		<div
 			class={[

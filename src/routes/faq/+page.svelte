@@ -116,7 +116,7 @@
 	<title>FAQ - Paillette.co</title>
 </svelte:head>
 
-<div class={['bg-white py-[60px]', 'lg:py-20']}>
+<div class={['bg-white py-16', 'lg:py-20']}>
 	<h1
 		class={[
 			'font-cormorant text-black-sheep text-center text-3xl/[36px]',
