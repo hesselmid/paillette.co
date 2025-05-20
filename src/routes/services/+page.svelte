@@ -231,4 +231,39 @@
 	<div bind:this={sentinelElement} style="height: 1px; width: 100%;" aria-hidden="true"></div>
 </section>
 
-<section class="bg-enoki py-16"></section>
+<section class={['bg-enoki py-16', 'lg:py-20']}>
+	<div
+		class={[
+			'mx-auto max-w-[340px]',
+			'sm:max-w-[570px]',
+			'md:max-w-[694px]',
+			'lg:max-w-[940px]',
+			'xl:max-w-[1152px]'
+		]}
+	>
+		<div class={['rounded-t-[10px] bg-white py-16', 'lg:py-20']}>
+			<h2
+				class={[
+					'font-apfel-grotezk-brukt text-black-sheep text-center text-3xl/[38px]',
+					'sm:text-4xl/[46px]',
+					'md:text-5xl/[62px]',
+					'lg:text-6xl/[77px]'
+				]}
+			>
+				Why choose Paillette?
+			</h2>
+			<p
+				class={[
+					'font-evolventa text-black-sheep mx-auto mt-9 max-w-[284px] text-center text-lg/6',
+					'sm:max-w-[511px] sm:text-2xl/8',
+					'md:max-w-[626px]',
+					'lg:mt-12 lg:max-w-[864px]'
+				]}
+			>
+				Each design is sold as a one-of-a-kind piece, including all color variations. Your brand
+				receives high-resolution files, full creative rights, and a certificate of authenticity for
+				unrestricted global use—ensuring exclusivity and originality with every piece.
+			</p>
+		</div>
+	</div>
+</section>
