@@ -60,6 +60,7 @@
 					'xl:w-[616px]',
 					'2xl:w-[685px]'
 				]}
+				fetchpriority="high"
 			/>
 			<h1
 				class={[
