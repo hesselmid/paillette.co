@@ -1,7 +1,49 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import PailletteIcon from './PailletteIcon.svelte';
 
-	let open = $state(true);
+	let open = $state(false);
+	let sentinelElement: HTMLDivElement | undefined = $state();
+	let animationTimeoutId: ReturnType<typeof setTimeout> | undefined = $state();
+
+	onMount(() => {
+		let observer: IntersectionObserver;
+
+		const observerCallback: IntersectionObserverCallback = (entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting && !animationTimeoutId) {
+					animationTimeoutId = setTimeout(() => {
+						open = true;
+						animationTimeoutId = undefined;
+					}, 300);
+
+					if (sentinelElement) {
+						observer.unobserve(sentinelElement);
+					}
+				}
+			});
+		};
+
+		const observerOptions: IntersectionObserverInit = {
+			root: null,
+			threshold: 0.1
+		};
+
+		observer = new IntersectionObserver(observerCallback, observerOptions);
+
+		if (sentinelElement) {
+			observer.observe(sentinelElement);
+		}
+
+		return () => {
+			if (animationTimeoutId) {
+				clearTimeout(animationTimeoutId);
+			}
+			if (observer) {
+				observer.disconnect();
+			}
+		};
+	});
 </script>
 
 <svelte:head>
@@ -48,66 +90,79 @@
 		<!-- Light blue -->
 		<div
 			class={[
-				'absolute size-[42px]',
+				'absolute size-[42px] transition-all duration-1000 ease-in-out',
 				'sm:size-[66px]',
 				'md:size-[84px]',
+				'lg:size-[94px]',
 				open ? 'top-[576px] left-[15px]' : 'top-[597px] left-[153px]',
 				open ? 'sm:top-[623px] sm:left-[96px]' : 'sm:top-[654px] sm:left-[254px]',
 				open ? 'md:top-[565px] md:left-[83px]' : 'md:top-[606px] md:left-[300px]',
-				open ? 'lg:top-[] lg:left-[]' : 'lg:top-[] lg:left-[]',
-				open ? 'xl:top-[] xl:left-[]' : 'xl:top-[] xl:left-[]',
-				open ? '2xl:top-[] 2xl:left-[]' : '2xl:top-[] 2xl:left-[]'
+				open ? 'lg:top-[359px] lg:left-[594px]' : 'lg:top-[373px] lg:left-[684.02px]',
+				open ? 'xl:top-[311px] xl:left-[824px]' : 'xl:top-[325px] xl:left-[918.02px]',
+				open ? '2xl:left-[1066px]' : '2xl:left-[1158.02px]'
 			]}
 		>
-			<PailletteIcon primaryColor="#D4EBF8" secondaryColor="#EEF7FC" />
+			<PailletteIcon
+				primaryColor={open ? '#D4EBF8' : '#ee66a6'}
+				secondaryColor={open ? '#EEF7FC' : '#f8c2db'}
+			/>
 		</div>
 
 		<!-- Red -->
 		<div
 			class={[
-				'absolute size-[42px]',
+				'absolute size-[42px] transition-all duration-1000 ease-in-out',
 				'sm:size-[66px]',
 				'md:size-[84px]',
+				'lg:size-[94px]',
 				open ? 'top-[640px] left-[61px]' : 'top-[633.4px] left-[132px]',
 				open ? 'sm:top-[735px] sm:left-[152px]' : 'sm:top-[711.2px] sm:left-[221px]',
 				open ? 'md:top-[718px] md:left-[32px]' : 'md:top-[678.83px] md:left-[258px]',
-				open ? 'lg:top-[] lg:left-[]' : 'lg:top-[] lg:left-[]',
-				open ? 'xl:top-[] xl:left-[]' : 'xl:top-[] xl:left-[]',
-				open ? '2xl:top-[] 2xl:left-[]' : '2xl:top-[] 2xl:left-[]'
+				open ? 'lg:top-[617px] lg:left-[614px]' : 'lg:top-[454.51px] lg:left-[637px]',
+				open ? 'xl:top-[521px] xl:left-[844px]' : 'xl:top-[406.51px] xl:left-[871px]',
+				open ? '2xl:left-[1086px]' : '2xl:left-[1111px]'
 			]}
 		>
-			<PailletteIcon primaryColor="#ff5249" secondaryColor="#ffbab6" />
+			<PailletteIcon
+				primaryColor={open ? '#FF5249' : '#ee66a6'}
+				secondaryColor={open ? '#FFBAB6' : '#f8c2db'}
+			/>
 		</div>
 
 		<!-- Brown -->
 		<div
 			class={[
-				'absolute size-[42px]',
+				'absolute size-[42px] transition-all duration-1000 ease-in-out',
 				'sm:size-[66px]',
 				'md:size-[84px]',
+				'lg:size-[94px]',
 				open ? 'top-[705px] left-[139px]' : 'top-[669.75px] left-[153px]',
 				open ? 'sm:top-[807px] sm:left-[230px]' : 'sm:top-[768.32px] sm:left-[254px]',
 				open ? 'md:top-[796px] md:left-[148px]' : 'md:top-[751.5px] md:left-[300px]',
-				open ? 'lg:top-[] lg:left-[]' : 'lg:top-[] lg:left-[]',
-				open ? 'xl:top-[] xl:left-[]' : 'xl:top-[] xl:left-[]',
-				open ? '2xl:top-[] 2xl:left-[]' : '2xl:top-[] 2xl:left-[]'
+				open ? 'lg:top-[241px] lg:left-[704px]' : 'lg:top-[535.89px] lg:left-[684.02px]',
+				open ? 'xl:top-[193px] xl:left-[934px]' : 'xl:top-[487.89px] xl:left-[918.02px]',
+				open ? '2xl:left-[1176px]' : '2xl:left-[1158.02px]'
 			]}
 		>
-			<PailletteIcon primaryColor="#541212" secondaryColor="#BBA0A0" />
+			<PailletteIcon
+				primaryColor={open ? '#541212' : '#ee66a6'}
+				secondaryColor={open ? '#BBA0A0' : '#f8c2db'}
+			/>
 		</div>
 
 		<!-- Yellow -->
 		<div
 			class={[
-				'absolute size-[42px]',
+				'absolute size-[42px] transition-all duration-1000 ease-in-out',
 				'sm:size-[66px]',
 				'md:size-[84px]',
+				'lg:size-[94px]',
 				open ? 'top-[633px] left-[174px]' : 'top-[633.4px] left-[174px]',
 				open ? 'sm:top-[711px] sm:left-[287px]' : 'sm:top-[711.2px] sm:left-[287px]',
 				open ? 'md:top-[679px] md:left-[342px]' : 'md:top-[678.83px] md:left-[342.04px]',
-				open ? 'lg:top-[] lg:left-[]' : 'lg:top-[] lg:left-[]',
-				open ? 'xl:top-[] xl:left-[]' : 'xl:top-[] xl:left-[]',
-				open ? '2xl:top-[] 2xl:left-[]' : '2xl:top-[] 2xl:left-[]'
+				open ? 'lg:top-[454px] lg:left-[733px]' : 'lg:top-[454.51px] lg:left-[731.04px]',
+				open ? 'xl:top-[406px] xl:left-[963px]' : 'xl:top-[406.51px] xl:left-[965.04px]',
+				open ? '2xl:left-[1205px]' : '2xl:left-[1205.04px]'
 			]}
 		>
 			<PailletteIcon primaryColor="#CDC526" secondaryColor="#EBE8A8" />
@@ -116,54 +171,64 @@
 		<!-- Green -->
 		<div
 			class={[
-				'absolute size-[42px]',
+				'absolute size-[42px] transition-all duration-1000 ease-in-out',
 				'sm:size-[66px]',
 				'md:size-[84px]',
+				'lg:size-[94px]',
 				open ? 'top-[576px] left-[258px]' : 'top-[597.03px] left-[195px]',
 				open ? 'sm:top-[623px] sm:left-[350px]' : 'sm:top-[654.05px] sm:left-[320px]',
 				open ? 'md:top-[578px] md:left-[429px]' : 'md:top-[606.06px] md:left-[384.05px]',
-				open ? 'lg:top-[] lg:left-[]' : 'lg:top-[] lg:left-[]',
-				open ? 'xl:top-[] xl:left-[]' : 'xl:top-[] xl:left-[]',
-				open ? '2xl:top-[] 2xl:left-[]' : '2xl:top-[] 2xl:left-[]'
+				open ? 'lg:top-[48px] lg:left-[861px]' : 'lg:top-[373.07px] lg:left-[778.06px]',
+				open ? 'xl:top-[48px] xl:left-[1091px]' : 'xl:top-[325.07px] xl:left-[1012.06px]',
+				open ? '2xl:left-[1333px]' : '2xl:left-[1252.06px]'
 			]}
 		>
-			<PailletteIcon primaryColor="#06D001" secondaryColor="#9BEC99" />
+			<PailletteIcon
+				primaryColor={open ? '#06D001' : '#ee66a6'}
+				secondaryColor={open ? '#9BEC99' : '#f8c2db'}
+			/>
 		</div>
 
 		<!-- Pink -->
 		<div
 			class={[
-				'absolute size-[42px]',
+				'absolute size-[42px] transition-all duration-1000 ease-in-out',
 				'sm:size-[66px]',
 				'md:size-[84px]',
+				'lg:size-[94px]',
 				open ? 'top-[705px] left-[315px]' : 'top-[669.75px] left-[195px]',
 				open ? 'sm:top-[794px] sm:left-[407px]' : 'sm:top-[768.32px] sm:left-[320px]',
 				open ? 'md:top-[796px] md:left-[517px]' : 'md:top-[751.56px] md:left-[384.05px]',
-				open ? 'lg:top-[] lg:left-[]' : 'lg:top-[] lg:left-[]',
-				open ? 'xl:top-[] xl:left-[]' : 'xl:top-[] xl:left-[]',
-				open ? '2xl:top-[] 2xl:left-[]' : '2xl:top-[] 2xl:left-[]'
+				open ? 'lg:top-[333px] lg:left-[890px]' : 'lg:top-[535.89px] lg:left-[778.06px]',
+				open ? 'xl:top-[285px] xl:left-[1120px]' : 'xl:top-[487.89px] xl:left-[1012.06px]',
+				open ? '2xl:left-[1362px]' : '2xl:left-[1252.06px]'
 			]}
 		>
-			<PailletteIcon primaryColor="#EE66A6" secondaryColor="#F8C2DB" />
+			<PailletteIcon primaryColor="#ee66a6" secondaryColor="#f8c2db" />
 		</div>
 
 		<!-- Dark blue -->
 		<div
 			class={[
-				'absolute size-[42px]',
+				'absolute size-[42px] transition-all duration-1000 ease-in-out',
 				'sm:size-[66px]',
 				'md:size-[84px]',
+				'lg:size-[94px]',
 				open ? 'top-[616px] left-[331px]' : 'top-[633.4px] left-[216px]',
 				open ? 'sm:top-[698px] sm:left-[478px]' : 'sm:top-[711.2px] sm:left-[353px]',
 				open ? 'md:top-[667px] md:left-[601px]' : 'md:top-[678.83px] md:left-[426.07px]',
-				open ? 'lg:top-[] lg:left-[]' : 'lg:top-[] lg:left-[]',
-				open ? 'xl:top-[] xl:left-[]' : 'xl:top-[] xl:left-[]',
-				open ? '2xl:top-[] 2xl:left-[]' : '2xl:top-[] 2xl:left-[]'
+				open ? 'lg:top-[561px] lg:left-[846px]' : 'lg:top-[454.51px] lg:left-[825.08px]',
+				open ? 'xl:top-[513px] xl:left-[1076px]' : 'xl:top-[406.51px] xl:left-[1059.08px]',
+				open ? '2xl:left-[1318px]' : '2xl:left-[1299.08px]'
 			]}
 		>
-			<PailletteIcon primaryColor="#3D3BF3" secondaryColor="#D5D4FF" />
+			<PailletteIcon
+				primaryColor={open ? '#3D3BF3' : '#ee66a6'}
+				secondaryColor={open ? '#D5D4FF' : '#f8c2db'}
+			/>
 		</div>
 	</div>
+	<div bind:this={sentinelElement} style="height: 1px; width: 100%;" aria-hidden="true"></div>
 </section>
 
 <section class="bg-enoki py-16"></section>
