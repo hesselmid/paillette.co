@@ -42,6 +42,21 @@
 		};
 	}
 
+	function debounce(func: () => void, waitFor: number): () => void {
+		let timeoutId: number | undefined = undefined;
+
+		return (): void => {
+			if (timeoutId !== undefined) {
+				clearTimeout(timeoutId);
+			}
+
+			timeoutId = window.setTimeout(() => {
+				timeoutId = undefined;
+				func();
+			}, waitFor);
+		};
+	}
+
 	let { data, form }: Props = $props();
 
 	const DEFAULT_COLORWAY_IMAGE_URL = 'https://placehold.co/300x200.png?text=Print+Image';
@@ -87,7 +102,7 @@
 		}
 	}
 
-	function handleFilterChange() {
+	const handleFilterChange = debounce(() => {
 		if (isDesktop && formElement) {
 			const formData = new FormData(formElement);
 			const params = new URLSearchParams(Array.from(formData.entries()) as [string, string][]);
@@ -99,7 +114,7 @@
 				replaceState: false
 			});
 		}
-	}
+	}, 400);
 
 	function getRemoveFilterUrl(
 		filterType: 'colors' | 'categories' | 'designers',
