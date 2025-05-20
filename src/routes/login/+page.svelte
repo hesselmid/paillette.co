@@ -38,7 +38,7 @@
 				disabled={$submitting}
 				aria-invalid={$errors.email ? 'true' : undefined}
 				class={[
-					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full px-[38px] py-[20px] text-base/[21px]',
+					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full border-0 px-[38px] py-[20px] text-base/[21px]',
 					'sm:text-lg/[24px]',
 					'md:text-xl/[27px]',
 					'lg:text-2xl/[32px]'

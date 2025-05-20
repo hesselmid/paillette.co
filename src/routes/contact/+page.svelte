@@ -72,7 +72,7 @@
 				placeholder="name*"
 				aria-invalid={$errors.name ? 'true' : undefined}
 				class={[
-					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full px-[38px] py-[20px] text-base/[21px]',
+					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full border-0 px-[38px] py-[20px] text-base/[21px]',
 					'sm:text-lg/[24px]',
 					'md:text-xl/[27px]',
 					'lg:text-2xl/[32px]'
@@ -98,7 +98,7 @@
 				placeholder="which company do you represent*"
 				aria-invalid={$errors.company ? 'true' : undefined}
 				class={[
-					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full px-[38px] py-[20px] text-base/[21px]',
+					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full border-0 px-[38px] py-[20px] text-base/[21px]',
 					'sm:text-lg/[24px]',
 					'md:text-xl/[27px]',
 					'lg:text-2xl/[32px]'
@@ -124,7 +124,7 @@
 				placeholder="e-mail address*"
 				aria-invalid={$errors.email ? 'true' : undefined}
 				class={[
-					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full px-[38px] py-[20px] text-base/[21px]',
+					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full border-0 px-[38px] py-[20px] text-base/[21px]',
 					'sm:text-lg/[24px]',
 					'md:text-xl/[27px]',
 					'lg:text-2xl/[32px]'
@@ -149,7 +149,7 @@
 				placeholder="message*"
 				aria-invalid={$errors.message ? 'true' : undefined}
 				class={[
-					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep h-[241px] w-full rounded-[40px] px-[38px] py-[20px] text-base/[21px]',
+					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep h-[241px] w-full rounded-[40px] border-0 px-[38px] py-[20px] text-base/[21px]',
 					'sm:h-[369px] sm:text-lg/[24px]',
 					'md:text-xl/[27px]',
 					'lg:text-2xl/[32px]'
