@@ -264,6 +264,15 @@
 				receives high-resolution files, full creative rights, and a certificate of authenticity for
 				unrestricted global use—ensuring exclusivity and originality with every piece.
 			</p>
+			<button
+				type="button"
+				class={[
+					'bg-enoki font-evolventa text-black-sheep mx-auto mt-9 flex h-[72px] w-[268px] items-center justify-center rounded-full text-2xl/8 lowercase shadow-[0px_4px_4px_rgba(0,0,0,0.25)]',
+					'sm:w-[432px]',
+					'md:w-[526px]',
+					'lg:mt-12 lg:w-[864px]'
+				]}>Tell me more</button
+			>
 		</div>
 	</div>
 </section>
