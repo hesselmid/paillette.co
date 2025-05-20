@@ -53,9 +53,9 @@
 
 	let filtersOpen = $state(false);
 	let filterSectionOpen = $state<{ colors: boolean; categories: boolean; designers: boolean }>({
-		colors: true,
-		categories: true,
-		designers: true
+		colors: false,
+		categories: false,
+		designers: false
 	});
 
 	let wishlistedPrintIds = $derived(new Set(data.wishlistedPrintIds || []));
