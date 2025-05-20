@@ -83,8 +83,6 @@
 		<div
 			class={[
 				'flex flex-col items-center gap-y-9',
-				'sm:gap-y-[60px]',
-				'md:gap-y-9',
 				'lg:flex-row lg:justify-center lg:gap-x-14 lg:gap-y-0',
 				'xl:gap-x-[136px]',
 				'2xl:gap-x-[126px]'

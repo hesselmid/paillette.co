@@ -154,7 +154,7 @@
 	</section>
 	<section
 		class={[
-			'mx-auto mt-[60px] max-w-[358px] space-y-5',
+			'mx-auto mt-16 max-w-[358px] space-y-5',
 			'sm:max-w-[535px]',
 			'md:max-w-[646px]',
 			'lg:mt-20 lg:max-w-[806px]',
@@ -177,7 +177,7 @@
 	</section>
 	<section
 		class={[
-			'mx-auto mt-[60px] max-w-[358px] space-y-5',
+			'mx-auto mt-16 max-w-[358px] space-y-5',
 			'sm:max-w-[535px]',
 			'md:max-w-[646px]',
 			'lg:mt-20 lg:max-w-[806px]',
@@ -200,7 +200,7 @@
 	</section>
 </div>
 
-<section class={['bg-enoki pt-9 pb-[60px]', 'lg:pt-12 lg:pb-20']}>
+<section class={['bg-enoki pt-9 pb-16', 'lg:pt-12 lg:pb-20']}>
 	<div class="container mx-auto">
 		<div
 			class={[
