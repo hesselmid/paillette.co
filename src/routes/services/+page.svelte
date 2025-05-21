@@ -39,9 +39,87 @@
 		}
 	];
 
+	const menu = [
+		{
+			title: 'Single Exclusive Print Design',
+			description: 'Price: Starts at €800 per design.',
+			primary: '#F4F4FF',
+			secondary: '#EAEAFF',
+			list: [
+				'Full exclusive rights to the design, including all colorways.',
+				'5 - 8 colorways per design.',
+				'Certificate of authenticity for worldwide industrial use for an unlimited time.',
+				'Advice on fabric type.'
+			],
+			extra: {
+				icon: 'star',
+				text: 'Conditions: Once sold, the design is taken off the platform and no longer available to other clients.'
+			}
+		},
+		{
+			title: 'Multi-Print Packages:',
+			description:
+				'Curated Collection (small batch)<br /> Price: €2000 - €3000 for a small collection of 3 - 5 different but related designs. ',
+			primary: '#DFDFFF',
+			secondary: '#D5D4FF',
+			list: [
+				'Full exclusive rights to the design, including all colorways.',
+				'3-5 designs with  a minimum of 5 colorways each. ',
+				'Certificate of authenticity for worldwide industrial use for an  unlimited time.',
+				'Advice on fabric type.'
+			],
+			extra: {
+				icon: 'star',
+				text: 'Conditions: Once sold, the design is taken off the platform and no longer available to other clients.'
+			}
+		},
+		{
+			title: 'Custom Design Collaboration:',
+			description: 'Price: Starts at €1200 per custom design.',
+			primary: '#CBC9FF',
+			secondary: '#C0BFFF',
+			list: [
+				'Client collaboration from start to finish, based on a mood-board or brief. ',
+				'2 client revisions and up to 15 bespoke colorways.',
+				'High-resolution files in repeat, with color seperations.',
+				'Certificate of authenticity for worldwide industrial use for an unlimited time.',
+				'Advice on fabric type.'
+			],
+			extra: {
+				icon: 'plus',
+				text: 'Extra Revisions: Beyond the 2 included revisions, additional fees apply (e.g., €200 per extra revision).'
+			}
+		},
+		{
+			title: 'Design Modifications:',
+			description: 'Price: Based on complexity, starting at €300 per modification.',
+			primary: '#B5B4FF',
+			secondary: '#ABA9FF',
+			list: [
+				'Modifying an exsisting design or alterning color ways.',
+				'Additional placement designs (e.g., scarf or T-shirt placements).'
+			],
+			extra: {
+				icon: 'plus',
+				text: 'Complex Requests: For highly customized of labor intensive changes, fees will be adjusted accoringly (e.g., €500+ depending on the scope).'
+			}
+		},
+		{
+			title: 'Extra Services (Add-Ons:',
+			description: 'Price: Starting at €300 per package.',
+			primary: '#A19FFF',
+			secondary: '#9694FF',
+			list: [
+				'High-quality behind-the-scenes video’s and photo’s documenting the design process tailored for brands to share on their social media.'
+			]
+		}
+	];
+
 	let open = $state(false);
 	let sentinelElement: HTMLDivElement | undefined = $state();
 	let animationTimeoutId: ReturnType<typeof setTimeout> | undefined = $state();
+
+	let tellMeMoreOpen = $state(false);
 
 	onMount(() => {
 		let observer: IntersectionObserver;
@@ -268,167 +346,336 @@
 	<div bind:this={sentinelElement} style="height: 1px; width: 100%;" aria-hidden="true"></div>
 </section>
 
-<section class={['bg-enoki py-16', 'lg:py-20']}>
-	<div
-		class={[
-			'mx-auto max-w-[340px]',
-			'sm:max-w-[570px]',
-			'md:max-w-[694px]',
-			'lg:max-w-[940px]',
-			'xl:max-w-[1152px]'
-		]}
-	>
-		<div class={['rounded-t-[10px] bg-white py-16', 'lg:py-20']}>
-			<h2
-				class={[
-					'font-apfel-grotezk-brukt text-black-sheep text-center text-3xl/[38px]',
-					'sm:text-4xl/[46px]',
-					'md:text-5xl/[62px]',
-					'lg:text-6xl/[77px]'
-				]}
-			>
-				Why choose Paillette?
-			</h2>
-			<p
-				class={[
-					'font-evolventa text-black-sheep mx-auto mt-9 max-w-[284px] text-center text-lg/6',
-					'sm:max-w-[511px] sm:text-2xl/8',
-					'md:max-w-[626px]',
-					'lg:mt-12 lg:max-w-[864px]'
-				]}
-			>
-				Each design is sold as a one-of-a-kind piece, including all color variations. Your brand
-				receives high-resolution files, full creative rights, and a certificate of authenticity for
-				unrestricted global use—ensuring exclusivity and originality with every piece.
-			</p>
+<div class={['bg-enoki space-y-16 py-16', 'lg:space-y-20 lg:py-20']}>
+	<section>
+		<div
+			class={[
+				'mx-auto max-w-[340px]',
+				'sm:max-w-[570px]',
+				'md:max-w-[694px]',
+				'lg:max-w-[940px]',
+				'xl:max-w-[1152px]'
+			]}
+		>
 			<div
 				class={[
-					'mt-9 ml-[51px] flex flex-col gap-y-5',
-					'sm:ml-[166px]',
-					'md:-mx-2 md:grid md:grid-cols-5',
-					'lg:mt-12 lg:ml-[30px]',
-					'xl:mx-[121px]'
+					'bg-white py-16',
+					'lg:py-20',
+					tellMeMoreOpen ? 'rounded-t-[10px]' : 'rounded-[10px]'
 				]}
 			>
-				<div
+				<h2
 					class={[
-						'flex items-center gap-x-6',
-						'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+						'font-apfel-grotezk-brukt text-black-sheep text-center text-3xl/[38px]',
+						'sm:text-4xl/[46px]',
+						'md:text-5xl/[62px]',
+						'lg:text-6xl/[77px]'
 					]}
 				>
-					<div class="size-[42px]">
-						<PailletteIcon primaryColor="#FF5249" secondaryColor="#FFBAB6" />
-					</div>
-					<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
-						>Bespoke<br class="hidden md:block" /> design</span
-					>
-				</div>
-				<div
+					Why choose Paillette?
+				</h2>
+				<p
 					class={[
-						'flex items-center gap-x-6',
-						'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+						'font-evolventa text-black-sheep mx-auto mt-9 max-w-[284px] text-center text-lg/6',
+						'sm:max-w-[511px] sm:text-2xl/8',
+						'md:max-w-[626px]',
+						'lg:mt-12 lg:max-w-[864px]'
 					]}
 				>
-					<div class="size-[42px]">
-						<PailletteIcon primaryColor="#D4EBF8" secondaryColor="#EEF7FC" />
-					</div>
-					<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
-						>Craftmanship</span
-					>
-				</div>
+					Each design is sold as a one-of-a-kind piece, including all color variations. Your brand
+					receives high-resolution files, full creative rights, and a certificate of authenticity
+					for unrestricted global use—ensuring exclusivity and originality with every piece.
+				</p>
 				<div
 					class={[
-						'flex items-center gap-x-6',
-						'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+						'mt-9 ml-[51px] flex flex-col gap-y-5',
+						'sm:ml-[166px]',
+						'md:-mx-2 md:grid md:grid-cols-5',
+						'lg:mt-12 lg:ml-[30px]',
+						'xl:mx-[121px]'
 					]}
 				>
-					<div class="size-[42px]">
-						<PailletteIcon primaryColor="#06D001" secondaryColor="#9BEC99" />
-					</div>
-					<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
-						>Timeless<br class="hidden md:block" /> design</span
-					>
-				</div>
-				<div
-					class={[
-						'flex items-center gap-x-6',
-						'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
-					]}
-				>
-					<div class="size-[42px]">
-						<PailletteIcon primaryColor="#EE66A6" secondaryColor="#F8C2DB" />
-					</div>
-					<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
-						>Frequent<br class="hidden md:block" /> updates</span
-					>
-				</div>
-				<div
-					class={[
-						'flex items-center gap-x-6',
-						'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
-					]}
-				>
-					<div class="size-[42px]">
-						<PailletteIcon primaryColor="#CDC526" secondaryColor="#EBE8A8" />
-					</div>
-					<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
-						>Exclusive<br class="hidden md:block" /> rights</span
-					>
-				</div>
-			</div>
-			<button
-				type="button"
-				class={[
-					'bg-enoki font-evolventa text-black-sheep mx-auto mt-9 flex h-[72px] w-[268px] items-center justify-center rounded-full text-2xl/8 lowercase shadow-[0px_4px_4px_rgba(0,0,0,0.25)]',
-					'sm:w-[432px]',
-					'md:w-[526px]',
-					'lg:mt-12 lg:w-[864px]'
-				]}>Tell me more</button
-			>
-		</div>
-		<div>
-			{#each usps as usp (usp.title)}
-				<div class={['group last:overflow-hidden last:rounded-b-[10px]', 'md:grid md:grid-cols-2']}>
 					<div
 						class={[
-							'p-6',
-							'sm:p-8',
-							'md:p-10 md:group-odd:order-1 md:group-even:order-2',
-							'lg:p-12'
+							'flex items-center gap-x-6',
+							'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
 						]}
-						style="background: {usp.primary};"
+					>
+						<div class="size-[42px]">
+							<PailletteIcon primaryColor="#FF5249" secondaryColor="#FFBAB6" />
+						</div>
+						<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
+							>Bespoke<br class="hidden md:block" /> design</span
+						>
+					</div>
+					<div
+						class={[
+							'flex items-center gap-x-6',
+							'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+						]}
+					>
+						<div class="size-[42px]">
+							<PailletteIcon primaryColor="#D4EBF8" secondaryColor="#EEF7FC" />
+						</div>
+						<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
+							>Craftmanship</span
+						>
+					</div>
+					<div
+						class={[
+							'flex items-center gap-x-6',
+							'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+						]}
+					>
+						<div class="size-[42px]">
+							<PailletteIcon primaryColor="#06D001" secondaryColor="#9BEC99" />
+						</div>
+						<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
+							>Timeless<br class="hidden md:block" /> design</span
+						>
+					</div>
+					<div
+						class={[
+							'flex items-center gap-x-6',
+							'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+						]}
+					>
+						<div class="size-[42px]">
+							<PailletteIcon primaryColor="#EE66A6" secondaryColor="#F8C2DB" />
+						</div>
+						<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
+							>Frequent<br class="hidden md:block" /> updates</span
+						>
+					</div>
+					<div
+						class={[
+							'flex items-center gap-x-6',
+							'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+						]}
+					>
+						<div class="size-[42px]">
+							<PailletteIcon primaryColor="#CDC526" secondaryColor="#EBE8A8" />
+						</div>
+						<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
+							>Exclusive<br class="hidden md:block" /> rights</span
+						>
+					</div>
+				</div>
+				<button
+					type="button"
+					class={[
+						'bg-enoki font-evolventa text-black-sheep mx-auto mt-9 flex h-[72px] w-[268px] cursor-pointer items-center justify-center rounded-full text-2xl/8 lowercase shadow-[0px_4px_4px_rgba(0,0,0,0.25)]',
+						'sm:w-[432px]',
+						'md:w-[526px]',
+						'lg:mt-12 lg:w-[864px]'
+					]}
+					onclick={() => (tellMeMoreOpen = true)}>Tell me more</button
+				>
+			</div>
+			<div class={tellMeMoreOpen ? 'block' : 'hidden'}>
+				{#each usps as usp (usp.title)}
+					<div
+						class={['group last:overflow-hidden last:rounded-b-[10px]', 'md:grid md:grid-cols-2']}
+					>
+						<div
+							class={[
+								'p-6',
+								'sm:p-8',
+								'md:p-10 md:group-odd:order-1 md:group-even:order-2',
+								'lg:p-12'
+							]}
+							style="background: {usp.primary};"
+						>
+							<h3
+								class={[
+									'font-apfel-grotezk text-black-sheep text-3xl/[38px]',
+									'sm:text-4xl/[46px]',
+									'lg:text-5xl/[62px]'
+								]}
+							>
+								{usp.title}
+							</h3>
+						</div>
+						<div
+							class={[
+								'p-6',
+								'sm:p-8',
+								'md:p-10 md:group-odd:order-2 md:group-even:order-1',
+								'lg:p-12'
+							]}
+							style="background: {usp.secondary};"
+						>
+							<p
+								class={[
+									'font-evolventa text-black-sheep text-base/[21px]',
+									'sm:text-lg/6',
+									'lg:text-xl/[27px]'
+								]}
+							>
+								{@html usp.description}
+							</p>
+						</div>
+					</div>
+				{/each}
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<h2
+			class={[
+				'font-apfel-grotezk text-black-sheep text-center text-4xl/[46px]',
+				'md:text-5xl/[62px]',
+				'lg:text-6xl/[77px]'
+			]}
+		>
+			Design Menu:
+		</h2>
+		<div
+			class={[
+				'mt-9 grid justify-center gap-y-5',
+				'lg:mx-auto lg:mt-12 lg:max-w-[944px] lg:grid-cols-2 lg:gap-x-6',
+				'xl:max-w-[1152px] xl:gap-x-20'
+			]}
+		>
+			{#each menu as item (item.title)}
+				<div
+					class={[
+						'max-w-[340px]',
+						'sm:max-w-[570px]',
+						'md:max-w-[694px]',
+						'lg:max-w-[460px]',
+						'xl:max-w-[536px]'
+					]}
+				>
+					<div
+						class={['border-perrywinkle space-y-6 rounded-t-[10px] border px-6 pt-6 pb-[34px]']}
+						style="background: {item.primary};"
 					>
 						<h3
 							class={[
-								'font-apfel-grotezk text-black-sheep text-3xl/[38px]',
-								'sm:text-4xl/[46px]',
-								'lg:text-5xl/[62px]'
+								'font-cormorant text-black-sheep text-2xl/[29px]',
+								'sm:text-3xl/[36px]',
+								'md:text-4xl/[44px]',
+								'lg:text-3xl/[36px]',
+								'xl:text-4xl/[44px]'
 							]}
 						>
-							{usp.title}
+							{item.title}
 						</h3>
+						<p
+							class={[
+								'font-evolventa text-black-sheep text-base/[34.8px] tracking-[0.05px]',
+								'sm:text-xl/[34.8px]',
+								'md:text-2xl/[34.8px]',
+								'lg:text-xl/[34.8px]',
+								'xl:text-2xl/[34.8px]'
+							]}
+						>
+							{@html item.description}
+						</p>
 					</div>
 					<div
 						class={[
-							'p-6',
-							'sm:p-8',
-							'md:p-10 md:group-odd:order-2 md:group-even:order-1',
-							'lg:p-12'
+							'border-perrywinkle -mt-[10px] space-y-6 rounded-[10px] border py-6 pr-6 pl-[38px]',
+							'sm:pl-[31px]',
+							'md:pl-[55px]'
 						]}
-						style="background: {usp.secondary};"
+						style="background: {item.secondary};"
 					>
-						<p
-							class={[
-								'font-evolventa text-black-sheep text-base/[21px]',
-								'sm:text-lg/6',
-								'lg:text-xl/[27px]'
-							]}
-						>
-							{@html usp.description}
-						</p>
+						{#each item.list as list (list)}
+							<div
+								class={[
+									'flex gap-x-[10px]',
+									'sm:gap-x-[30px]',
+									'md:gap-x-[19px]',
+									'lg:gap-x-[21px]'
+								]}
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="text-black-sheep mt-1 size-6 shrink-0"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
+									/>
+								</svg>
+								<span
+									class={[
+										'font-evolventa text-black-sheep text-base/[34.8px] tracking-[0.05px]',
+										'sm:text-xl/[34.8px]',
+										'md:text-2xl/[34.8px]',
+										'lg:text-xl/[34.8px]',
+										'xl:text-2xl/[34.8px]'
+									]}
+								>
+									{list}
+								</span>
+							</div>
+						{/each}
+						{#if item.extra}
+							<div
+								class={[
+									'flex gap-x-[10px]',
+									'sm:gap-x-[30px]',
+									'md:gap-x-[19px]',
+									'lg:gap-x-[21px]'
+								]}
+							>
+								{#if item.extra.icon === 'star'}
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke-width="1.5"
+										stroke="currentColor"
+										class="text-black-sheep mt-1 size-6 shrink-0"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+										/>
+									</svg>
+								{:else if item.extra.icon === 'plus'}
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke-width="1.5"
+										stroke="currentColor"
+										class="text-black-sheep mt-1 size-6 shrink-0"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M12 4.5v15m7.5-7.5h-15"
+										/>
+									</svg>
+								{/if}
+
+								<span
+									class={[
+										'font-evolventa text-black-sheep text-base/[34.8px] tracking-[0.05px]',
+										'sm:text-xl/[34.8px]',
+										'md:text-2xl/[34.8px]',
+										'lg:text-xl/[34.8px]',
+										'xl:text-2xl/[34.8px]'
+									]}
+								>
+									{item.extra.text}
+								</span>
+							</div>
+						{/if}
 					</div>
 				</div>
 			{/each}
 		</div>
-	</div>
-</section>
+	</section>
+</div>
