@@ -722,7 +722,7 @@
 	</section>
 </div>
 
-<section class={['bg-white pt-16', 'lg:pt-12 lg:pb-20']}>
+<section class={['bg-white py-16', 'lg:pt-12 lg:pb-20']}>
 	<div class="container mx-auto">
 		<div
 			class={[
