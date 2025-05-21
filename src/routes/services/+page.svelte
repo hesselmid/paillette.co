@@ -2,6 +2,43 @@
 	import { onMount } from 'svelte';
 	import PailletteIcon from './PailletteIcon.svelte';
 
+	const usps = [
+		{
+			title: 'Bespoke design services across a wide range of styles',
+			description:
+				'Tailored Designs with a Personal Touch Paillette’s diverse designer roster means we offer a broad spectrum of styles for custom projects. With talent skilled in both hand-drawn and digital techniques, we can align your custom designs with the most fitting artistic approach. Each custom project is a collaboration; our team ensures your brand’s vision is realized, whether inspired by our in-house collection or created from scratch based on your brief.',
+			primary: '#FF5249',
+			secondary: '#FFBAB6'
+		},
+		{
+			title: 'A blend of craftsmanship & digital excellence',
+			description:
+				'Prints Crafted with Passion and Precision Paillette encourages designers to balance traditional handcrafting with digital skills, blending artistry with modern execution. This commitment to both physical and digital techniques ensures that every print is meticulously developed, reflecting both authenticity and innovation.',
+			primary: '#D4EBF8',
+			secondary: '#EEF7FC'
+		},
+		{
+			title: 'Timeless Design & Seasonless Colorways: Always Relevant, Always Stunning',
+			description: `At Paillette, we believe great design transcends seasons. Each print is developed with a full spectrum of striking colorways, allowing your brand to find the perfect match anytime. Because we don’t follow seasonal constraints, our designs remain fresh and adaptable—ready to integrate seamlessly into your creative vision year-round. Whether you're curating a new collection or refining an existing one, Paillette prints maintain their impact beyond fleeting trends.`,
+			primary: '#06D001',
+			secondary: '#9BEC99'
+		},
+		{
+			title: 'Frequent Updates: A Constant Flow of New Inspiration',
+			description:
+				'Creativity is an evolving process, and so is our collection. Paillette introduces new exclusive designs on a rolling basis, ensuring that fresh inspiration is always within reach. This means you’ll never be limited to a static archive—there’s always something new to discover. Whether you’re looking for a bold statement piece or a subtle classic, our regularly updated selection ensures your brand has access to cutting-edge, original designs whenever you need them.',
+			primary: '#EE66A6',
+			secondary: '#F8C2DB'
+		},
+		{
+			title: 'Exclusive rights & authenticity',
+			description:
+				'Your Story, Your Design<br /><br /> Each Paillette design is uniquely yours—no duplicates. Upon purchase, you receive high-resolution files and exclusive worldwide rights. Additionally, a certificate of authenticity accompanies each design, reinforcing its originality and value for your brand.',
+			primary: '#CDC526',
+			secondary: '#EBE8A8'
+		}
+	];
+
 	let open = $state(false);
 	let sentinelElement: HTMLDivElement | undefined = $state();
 	let animationTimeoutId: ReturnType<typeof setTimeout> | undefined = $state();
@@ -348,6 +385,50 @@
 					'lg:mt-12 lg:w-[864px]'
 				]}>Tell me more</button
 			>
+		</div>
+		<div>
+			{#each usps as usp (usp.title)}
+				<div class={['group last:overflow-hidden last:rounded-b-[10px]', 'md:grid md:grid-cols-2']}>
+					<div
+						class={[
+							'p-6',
+							'sm:p-8',
+							'md:p-10 md:group-odd:order-1 md:group-even:order-2',
+							'lg:p-12'
+						]}
+						style="background: {usp.primary};"
+					>
+						<h3
+							class={[
+								'font-apfel-grotezk text-black-sheep text-3xl/[38px]',
+								'sm:text-4xl/[46px]',
+								'lg:text-5xl/[62px]'
+							]}
+						>
+							{usp.title}
+						</h3>
+					</div>
+					<div
+						class={[
+							'p-6',
+							'sm:p-8',
+							'md:p-10 md:group-odd:order-2 md:group-even:order-1',
+							'lg:p-12'
+						]}
+						style="background: {usp.secondary};"
+					>
+						<p
+							class={[
+								'font-evolventa text-black-sheep text-base/[21px]',
+								'sm:text-lg/6',
+								'lg:text-xl/[27px]'
+							]}
+						>
+							{@html usp.description}
+						</p>
+					</div>
+				</div>
+			{/each}
 		</div>
 	</div>
 </section>
