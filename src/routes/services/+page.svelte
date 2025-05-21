@@ -401,8 +401,13 @@
 							'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
 						]}
 					>
-						<div class="size-[42px]">
-							<PailletteIcon primaryColor="#FF5249" secondaryColor="#FFBAB6" />
+						<div
+							class={tellMeMoreOpen ? 'size-[52px] rounded-full border-[10px]' : 'size-[42px]'}
+							style="border-color: #FF5249;"
+						>
+							{#if !tellMeMoreOpen}
+								<PailletteIcon primaryColor="#FF5249" secondaryColor="#FFBAB6" />
+							{/if}
 						</div>
 						<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
 							>Bespoke<br class="hidden md:block" /> design</span
@@ -414,8 +419,13 @@
 							'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
 						]}
 					>
-						<div class="size-[42px]">
-							<PailletteIcon primaryColor="#D4EBF8" secondaryColor="#EEF7FC" />
+						<div
+							class={tellMeMoreOpen ? 'size-[52px] rounded-full border-[10px]' : 'size-[42px]'}
+							style="border-color: #D4EBF8;"
+						>
+							{#if !tellMeMoreOpen}
+								<PailletteIcon primaryColor="#D4EBF8" secondaryColor="#EEF7FC" />
+							{/if}
 						</div>
 						<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
 							>Craftmanship</span
@@ -427,8 +437,13 @@
 							'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
 						]}
 					>
-						<div class="size-[42px]">
-							<PailletteIcon primaryColor="#06D001" secondaryColor="#9BEC99" />
+						<div
+							class={tellMeMoreOpen ? 'size-[52px] rounded-full border-[10px]' : 'size-[42px]'}
+							style="border-color: #06D001;"
+						>
+							{#if !tellMeMoreOpen}
+								<PailletteIcon primaryColor="#06D001" secondaryColor="#9BEC99" />
+							{/if}
 						</div>
 						<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
 							>Timeless<br class="hidden md:block" /> design</span
@@ -440,8 +455,13 @@
 							'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
 						]}
 					>
-						<div class="size-[42px]">
-							<PailletteIcon primaryColor="#EE66A6" secondaryColor="#F8C2DB" />
+						<div
+							class={tellMeMoreOpen ? 'size-[52px] rounded-full border-[10px]' : 'size-[42px]'}
+							style="border-color: #EE66A6;"
+						>
+							{#if !tellMeMoreOpen}
+								<PailletteIcon primaryColor="#EE66A6" secondaryColor="#F8C2DB" />
+							{/if}
 						</div>
 						<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
 							>Frequent<br class="hidden md:block" /> updates</span
@@ -453,8 +473,13 @@
 							'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
 						]}
 					>
-						<div class="size-[42px]">
-							<PailletteIcon primaryColor="#CDC526" secondaryColor="#EBE8A8" />
+						<div
+							class={tellMeMoreOpen ? 'size-[52px] rounded-full border-[10px]' : 'size-[42px]'}
+							style="border-color: #CDC526;"
+						>
+							{#if !tellMeMoreOpen}
+								<PailletteIcon primaryColor="#CDC526" secondaryColor="#EBE8A8" />
+							{/if}
 						</div>
 						<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
 							>Exclusive<br class="hidden md:block" /> rights</span
