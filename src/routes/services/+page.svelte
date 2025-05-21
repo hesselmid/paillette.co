@@ -402,7 +402,7 @@
 						]}
 					>
 						<div
-							class={tellMeMoreOpen ? 'size-[52px] rounded-full border-[10px]' : 'size-[42px]'}
+							class={['size-[42px]', tellMeMoreOpen ? 'rounded-full border-[10px]' : '']}
 							style="border-color: #FF5249;"
 						>
 							{#if !tellMeMoreOpen}
@@ -420,7 +420,7 @@
 						]}
 					>
 						<div
-							class={tellMeMoreOpen ? 'size-[52px] rounded-full border-[10px]' : 'size-[42px]'}
+							class={['size-[42px]', tellMeMoreOpen ? 'rounded-full border-[10px]' : '']}
 							style="border-color: #D4EBF8;"
 						>
 							{#if !tellMeMoreOpen}
@@ -438,7 +438,7 @@
 						]}
 					>
 						<div
-							class={tellMeMoreOpen ? 'size-[52px] rounded-full border-[10px]' : 'size-[42px]'}
+							class={['size-[42px]', tellMeMoreOpen ? 'rounded-full border-[10px]' : '']}
 							style="border-color: #06D001;"
 						>
 							{#if !tellMeMoreOpen}
@@ -456,7 +456,7 @@
 						]}
 					>
 						<div
-							class={tellMeMoreOpen ? 'size-[52px] rounded-full border-[10px]' : 'size-[42px]'}
+							class={['size-[42px]', tellMeMoreOpen ? 'rounded-full border-[10px]' : '']}
 							style="border-color: #EE66A6;"
 						>
 							{#if !tellMeMoreOpen}
@@ -474,7 +474,7 @@
 						]}
 					>
 						<div
-							class={tellMeMoreOpen ? 'size-[52px] rounded-full border-[10px]' : 'size-[42px]'}
+							class={['size-[42px]', tellMeMoreOpen ? 'rounded-full border-[10px]' : '']}
 							style="border-color: #CDC526;"
 						>
 							{#if !tellMeMoreOpen}
@@ -495,7 +495,7 @@
 						'lg:mt-12 lg:w-[864px]'
 					]}
 					onclick={() => (tellMeMoreOpen = !tellMeMoreOpen)}
-					>{tellMeMoreOpen ? 'Tell me less' : 'Tell me more'}</button
+					>{tellMeMoreOpen ? 'Show me less' : 'Tell me more'}</button
 				>
 			</div>
 			<div class={tellMeMoreOpen ? 'block' : 'hidden'}>
