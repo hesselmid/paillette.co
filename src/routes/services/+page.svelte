@@ -469,7 +469,8 @@
 						'md:w-[526px]',
 						'lg:mt-12 lg:w-[864px]'
 					]}
-					onclick={() => (tellMeMoreOpen = true)}>Tell me more</button
+					onclick={() => (tellMeMoreOpen = !tellMeMoreOpen)}
+					>{tellMeMoreOpen ? 'Tell me less' : 'Tell me more'}</button
 				>
 			</div>
 			<div class={tellMeMoreOpen ? 'block' : 'hidden'}>
