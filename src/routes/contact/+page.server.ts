@@ -13,7 +13,7 @@ const schema = z.object({
 export const load = async () => {
 	const form = await superValidate(zod(schema));
 
-	return { form };
+	return { form, navColor: 'enoki', footerColor: 'white' };
 };
 
 export const actions = {

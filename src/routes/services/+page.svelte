@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import PailletteIcon from './PailletteIcon.svelte';
 
 	const usps = [
@@ -120,6 +120,22 @@
 	let animationTimeoutId: ReturnType<typeof setTimeout> | undefined = $state();
 
 	let tellMeMoreOpen = $state(false);
+	let uspsContainer: HTMLDivElement | undefined = $state();
+
+	async function toggleTellMeMoreAndScroll() {
+		const wasOpen = tellMeMoreOpen;
+		tellMeMoreOpen = !tellMeMoreOpen;
+
+		if (tellMeMoreOpen && !wasOpen) {
+			await tick();
+			if (uspsContainer) {
+				uspsContainer.scrollIntoView({
+					behavior: 'smooth',
+					block: 'start'
+				});
+			}
+		}
+	}
 
 	onMount(() => {
 		let observer: IntersectionObserver;
@@ -494,11 +510,11 @@
 						'md:w-[526px]',
 						'lg:mt-12 lg:w-[864px]'
 					]}
-					onclick={() => (tellMeMoreOpen = !tellMeMoreOpen)}
+					onclick={toggleTellMeMoreAndScroll}
 					>{tellMeMoreOpen ? 'Show me less' : 'Tell me more'}</button
 				>
 			</div>
-			<div class={tellMeMoreOpen ? 'block' : 'hidden'}>
+			<div bind:this={uspsContainer} class={tellMeMoreOpen ? 'block' : 'hidden'}>
 				{#each usps as usp (usp.title)}
 					<div
 						class={['group last:overflow-hidden last:rounded-b-[10px]', 'md:grid md:grid-cols-2']}
@@ -705,3 +721,57 @@
 		</div>
 	</section>
 </div>
+
+<section class={['bg-white pt-16', 'lg:pt-12 lg:pb-20']}>
+	<div class="container mx-auto">
+		<div
+			class={[
+				'flex flex-col items-center gap-y-9',
+				'lg:flex-row lg:justify-center lg:gap-y-0',
+				'xl:gap-x-[115px]',
+				'2xl:gap-x-[339px]'
+			]}
+		>
+			<enhanced:img
+				src="$lib/assets/ServicePage_9 17.png?w=340;452;502;559;680;904;1004;1118"
+				alt=""
+				sizes="(min-width: 1280px) 559px, (min-width: 768px) 502px, (min-width: 640px) 452px, 340px"
+				class={[
+					'h-auto w-[340px]',
+					'sm:ml-[34px] sm:w-[452px]',
+					'md:ml-[38px] md:w-[502px]',
+					'lg:ml-[40px] lg:w-[559px] lg:shrink-0'
+				]}
+				draggable="false"
+				oncontextmenu={(e) => e.preventDefault()}
+				role="img"
+			/>
+			<div
+				class={[
+					'flex flex-col items-center gap-y-9',
+					'lg:-ml-[100px] lg:shrink-0 lg:gap-y-12',
+					'xl:ml-0'
+				]}
+			>
+				<p
+					class={[
+						'font-cormorant text-black-sheep max-w-[239px] text-center text-lg/[64px] font-light',
+						'sm:max-w-[319px] sm:text-2xl/[64px]',
+						'md:max-w-[398px] md:text-3xl/[64px]',
+						'lg:max-w-[478px] lg:text-left lg:text-4xl/[64px]'
+					]}
+				>
+					"Every paillette catches the light—<br />
+					let your collection do the same."
+				</p>
+				<a
+					href="/contact"
+					class={[
+						'font-evolventa border-black-sheep text-black-sheep rounded-full border px-[37px] py-[19px] text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px]',
+						'sm:text-lg/6'
+					]}>Get in touch</a
+				>
+			</div>
+		</div>
+	</div>
+</section>

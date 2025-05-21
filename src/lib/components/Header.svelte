@@ -37,7 +37,7 @@
 	});
 </script>
 
-<nav class="bg-enoki">
+<nav class={page.data.navColor === 'enoki' ? 'bg-enoki' : 'bg-white'}>
 	<div class={['container mx-auto px-4', 'md:px-8', 'lg:px-10', 'xl:px-16', '2xl:px-20']}>
 		<div class="relative flex h-[112px] items-center justify-between">
 			<div class="flex items-center">

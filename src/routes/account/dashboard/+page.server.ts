@@ -30,6 +30,8 @@ export const load = async ({ locals }) => {
 		currentUser: {
 			firstName: locals.user.firstName,
 			companyName: companyName
-		}
+		},
+		navColor: 'enoki',
+		footerColor: 'enoki'
 	};
 };

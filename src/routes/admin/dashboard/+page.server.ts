@@ -12,7 +12,9 @@ export const load = async ({ locals }) => {
 	return {
 		currentUser: {
 			firstName: locals.user.firstName
-		}
+		},
+		navColor: 'enoki',
+		footerColor: 'enoki'
 	};
 };
 

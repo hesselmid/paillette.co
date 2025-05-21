@@ -21,7 +21,7 @@ const LoginSchema = z.object({
 
 export const load = async () => {
 	const form = await superValidate(zod(LoginSchema));
-	return { form };
+	return { form, navColor: 'enoki', footerColor: 'enoki' };
 };
 
 export const actions = {
