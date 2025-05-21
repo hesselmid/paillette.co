@@ -264,6 +264,81 @@
 				receives high-resolution files, full creative rights, and a certificate of authenticity for
 				unrestricted global use—ensuring exclusivity and originality with every piece.
 			</p>
+			<div
+				class={[
+					'mt-9 ml-[51px] flex flex-col gap-y-5',
+					'sm:ml-[166px]',
+					'md:-mx-2 md:grid md:grid-cols-5',
+					'lg:mt-12 lg:ml-[30px]',
+					'xl:mx-[121px]'
+				]}
+			>
+				<div
+					class={[
+						'flex items-center gap-x-6',
+						'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+					]}
+				>
+					<div class="size-[42px]">
+						<PailletteIcon primaryColor="#FF5249" secondaryColor="#FFBAB6" />
+					</div>
+					<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
+						>Bespoke<br class="hidden md:block" /> design</span
+					>
+				</div>
+				<div
+					class={[
+						'flex items-center gap-x-6',
+						'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+					]}
+				>
+					<div class="size-[42px]">
+						<PailletteIcon primaryColor="#D4EBF8" secondaryColor="#EEF7FC" />
+					</div>
+					<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
+						>Craftmanship</span
+					>
+				</div>
+				<div
+					class={[
+						'flex items-center gap-x-6',
+						'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+					]}
+				>
+					<div class="size-[42px]">
+						<PailletteIcon primaryColor="#06D001" secondaryColor="#9BEC99" />
+					</div>
+					<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
+						>Timeless<br class="hidden md:block" /> design</span
+					>
+				</div>
+				<div
+					class={[
+						'flex items-center gap-x-6',
+						'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+					]}
+				>
+					<div class="size-[42px]">
+						<PailletteIcon primaryColor="#EE66A6" secondaryColor="#F8C2DB" />
+					</div>
+					<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
+						>Frequent<br class="hidden md:block" /> updates</span
+					>
+				</div>
+				<div
+					class={[
+						'flex items-center gap-x-6',
+						'md:flex-col-reverse md:justify-between md:gap-x-0 md:gap-y-5'
+					]}
+				>
+					<div class="size-[42px]">
+						<PailletteIcon primaryColor="#CDC526" secondaryColor="#EBE8A8" />
+					</div>
+					<span class={['font-evolventa text-black-sheep text-xl/[27px]', 'md:text-center']}
+						>Exclusive<br class="hidden md:block" /> rights</span
+					>
+				</div>
+			</div>
 			<button
 				type="button"
 				class={[
