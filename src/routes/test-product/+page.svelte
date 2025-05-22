@@ -49,7 +49,7 @@
 					</button>
 				</div>
 			</div>
-			<div class="mt-8">
+			<div class={["mt-8", 'lg:mt-0']}>
 				<h1
 					class={[
 						'font-apfel-grotezk-brukt text-black-sheep text-5xl/[62px]',
