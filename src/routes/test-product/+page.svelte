@@ -145,12 +145,13 @@
 				>
 
 				<div class={['flex gap-x-[10px]', 'md:gap-x-[20px]', '2xl:gap-x-[22px]']}>
-					{#each { length: 1 }}
-						<img
-							src="/LolavanPraag_PailletteParade_LPM03_26:04:25.png"
-							alt=""
-							class={[
-								'shadow-[5px_5px_20px_rgba(0, 0, 0, 0.05)] aspect-square w-[146px] rounded-[10px] object-cover',
+					{#each { length: 1 }}	
+						<a href="?colorway=1">
+							<img
+								src="/LolavanPraag_PailletteParade_LPM03_26:04:25.png"
+								alt=""
+								class={[
+									'shadow-[5px_5px_20px_rgba(0, 0, 0, 0.05)] aspect-square w-[146px] rounded-[10px] object-cover',
 								'md:w-[246px]',
 								'xl:w-[308px]',
 								'2xl:w-[382px]'
@@ -199,16 +200,18 @@
 
 			<div class={['flex gap-x-[10px]', 'md:gap-x-[20px]', '2xl:gap-x-[22px]']}>
 				{#each { length: 1 }}
-					<img
-						src="/LolavanPraag_PailletteParade_LPM03_26:04:25.png"
-						alt=""
-						class={[
-							'shadow-[5px_5px_20px_rgba(0, 0, 0, 0.05)] aspect-square w-[146px] rounded-[10px] object-cover',
-							'md:w-[246px]',
-							'xl:w-[308px]',
-							'2xl:w-[382px]'
-						]}
-					/>
+					<a href="/">
+						<img
+							src="/LolavanPraag_PailletteParade_LPM03_26:04:25.png"
+							alt=""
+							class={[
+								'shadow-[5px_5px_20px_rgba(0, 0, 0, 0.05)] aspect-square w-[146px] rounded-[10px] object-cover',
+								'md:w-[246px]',
+								'xl:w-[308px]',
+								'2xl:w-[382px]'
+							]}
+						/>
+					</a>
 				{/each}
 			</div>
 			<button
