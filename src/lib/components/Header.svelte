@@ -39,7 +39,7 @@
 
 <nav class={page.data.navColor === 'enoki' ? 'bg-enoki' : 'bg-white'}>
 	<div class={['container mx-auto px-4', 'md:px-8', 'lg:px-10', 'xl:px-16', '2xl:px-20']}>
-		<div class="relative flex h-[112px] items-center justify-between">
+		<div class="relative flex h-[98px] items-center justify-between">
 			<div class="flex items-center">
 				<button
 					type="button"
@@ -160,7 +160,7 @@
 				isOpen ? 'h-auto' : 'h-0'
 			]}
 		>
-			<ul class={['flex flex-col gap-y-4 py-[53px]', 'lg:flex-row lg:gap-x-16 lg:gap-y-0']}>
+			<ul class={['flex flex-col gap-y-4 pb-4', 'lg:flex-row lg:gap-x-16 lg:gap-y-0']}>
 				{#each navLinks as link (link.href)}
 					<li>
 						<a

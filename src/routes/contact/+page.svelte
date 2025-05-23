@@ -47,8 +47,6 @@
 					'2xl:w-[629px]'
 				]}
 				draggable="false"
-				oncontextmenu={(e) => e.preventDefault()}
-				role="img"
 			/>
 		</div>
 	</div>

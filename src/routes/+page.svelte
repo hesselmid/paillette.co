@@ -62,8 +62,6 @@
 				]}
 				fetchpriority="high"
 				draggable="false"
-				oncontextmenu={(e) => e.preventDefault()}
-				role="img"
 			/>
 			<h1
 				class={[
@@ -97,8 +95,6 @@
 				sizes="(min-width: 1280px) 608px, (min-width: 768px) 478px, (min-width: 640px) 431px, 358px"
 				class={['h-auto w-[358px]', 'sm:w-[431px]', 'md:w-[478px]', 'xl:w-[608px]']}
 				draggable="false"
-				oncontextmenu={(e) => e.preventDefault()}
-				role="img"
 			/>
 			<div
 				class={[
@@ -202,8 +198,6 @@
 					'2xl:w-[718px]'
 				]}
 				draggable="false"
-				oncontextmenu={(e) => e.preventDefault()}
-				role="img"
 			/>
 			<div class={['flex flex-col items-center gap-y-9', 'lg:gap-y-12']}>
 				<p

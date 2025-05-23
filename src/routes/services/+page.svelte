@@ -743,8 +743,6 @@
 					'lg:ml-[40px] lg:w-[559px] lg:shrink-0'
 				]}
 				draggable="false"
-				oncontextmenu={(e) => e.preventDefault()}
-				role="img"
 			/>
 			<div
 				class={[
