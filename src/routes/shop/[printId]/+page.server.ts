@@ -92,7 +92,9 @@ export const load = async ({ params, locals }) => {
 		return {
 			print: printDetails,
 			colorways: uniqueColorways,
-			isInWishlist
+			isInWishlist,
+			navColor: 'enoki',
+			footerColor: 'white'
 		};
 	} catch (e) {
 		console.error(`Error fetching print details for ID ${printId}:`, e);
