@@ -1,3 +1,18 @@
+<script lang="ts">
+	import Carousel from './Carousel.svelte';
+
+	const carouselItems = [
+		{ id: 1, imageUrl: '/LolavanPraag_PailletteParade_LPM03_26:04:25.png', colorway: 1 },
+		{ id: 2, imageUrl: '/LolavanPraag_PailletteParade_LPM03_26:04:25.png', colorway: 2 },
+		{ id: 3, imageUrl: '/LolavanPraag_PailletteParade_LPM03_26:04:25.png', colorway: 3 },
+		{ id: 4, imageUrl: '/LolavanPraag_PailletteParade_LPM03_26:04:25.png', colorway: 4 },
+		{ id: 5, imageUrl: '/LolavanPraag_PailletteParade_LPM03_26:04:25.png', colorway: 5 },
+		{ id: 6, imageUrl: '/LolavanPraag_PailletteParade_LPM03_26:04:25.png', colorway: 6 },
+		{ id: 7, imageUrl: '/LolavanPraag_PailletteParade_LPM03_26:04:25.png', colorway: 7 },
+		{ id: 8, imageUrl: '/LolavanPraag_PailletteParade_LPM03_26:04:25.png', colorway: 8 }
+	];
+</script>
+
 <div class={['bg-white py-16', 'lg:py-20']}>
 	<div class={['container mx-auto space-y-8', 'lg:space-y-0']}>
 		<section
@@ -49,7 +64,7 @@
 					</button>
 				</div>
 			</div>
-			<div class={["mt-8", 'lg:mt-0']}>
+			<div class={['mt-8', 'lg:mt-0']}>
 				<h1
 					class={[
 						'font-apfel-grotezk-brukt text-black-sheep text-5xl/[62px]',
@@ -129,43 +144,8 @@
 			>
 				Colorways
 			</h2>
-			<div
-				class={[
-					'mt-5 flex items-center justify-between px-4',
-					'md:px-8',
-					'lg:px-40',
-					'xl:px-16',
-					'2xl:px-20'
-				]}
-			>
-				<button
-					type="button"
-					class="font-evolventa bg-enoki text-black-sheep border-black-sheep flex size-16 cursor-pointer items-center justify-center rounded-full border text-lg/[24px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] disabled:cursor-not-allowed"
-					>&lt;</button
-				>
 
-				<div class={['flex gap-x-[10px]', 'md:gap-x-[20px]', '2xl:gap-x-[22px]']}>
-					{#each { length: 1 }}
-						<a href="?colorway=1">
-							<img
-								src="/LolavanPraag_PailletteParade_LPM03_26:04:25.png"
-								alt=""
-								class={[
-									'shadow-[5px_5px_20px_rgba(0, 0, 0, 0.05)] aspect-square w-[146px] rounded-[10px] object-cover',
-									'md:w-[246px]',
-									'xl:w-[308px]',
-									'2xl:w-[382px]'
-								]}
-							/>
-						</a>
-					{/each}
-				</div>
-				<button
-					type="button"
-					class="font-evolventa bg-enoki text-black-sheep border-black-sheep flex size-16 cursor-pointer items-center justify-center rounded-full border text-lg/[24px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] disabled:cursor-not-allowed"
-					>&gt;</button
-				>
-			</div>
+			<Carousel items={carouselItems} />
 		</section>
 	</div>
 </div>
@@ -184,42 +164,7 @@
 		>
 			Discover the collection
 		</h2>
-		<div
-			class={[
-				'mt-5 flex items-center justify-between px-4',
-				'md:px-8',
-				'lg:px-40',
-				'xl:px-16',
-				'2xl:px-20'
-			]}
-		>
-			<button
-				type="button"
-				class="font-evolventa bg-enoki text-black-sheep border-black-sheep flex size-16 cursor-pointer items-center justify-center rounded-full border text-lg/[24px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] disabled:cursor-not-allowed"
-				>&lt;</button
-			>
 
-			<div class={['flex gap-x-[10px]', 'md:gap-x-[20px]', '2xl:gap-x-[22px]']}>
-				{#each { length: 1 }}
-					<a href="/">
-						<img
-							src="/LolavanPraag_PailletteParade_LPM03_26:04:25.png"
-							alt=""
-							class={[
-								'shadow-[5px_5px_20px_rgba(0, 0, 0, 0.05)] aspect-square w-[146px] rounded-[10px] object-cover',
-								'md:w-[246px]',
-								'xl:w-[308px]',
-								'2xl:w-[382px]'
-							]}
-						/>
-					</a>
-				{/each}
-			</div>
-			<button
-				type="button"
-				class="font-evolventa bg-enoki text-black-sheep border-black-sheep flex size-16 cursor-pointer items-center justify-center rounded-full border text-lg/[24px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] disabled:cursor-not-allowed"
-				>&gt;</button
-			>
-		</div>
+		<Carousel items={carouselItems} />
 	</div>
 </section>
