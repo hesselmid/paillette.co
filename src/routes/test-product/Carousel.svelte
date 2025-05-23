@@ -38,7 +38,7 @@
 		} else if (isSM.current) {
 			return { itemsToDisplay: 3, itemPixelWidth: 146, gapPixelWidth: 10 };
 		} else {
-			return { itemsToDisplay: 1, itemPixelWidth: 146, gapPixelWidth: 0 };
+			return { itemsToDisplay: 1, itemPixelWidth: 146, gapPixelWidth: 10 };
 		}
 	});
 
@@ -112,8 +112,7 @@
 	>
 		<div
 			class={[
-				'flex gap-x-0 transition-transform duration-300 ease-in-out',
-				'sm:gap-x-[10px]',
+				'flex gap-x-[10px] transition-transform duration-300 ease-in-out',
 				'md:gap-x-[20px]',
 				'2xl:gap-x-[22px]'
 			]}
@@ -122,7 +121,7 @@
 			{#each items as item (item.id)}
 				<div
 					class={[
-						'shadow-[5px_5px_20px_rgba(0, 0, 0, 0.05)] w-[146px] shrink-0',
+						'w-[146px] shrink-0 drop-shadow-[5px_5px]',
 						'sm:w-[146px]',
 						'md:w-[246px]',
 						'lg:w-[246px]',
