@@ -6,7 +6,7 @@
 	<title>Account - Paillette.co</title>
 </svelte:head>
 
-<div class={['bg-white py-16', 'lg:py-[20]']}>
+<div class={['bg-white py-16', 'lg:py-20']}>
 	<div class="container mx-auto">
 		<h1 class={['font-apfel-grotezk-brukt text-black-sheep text-center text-5xl/[62px]']}>
 			Hi, {data.currentUser.firstName}
