@@ -133,7 +133,7 @@
 			id="main-menu"
 			class={[
 				'overflow-hidden  transition-[height] duration-300 ease-in-out [interpolate-size:allow-keywords]',
-				isOpen ? 'h-auto' : 'h-0'
+				isOpen ? 'h-[268px] md:h-[64px]' : 'h-0'
 			]}
 		>
 			<ul class={['mx-[10px] mt-[10px] rounded-[10px] bg-white px-[30px] py-[10px]', 'md:flex']}>
