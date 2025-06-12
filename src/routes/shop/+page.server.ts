@@ -135,7 +135,6 @@ export const load = async ({ url, locals }) => {
 			selectedCategoryIds,
 			selectedDesignerIds
 		},
-		navColor: 'enoki',
 		footerColor: 'enoki'
 	};
 };

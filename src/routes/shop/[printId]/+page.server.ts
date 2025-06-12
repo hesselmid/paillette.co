@@ -93,7 +93,6 @@ export const load = async ({ params, locals }) => {
 			print: printDetails,
 			colorways: uniqueColorways,
 			isInWishlist,
-			navColor: 'enoki',
 			footerColor: 'white'
 		};
 	} catch (e) {

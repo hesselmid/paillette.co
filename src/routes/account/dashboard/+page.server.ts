@@ -31,7 +31,6 @@ export const load = async ({ locals }) => {
 			firstName: locals.user.firstName,
 			companyName: companyName
 		},
-		navColor: 'enoki',
 		footerColor: 'enoki'
 	};
 };
