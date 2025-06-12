@@ -38,7 +38,7 @@
 
 <nav class={['container mx-auto mt-6 px-2', 'md:px-4', 'lg:px-5', 'xl:px-8', '2xl:px-10']}>
 	<div class="bg-enoki rounded-[10px] py-[10px]">
-		<div class="flex items-center justify-between px-10">
+		<div class="relative flex items-center justify-between px-10">
 			<div>
 				<button
 					type="button"
@@ -77,7 +77,7 @@
 					{/if}
 				</button>
 			</div>
-			<div>
+			<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
 				<a href="/" aria-label="Paillette Homepage">
 					<enhanced:img
 						src="$lib/assets/logo.png"
