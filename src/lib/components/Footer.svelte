@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 </script>
 
-<footer class={['py-8', page.data.footerColor === 'enoki' ? 'bg-enoki' : 'bg-white']}>
+<footer class={['py-8', page.data.footerColor === 'white' ? 'bg-white' : 'bg-enoki']}>
 	<div class={['container mx-auto px-4', 'md:px-8', 'lg:px-10', 'xl:px-16', '2xl:px-20']}>
 		<h2 class="sr-only">Footer</h2>
 
