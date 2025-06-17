@@ -1,0 +1,9 @@
+{
+	"name": "paillette.co",
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"compatibility_date": "2025-06-17",
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	}
+}
