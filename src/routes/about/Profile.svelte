@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { order = '123' } = $props();
+	let { name = 'Lola', order = '123' } = $props();
 </script>
 
 <div
@@ -35,7 +35,7 @@
 				'xl:pt-[42px]'
 			]}
 		>
-			Lola
+			{name}
 		</div>
 	</div>
 
