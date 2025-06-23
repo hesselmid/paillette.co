@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { name = 'Lola', order = '123' } = $props();
+	let { name = 'Lola', order = '123', image } = $props();
 </script>
 
 <div
@@ -22,7 +22,7 @@
 		]}
 	>
 		<enhanced:img
-			src="$lib/assets/IMAGE.jpg"
+			src={image}
 			alt="Lola van Praag"
 			class="h-[281px] w-full object-cover object-center sm:h-[470px] md:h-[262px] lg:h-[220px] xl:h-[280px]"
 			draggable="false"
