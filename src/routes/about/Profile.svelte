@@ -29,7 +29,7 @@
 		/>
 		<div
 			class={[
-				'bg-grapefruit font-evolventa text-black-sheep rounded-b-[10px] px-4 pt-8 pb-4 text-2xl/[32px]',
+				'font-evolventa text-black-sheep rounded-b-[10px] bg-(--primary) px-4 pt-8 pb-4 text-2xl/[32px]',
 				'sm:pt-[96px]',
 				'md:pt-8',
 				'xl:pt-[42px]'
@@ -41,7 +41,7 @@
 
 	<div
 		class={[
-			'font-evolventa text-black-sheep size-[358px] space-y-[21px] overflow-y-scroll rounded-[10px] bg-[#ffbab6] p-4 text-base/[21px] [&::-webkit-scrollbar]:w-6 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#ff5249] [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:border [&::-webkit-scrollbar-track]:border-[#ff5249] [&::-webkit-scrollbar-track]:bg-[#ffbab6]',
+			'font-evolventa text-black-sheep size-[358px] space-y-[21px] overflow-y-scroll rounded-[10px] bg-(--secondary) p-4 text-base/[21px] [&::-webkit-scrollbar]:w-6 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-(--primary) [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:border [&::-webkit-scrollbar-track]:border-(--primary) [&::-webkit-scrollbar-track]:bg-(--secondary)',
 			'sm:size-[608px]',
 			'md:order-3 md:h-[370px] md:w-[704px] md:space-y-[24px] md:text-lg/[24px]',
 			'lg:order-2 lg:size-[300px]',

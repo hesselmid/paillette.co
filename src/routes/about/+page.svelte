@@ -138,10 +138,25 @@
 	>
 		The Founder of Paillette
 	</h2>
-	<Profile />
+	<Profile order="123" --primary="#ff5249" --secondary="#ffbab6" />
 </section>
 
+<div class="bg-white py-16"></div>
+
+<section class="bg-enoki pt-9 pb-16"></section>
+
 <div class={['space-y-16 bg-white py-16', 'lg:space-y-20 lg:py-20']}>
-	<Profile order="312" />
-	<Profile order="231" />
+	<Profile order="312" --primary="#d4ebf8" --secondary="#efefef" />
+	<Profile order="231" --primary="#06d001" --secondary="#9bec99" />
+</div>
+
+<section class="bg-enoki pt-9 pb-16"></section>
+
+<div class={['space-y-16 bg-white py-16', 'lg:space-y-20 lg:py-20']}>
+	<Profile order="123" --primary="#ee66a6" --secondary="#f8c2db" />
+	<Profile order="312" --primary="#cdc526" --secondary="#fff4cf" />
+	<Profile order="231" --primary="#ff5249" --secondary="#ff5249" />
+	<Profile order="123" --primary="#d4ebf8" --secondary="#eeefef" />
+	<Profile order="312" --primary="#06d001" --secondary="#9bec99" />
+	<Profile order="231" --primary="#ee66a6" --secondary="#f8c2db" />
 </div>
