@@ -39,13 +39,16 @@
 	</div>
 </div>
 
-<section class="bg-enoki py-9">
+<section class={['bg-enoki py-9', 'lg:py-12']}>
 	<div class="container mx-auto">
 		<h2
 			class={[
 				'font-cormorant text-black-sheep text-center text-3xl/[36px] font-light',
 				'sm:text-4xl/[44px]',
-				'md:text-5xl/[58px]'
+				'md:text-5xl/[58px]',
+				'lg:ml-10 lg:text-left lg:text-6xl/[73px]',
+				'xl:ml-[138px]',
+				'2xl:ml-[266px]'
 			]}
 		>
 			About us:
@@ -53,8 +56,11 @@
 		<div
 			class={[
 				'font-cormorant text-black-sheep mx-4 mt-9 h-[456px] space-y-[19px] overflow-y-scroll pr-4 text-base/[19px] [&::-webkit-scrollbar]:w-6 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#541212] [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:border [&::-webkit-scrollbar-track]:border-[#541212] [&::-webkit-scrollbar-track]:bg-[#bba0a0]',
-				'sm:h-[331px] sm:space-y-[24px] sm:text-xl/[24px]',
-				'md:mr-8 md:h-[580px] md:space-y-[29px] md:pr-[30px] md:text-2xl/[29px]'
+				'sm:h-[448px] sm:space-y-[24px] sm:text-xl/[24px]',
+				'md:mx-8 md:h-[434px] md:space-y-[29px] md:pr-8 md:text-2xl/[29px]',
+				'lg:mx-10 lg:mt-12 lg:h-[383px] lg:pr-10',
+				'xl:mr-16 xl:ml-[138px] xl:pr-[50px]',
+				'2xl:mr-[192px] 2xl:ml-[266px]'
 			]}
 		>
 			<p>
@@ -98,3 +104,20 @@
 		</div>
 	</div>
 </section>
+
+<div class={['bg-white py-16', 'lg:py-20']}>
+	<p
+		class={[
+			'font-evolventa text-black-sheep mx-auto max-w-[358px] text-center text-lg/[24px]',
+			'sm:max-w-[608px] sm:text-2xl/[32px]',
+			'lg:max-w-[830px]',
+			'xl:max-w-[1004px]',
+			'2xl:max-w-[1052px]'
+		]}
+	>
+		At Paillette, we believe meaningful design starts with the people behind it. From our founder to
+		our ambassadors and emerging designers, each person brings a unique perspective and shared
+		commitment to reimagining how creativity moves through the fashion industry. Meet the
+		individuals shaping Paillette — and the future of print.
+	</p>
+</div>
