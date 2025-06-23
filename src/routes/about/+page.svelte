@@ -121,3 +121,24 @@
 		individuals shaping Paillette — and the future of print.
 	</p>
 </div>
+
+<section class="bg-enoki py-16">
+	<h2 class={['font-apfel-grotezk-brukt text-black-sheep text-center text-3xl/[38px]']}>
+		The Founder of Paillette
+	</h2>
+	<div class="mt-9 flex flex-col items-center gap-y-5">
+		<div class="size-[358px]">
+			<enhanced:img
+				src="$lib/assets/IMAGE.jpg"
+				alt="Lola van Praag"
+				class="w-358px h-[281px] object-cover object-center"
+				draggable="false"
+			/>
+			<div
+				class="bg-grapefruit font-evolventa text-black-sheep rounded-b-[10px] px-4 pt-8 pb-4 text-2xl/[32px]"
+			>
+				Lola
+			</div>
+		</div>
+	</div>
+</section>
