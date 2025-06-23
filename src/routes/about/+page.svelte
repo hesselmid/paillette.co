@@ -143,14 +143,88 @@
 
 <div class="bg-white py-16"></div>
 
-<section class="bg-enoki pt-9 pb-16"></section>
+<section class={['bg-enoki pt-9 pb-16', 'lg:pt-12 lg:pb-20']}>
+	<h2
+		class={[
+			'font-apfel-grotezk-brukt text-black-sheep text-center text-3xl/[38px]',
+			'sm:text-4xl/[46px]',
+			'md:text-5xl/[62px]',
+			'lg:text-6xl/[77px]',
+			'xl:text-7xl/[92px]'
+		]}
+	>
+		Paillette Ambassadors
+	</h2>
+	<div
+		class={[
+			'text-black-sheep font-evolventa mx-auto mt-9 max-w-[358px] space-y-[24px] text-center text-lg/[24px]',
+			'sm:max-w-[608px] sm:space-y-[32px] sm:text-2xl/[32px]',
+			'lg:mt-12 lg:max-w-[830px]',
+			'xl:max-w-[1004px]',
+			'2xl:max-w-[1152px]'
+		]}
+	>
+		<p>Our ambassadors are the first people helping shape how the world sees Paillette.</p>
+		<p>
+			At this early stage, they serve as advocates and representatives of the platform, helping to
+			share our vision and build awareness across the creative industry. Their insight, perspective,
+			and presence help us connect with the right audiences as we grow.
+		</p>
+		<p>
+			In the future, we see our ambassadors playing a more active role in mentoring new talent —
+			drawing from their own professional experience to support the next generation of print
+			designers. For now, we’re proud to have them as trusted voices in our journey forward.
+		</p>
+	</div>
+</section>
 
 <div class={['space-y-16 bg-white py-16', 'lg:space-y-20 lg:py-20']}>
 	<Profile name="Larissa" order="312" --primary="#d4ebf8" --secondary="#efefef" />
 	<Profile name="Linde" order="231" --primary="#06d001" --secondary="#9bec99" />
 </div>
 
-<section class="bg-enoki pt-9 pb-16"></section>
+<section class={['bg-enoki pt-9 pb-16', 'lg:pt-12 lg:pb-20']}>
+	<h2
+		class={[
+			'font-apfel-grotezk-brukt text-black-sheep text-center text-3xl/[38px]',
+			'sm:text-4xl/[46px]',
+			'md:text-5xl/[62px]',
+			'lg:text-6xl/[77px]',
+			'xl:text-7xl/[92px]'
+		]}
+	>
+		The Paillette community
+	</h2>
+	<div
+		class={[
+			'text-black-sheep font-evolventa mx-auto mt-9 max-w-[358px] space-y-[24px] text-center text-lg/[24px]',
+			'sm:max-w-[608px] sm:space-y-[32px] sm:text-2xl/[32px]',
+			'lg:mt-12 lg:max-w-[830px]',
+			'xl:max-w-[1004px]',
+			'2xl:max-w-[1152px]'
+		]}
+	>
+		<p>
+			Our community is made up of a handpicked group of designers from around the world — the
+			beating heart of Paillette. We carefully select those who bring a fresh, unique signature and
+			share the same ethos that defines Paillette.
+		</p>
+		<p>
+			Many talented designers work independently and can sometimes feel isolated. Through Paillette,
+			we bring them together — creating a supportive community where they can connect, share
+			insights, and grow.
+		</p>
+		<p>
+			By taking care of sales and business opportunities, we free up designers to focus on what they
+			do best: creating. Together, we’re building more than a platform — we’re nurturing a vibrant
+			ecosystem that helps each member thrive and push the boundaries of print design.
+		</p>
+		<p>
+			As Paillette grows, this community remains at its core — driving new connections, fresh ideas,
+			and shaping the future of print.
+		</p>
+	</div>
+</section>
 
 <div class={['space-y-16 bg-white py-16', 'lg:space-y-20 lg:py-20']}>
 	<Profile name="Filipa" order="123" --primary="#ee66a6" --secondary="#f8c2db" />
