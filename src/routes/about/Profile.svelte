@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { bios } from './bios';
+
 	let { name = 'Lola', order = '123', image, work } = $props();
 </script>
 
@@ -49,42 +51,7 @@
 			order === '123' ? 'lg:order-2' : order === '312' ? 'lg:order-3' : 'lg:order-1'
 		]}
 	>
-		<p>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu dolor eu magna maximus
-			malesuada eu nec quam. Proin sed mollis sapien. Nunc venenatis leo vitae semper luctus. Nulla
-			at odio id ligula viverra gravida et nec eros. Vestibulum sodales dui lacus, nec suscipit
-			nulla venenatis sed. Etiam vulputate sapien vitae auctor tristique. Ut pulvinar mattis mi,
-			eget interdum leo eleifend sit amet.
-		</p>
-		<p>
-			Vestibulum dui nulla, porta egestas placerat sit amet, accumsan et metus. Pellentesque aliquet
-			mollis consectetur. Pellentesque eget odio faucibus, faucibus turpis a, ultricies massa.
-			Phasellus sed fringilla elit. Pellentesque venenatis lectus id urna euismod dictum. Aenean nec
-			facilisis libero. In hac habitasse platea dictumst. Nam et lacus sed massa ultrices dignissim
-			eget in dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-			inceptos himenaeos. Mauris eget dui eu metus sagittis rhoncus. Nam blandit eleifend purus, sit
-			amet tincidunt dolor porta id. Nam tempus, magna ac vehicula iaculis, mi arcu tincidunt est,
-			sed rhoncus nunc risus sed justo. Suspendisse potenti. Lorem ipsum dolor sit amet, consectetur
-			adipiscing elit. Aliquam bibendum urna vitae consectetur tristique.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu dolor eu magna maximus
-			malesuada eu nec quam. Proin sed mollis sapien. Nunc venenatis leo vitae semper luctus. Nulla
-			at odio id ligula viverra gravida et nec eros. Vestibulum sodales dui lacus, nec suscipit
-			nulla venenatis sed. Etiam vulputate sapien vitae auctor tristique. Ut pulvinar mattis mi,
-			eget interdum leo eleifend sit amet.
-		</p>
-		<p>
-			Vestibulum dui nulla, porta egestas placerat sit amet, accumsan et metus. Pellentesque aliquet
-			mollis consectetur. Pellentesque eget odio faucibus, faucibus turpis a, ultricies massa.
-			Phasellus sed fringilla elit. Pellentesque venenatis lectus id urna euismod dictum. Aenean nec
-			facilisis libero. In hac habitasse platea dictumst. Nam et lacus sed massa ultrices dignissim
-			eget in dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-			inceptos himenaeos. Mauris eget dui eu metus sagittis rhoncus. Nam blandit eleifend purus, sit
-			amet tincidunt dolor porta id. Nam tempus, magna ac vehicula iaculis, mi arcu tincidunt est,
-			sed rhoncus nunc risus sed justo. Suspendisse potenti. Lorem ipsum dolor sit amet, consectetur
-			adipiscing elit. Aliquam bibendum urna vitae consectetur tristique.
-		</p>
+		{@html bios[name.toLowerCase()]}
 	</div>
 
 	<div
