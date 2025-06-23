@@ -10,6 +10,16 @@
 	import lucy from './profiles/lucy.jpg?enhanced';
 	import wendy from './profiles/wendy.jpg?enhanced';
 	import amina from './profiles/amina.jpg?enhanced';
+
+	import workLola from './work/lola.jpg?enhanced';
+	import workLarissa from './work/larissa.jpg?enhanced';
+	import workLinde from './work/linde.jpg?enhanced';
+	import workFilipa from './work/filipa.jpg?enhanced';
+	import workMargarida from './work/margarida.jpg?enhanced';
+	import workEnya from './work/enya.jpg?enhanced';
+	import workLucy from './work/lucy.jpg?enhanced';
+	import workWendy from './work/wendy.jpg?enhanced';
+	import workAmina from './work/amina.jpg?enhanced';
 </script>
 
 <svelte:head>
@@ -148,7 +158,14 @@
 	>
 		The Founder of Paillette
 	</h2>
-	<Profile name="Lola" order="123" image={lola} --primary="#ff5249" --secondary="#ffbab6" />
+	<Profile
+		name="Lola"
+		order="123"
+		image={lola}
+		work={workLola}
+		--primary="#ff5249"
+		--secondary="#ffbab6"
+	/>
 </section>
 
 <div class="bg-white py-16"></div>
@@ -189,8 +206,22 @@
 </section>
 
 <div class={['space-y-16 bg-white py-16', 'lg:space-y-20 lg:py-20']}>
-	<Profile name="Larissa" order="312" image={larissa} --primary="#d4ebf8" --secondary="#efefef" />
-	<Profile name="Linde" order="231" image={linde} --primary="#06d001" --secondary="#9bec99" />
+	<Profile
+		name="Larissa"
+		order="312"
+		image={larissa}
+		work={workLarissa}
+		--primary="#d4ebf8"
+		--secondary="#efefef"
+	/>
+	<Profile
+		name="Linde"
+		order="231"
+		image={linde}
+		work={workLinde}
+		--primary="#06d001"
+		--secondary="#9bec99"
+	/>
 </div>
 
 <section class={['bg-enoki pt-9 pb-16', 'lg:pt-12 lg:pb-20']}>
@@ -237,16 +268,52 @@
 </section>
 
 <div class={['space-y-16 bg-white py-16', 'lg:space-y-20 lg:py-20']}>
-	<Profile name="Filipa" order="123" image={filipa} --primary="#ee66a6" --secondary="#f8c2db" />
+	<Profile
+		name="Filipa"
+		order="123"
+		image={filipa}
+		work={workFilipa}
+		--primary="#ee66a6"
+		--secondary="#f8c2db"
+	/>
 	<Profile
 		name="Margarida"
 		order="312"
 		image={margarida}
+		work={workMargarida}
 		--primary="#cdc526"
 		--secondary="#fff4cf"
 	/>
-	<Profile name="Enya" order="231" image={enya} --primary="#ff5249" --secondary="#ff5249" />
-	<Profile name="Lucy" order="123" image={lucy} --primary="#d4ebf8" --secondary="#eeefef" />
-	<Profile name="Wendy" order="312" image={wendy} --primary="#06d001" --secondary="#9bec99" />
-	<Profile name="Amina" order="231" image={amina} --primary="#ee66a6" --secondary="#f8c2db" />
+	<Profile
+		name="Enya"
+		order="231"
+		image={enya}
+		work={workEnya}
+		--primary="#ff5249"
+		--secondary="#ff5249"
+	/>
+	<Profile
+		name="Lucy"
+		order="123"
+		image={lucy}
+		work={workLucy}
+		--primary="#d4ebf8"
+		--secondary="#eeefef"
+	/>
+	<Profile
+		name="Wendy"
+		order="312"
+		image={wendy}
+		work={workWendy}
+		--primary="#06d001"
+		--secondary="#9bec99"
+	/>
+	<Profile
+		name="Amina"
+		order="231"
+		image={amina}
+		work={workAmina}
+		--primary="#ee66a6"
+		--secondary="#f8c2db"
+	/>
 </div>

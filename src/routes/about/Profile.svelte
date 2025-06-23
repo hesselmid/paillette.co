@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { name = 'Lola', order = '123', image } = $props();
+	let { name = 'Lola', order = '123', image, work } = $props();
 </script>
 
 <div
@@ -23,7 +23,7 @@
 	>
 		<enhanced:img
 			src={image}
-			alt="Lola van Praag"
+			alt={name}
 			class="h-[281px] w-full object-cover object-center sm:h-[470px] md:h-[262px] lg:h-[220px] xl:h-[280px]"
 			draggable="false"
 		/>
@@ -97,9 +97,9 @@
 			order === '123' ? 'lg:order-3' : order === '312' ? 'lg:order-1' : 'lg:order-2'
 		]}
 	>
-		<img
-			src="https://picsum.photos/200/300"
-			alt=""
+		<enhanced:img
+			src={work}
+			alt="{name}'s work"
 			class="h-full w-full rounded-[10px] object-cover object-center"
 			draggable="false"
 		/>
