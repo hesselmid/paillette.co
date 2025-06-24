@@ -7,7 +7,11 @@
 </script>
 
 <svelte:head>
-	<title>Login - Paillette.co</title>
+	<title>Paillette Login | Access Your Exclusive Print Collection</title>
+	<meta
+		name="description"
+		content="Log in to your Paillette account to browse exclusive prints, manage orders and collaborate with emerging designers."
+	/>
 </svelte:head>
 
 <div class={['bg-white py-16', 'lg:py-20']}>

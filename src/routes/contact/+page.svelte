@@ -7,7 +7,11 @@
 </script>
 
 <svelte:head>
-	<title>Contact - Paillette.co</title>
+	<title>Contact Paillette | Start Your Custom Print Project</title>
+	<meta
+		name="description"
+		content="Inspired by our prints? Get in touch to discuss custom projects, pricing or collaborations. Paillette’s team is ready to add sparkle to your collection."
+	/>
 </svelte:head>
 
 <section class={['bg-white py-16', 'xl:py-20']}>

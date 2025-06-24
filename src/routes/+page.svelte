@@ -36,7 +36,11 @@
 </script>
 
 <svelte:head>
-	<title>Paillette.co</title>
+	<title>Paillette | Exclusive Textile Prints by Emerging Designers</title>
+	<meta
+		name="description"
+		content="Add a little shine to your story with exclusive, one-of-a-kind textile prints crafted by emerging designers. Shop or commission bespoke designs at Paillette."
+	/>
 </svelte:head>
 
 <section class={['bg-white py-16', 'lg:py-20']}>

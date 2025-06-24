@@ -113,7 +113,11 @@
 </script>
 
 <svelte:head>
-	<title>FAQ - Paillette.co</title>
+	<title>Paillette FAQ | Exclusive Print Design Questions</title>
+	<meta
+		name="description"
+		content="Find answers about exclusive rights, pricing, custom designs, delivery and more. Paillette’s FAQ covers everything brands and designers need to know."
+	/>
 </svelte:head>
 
 <div class={['bg-white py-16', 'lg:py-20']}>

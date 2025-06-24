@@ -23,7 +23,11 @@
 </script>
 
 <svelte:head>
-	<title>About - Paillette.co</title>
+	<title>About Paillette | Bridging Emerging Talent & Brands</title>
+	<meta
+		name="description"
+		content="Discover how Paillette unites forward-thinking brands with emerging textile talent. Meet our founder and community shaping the future of print design."
+	/>
 </svelte:head>
 
 <div class={['bg-white py-16', 'lg:py-20']}>
