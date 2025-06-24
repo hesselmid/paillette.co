@@ -36,7 +36,7 @@
 </script>
 
 <svelte:head>
-	<title>Paillette | Exclusive Textile Prints by Emerging Designers</title>
+	<title>Exclusive Print Designs | Paillette</title>
 	<meta
 		name="description"
 		content="Add a little shine to your story with exclusive, one-of-a-kind textile prints crafted by emerging designers. Shop or commission bespoke designs at Paillette."

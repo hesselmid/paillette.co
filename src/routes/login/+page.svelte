@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>Paillette Login | Access Your Exclusive Print Collection</title>
+	<title>Log In | Paillette</title>
 	<meta
 		name="description"
 		content="Log in to your Paillette account to browse exclusive prints, manage orders and collaborate with emerging designers."

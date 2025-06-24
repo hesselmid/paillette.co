@@ -178,7 +178,7 @@
 </script>
 
 <svelte:head>
-	<title>Bespoke & Ready-to-Buy Exclusive Prints | Paillette</title>
+	<title>Services | Paillette</title>
 	<meta
 		name="description"
 		content="Explore a constantly updated collection of exclusive prints or collaborate on bespoke designs. Full rights, global talent—Paillette makes your brand shine."

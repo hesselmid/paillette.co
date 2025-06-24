@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>Contact Paillette | Start Your Custom Print Project</title>
+	<title>Contact | Paillette</title>
 	<meta
 		name="description"
 		content="Inspired by our prints? Get in touch to discuss custom projects, pricing or collaborations. Paillette’s team is ready to add sparkle to your collection."

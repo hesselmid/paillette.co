@@ -113,7 +113,7 @@
 </script>
 
 <svelte:head>
-	<title>Paillette FAQ | Exclusive Print Design Questions</title>
+	<title>FAQ | Paillette</title>
 	<meta
 		name="description"
 		content="Find answers about exclusive rights, pricing, custom designs, delivery and more. Paillette’s FAQ covers everything brands and designers need to know."

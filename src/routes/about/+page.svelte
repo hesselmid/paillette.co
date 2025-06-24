@@ -23,7 +23,7 @@
 </script>
 
 <svelte:head>
-	<title>About Paillette | Bridging Emerging Talent & Brands</title>
+	<title>About Us | Paillette</title>
 	<meta
 		name="description"
 		content="Discover how Paillette unites forward-thinking brands with emerging textile talent. Meet our founder and community shaping the future of print design."
