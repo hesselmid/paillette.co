@@ -1,0 +1,58 @@
+[
+	{
+		"paillette": {
+			"background": "#ffa3a3",
+			"primary": "#ff5249",
+			"title": "Paillette<br /> Beginner"
+		},
+		"background": "#ffcccc",
+		"list": [
+			"Description: Entry-level for new designers starting their journey with Paillette. Designers here are eager to gain experience and visibility.",
+			"Requirements: Recently joined, beginner portfolio, no completed sales yet.",
+			"Designer Earnings: Base profit percentage 35% designer, 65% platform.",
+			"Benefits: Access to foundational mentorship, workshops, and one-on-one reviews."
+		]
+	},
+	{
+		"paillette": {
+			"background": "#edf6fc",
+			"primary": "#d4ebf8",
+			"title": "Paillette<br /> Rising<br /> Talent"
+		},
+		"background": "#f2faff",
+		"list": [
+			"Description: Designers with a few successful sales or custom collaborations, demonstrating an understanding of client needs and consistent quality.",
+			"Requirements: At least 10 completed sales and 1-2 successful custom projects as a Paillette Beginner designer.",
+			"Designer Earnings: Increased profit percentage 40% designer, 60% platform.",
+			"Benefits: Enhanced mentorship with personalized design advice and skill refinement sessions, plus increased visibility on the platform."
+		]
+	},
+	{
+		"paillette": {
+			"background": "#9bec99",
+			"primary": "#06d001",
+			"title": "Paillette<br /> Pro"
+		},
+		"background": "#c9f3c5",
+		"list": [
+			"Description: Established designers with proven success, positive client feedback, and a distinctive style that resonates with brands.",
+			"Requirements: 25+ successful sales or 5+ completed custom projects as a Paillette Rising Talent designer.",
+			"Designer Earnings: Higher profit percentage 50% designer, 50% platform.",
+			"Benefits: Direct brand introductions, priority listing for custom projects, priority listing on the platform, and access to advanced mentorship tailored to scaling their career."
+		]
+	},
+	{
+		"paillette": {
+			"background": "#f8c2db",
+			"primary": "#ee66a6",
+			"title": "Paillette<br /> Expert"
+		},
+		"background": "#f7dde7",
+		"list": [
+			"Description: Designers in high demand with a significant following and multiple exclusive collaborations. These designers have a strong reputation for excellence within the platform.",
+			"Requirements: 50+ successful sales or 15+ successful custom projects with brands as a Paillette Pro designer.",
+			"Designer Earnings: Premium profit percentage 60% designer, 40% platform.",
+			"Benefits: Exclusive brand partnerships, co-branding opportunities, master-level mentorship, and invitations to industry events and showcases."
+		]
+	}
+]
