@@ -168,7 +168,46 @@
 	/>
 </section>
 
-<div class="bg-white py-16"></div>
+<div class={['bg-white py-16', 'lg:py-20']}>
+	<div
+		class={[
+			'flex flex-col items-center gap-y-9',
+			'lg:flex-row lg:justify-center lg:gap-x-[54px] lg:gap-y-0',
+			'xl:gap-x-[106px]',
+			'2xl:gap-x-[246px]'
+		]}
+	>
+		<enhanced:img
+			src="$lib/assets/AboutUs_11new.png?w=358;431;482;716;862;964"
+			alt=""
+			sizes="(min-width: 1280px) 482px, (min-width: 640px) 431px, 358px"
+			class={['h-auto w-[358px]', 'sm:w-[431px]', 'xl:w-[482px]']}
+			draggable="false"
+		/>
+		<div class={['flex flex-col items-center gap-y-9', 'lg:gap-y-12']}>
+			<p
+				class={[
+					'font-cormorant text-black-sheep text-center text-lg/[64px] font-light',
+					'sm:text-2xl/[64px]',
+					'md:text-3xl/[64px]',
+					'lg:text-4xl/[64px]'
+				]}
+			>
+				“Curated with care, designed<br class="hidden lg:inline" /> to shine -<br
+					class="lg:hidden"
+				/>
+				bring your vision to<br class="hidden lg:inline" /> life with Paillette.”
+			</p>
+			<a
+				href="/contact"
+				class={[
+					'font-evolventa border-black-sheep text-black-sheep bg-enoki rounded-full border px-[37px] py-[19px] text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px]',
+					'sm:text-lg/6'
+				]}>Get in touch</a
+			>
+		</div>
+	</div>
+</div>
 
 <section class={['bg-enoki pt-9 pb-16', 'lg:pt-12 lg:pb-20']}>
 	<h2
