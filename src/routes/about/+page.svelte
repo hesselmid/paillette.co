@@ -306,7 +306,7 @@
 	</div>
 </section>
 
-<div class={['space-y-16 bg-white py-16', 'lg:space-y-20 lg:py-20']}>
+<div class={['space-y-16 bg-white pt-16', 'lg:space-y-20 lg:pt-20']}>
 	<Profile
 		name="Filipa"
 		order="123"
@@ -361,31 +361,31 @@
 	<div
 		class={[
 			'flex flex-col items-center gap-y-9',
-			'lg:flex-row lg:justify-center lg:gap-x-[54px] lg:gap-y-0',
-			'xl:gap-x-[106px]',
-			'2xl:gap-x-[246px]'
+			'lg:flex-row lg:justify-center lg:gap-x-[88px] lg:gap-y-0',
+			'xl:gap-x-[50px]',
+			'2xl:gap-x-[110px]'
 		]}
 	>
 		<enhanced:img
-			src="$lib/assets/AboutUs_12.png?w=358;431;482;716;862;964"
+			src="$lib/assets/AboutUs_12.png?w=358;448;656;540;584;716;896;1312;1080;1168"
 			alt=""
-			sizes="(min-width: 1280px) 482px, (min-width: 640px) 431px, 358px"
-			class={['h-auto w-[358px]', 'sm:w-[431px]', 'xl:w-[482px]']}
+			sizes="(min-width: 1280px) 584px,(min-width: 1024px) 540px,(min-width: 768px) 656px, (min-width: 640px) 448, 358px"
+			class={['h-auto w-[358px]', 'sm:w-[448px]', 'md:w-[656px]', 'lg:w-[540px]', 'xl:w-[584px]']}
 			draggable="false"
 		/>
 		<div class={['flex flex-col items-center gap-y-9', 'lg:gap-y-12']}>
 			<p
 				class={[
 					'font-cormorant text-black-sheep text-center text-lg/[64px] font-light',
-					'sm:text-2xl/[64px]',
-					'md:text-3xl/[64px]',
+					'sm:max-w-[356px] sm:text-2xl/[64px]',
+					'md:max-w-none md:text-3xl/[64px]',
 					'lg:text-4xl/[64px]'
 				]}
 			>
-				“Curated with care, designed<br class="hidden lg:inline" /> to shine -<br
-					class="lg:hidden"
+				“Every print tells<br class="hidden lg:inline xl:hidden" /> a story.<br
+					class="sm:hidden md:inline lg:hidden xl:inline"
 				/>
-				bring your vision to<br class="hidden lg:inline" /> life with Paillette.”
+				Make yours<br class="hidden lg:inline xl:hidden" /> sparkle with Paillette.”
 			</p>
 			<a
 				href="/contact"
