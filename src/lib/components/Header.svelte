@@ -10,7 +10,7 @@
 		{ href: '/services', label: 'Services' },
 		{ href: '/about', label: 'About' },
 		{ href: '/community', label: 'Community' },
-		{ href: '/threads-and-thoughts', label: 'Threads & Thoughts' },
+		// { href: '/threads-and-thoughts', label: 'Threads & Thoughts' },
 		{ href: '/contact', label: 'Contact' },
 		{ href: '/faq', label: 'FAQ' }
 	];
