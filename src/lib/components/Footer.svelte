@@ -52,9 +52,7 @@
 					<h3 class="font-evolventa text-xs/[16px] text-[#b1b2ae] uppercase">Designers</h3>
 					<a href="/community" class="font-evolventa text-black-sheep text-base/[21px]">Community</a
 					>
-					<a href="/threads-and-thoughts" class="font-evolventa text-black-sheep text-base/[21px]"
-						>T & T</a
-					>
+					<a href="#" class="font-evolventa text-black-sheep text-base/[21px]">T & T</a>
 				</div>
 			</div>
 		</div>
@@ -71,12 +69,8 @@
 			<span class="font-evolventa text-black-sheep text-xs/4 uppercase"
 				>© {new Date().getFullYear()} Paillette</span
 			>
-			<a href="/terms-and-conditions" class="font-evolventa text-black-sheep text-xs/4 uppercase"
-				>Terms & Conditions</a
-			>
-			<a href="/privacy-policy" class="font-evolventa text-black-sheep text-xs/4 uppercase"
-				>Privacy Policy</a
-			>
+			<a href="#" class="font-evolventa text-black-sheep text-xs/4 uppercase">Terms & Conditions</a>
+			<a href="#" class="font-evolventa text-black-sheep text-xs/4 uppercase">Privacy Policy</a>
 		</div>
 	</div>
 </footer>
