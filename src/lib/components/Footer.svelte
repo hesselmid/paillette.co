@@ -52,7 +52,10 @@
 					<h3 class="font-evolventa text-xs/[16px] text-[#b1b2ae] uppercase">Designers</h3>
 					<a href="/community" class="font-evolventa text-black-sheep text-base/[21px]">Community</a
 					>
-					<a href="#" class="font-evolventa text-black-sheep text-base/[21px]">T & T</a>
+					<a
+						href="https://pailletteco.substack.com"
+						class="font-evolventa text-black-sheep text-base/[21px]">T & T</a
+					>
 				</div>
 			</div>
 		</div>
