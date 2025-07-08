@@ -152,3 +152,65 @@
 		/>
 	</div>
 </div>
+
+<section class={['bg-enoki py-16', 'lg:py-20']}>
+	<div
+		class={[
+			'flex flex-col items-center gap-y-9',
+			'md:gap-y-12',
+			'xl:flex-row-reverse xl:items-start xl:justify-center xl:gap-x-[129px] xl:gap-y-0',
+			'2xl:ml-[43px] 2xl:gap-x-[267px]'
+		]}
+	>
+		<div class={['flex flex-col items-center gap-y-9', 'lg:gap-y-12', 'xl:mt-[6px]', '2xl:mt-0']}>
+			<h2
+				class={[
+					'font-cormorant text-black-sheep max-w-[358px] text-center text-5xl/[58px] font-light',
+					'sm:max-w-[514px] sm:text-6xl/[73px]',
+					'md:max-w-[603px] md:text-7xl/[87px]',
+					'lg:max-w-[813px]',
+					'xl:max-w-[603px]'
+				]}
+			>
+				“Threads & Thoughts: The latest industry insights”
+			</h2>
+			<p
+				class={[
+					'font-evolventa text-black-sheep max-w-[358px] text-center text-lg/[24px]',
+					'sm:max-w-[514px] sm:text-2xl/[32px]',
+					'md:max-w-[603px]',
+					'lg:max-w-[535px]'
+				]}
+			>
+				Stay in the know with Threads & Thoughts, our curated collection of must-read articles and
+				updates shaping the fashion and design industries. Whether it’s groundbreaking news,
+				cultural shifts, or emerging trends, this is where we share the stories that impact our
+				community.
+			</p>
+		</div>
+		<div
+			class={[
+				'flex flex-col items-center gap-y-9',
+				'sm:gap-y-0',
+				'md:-translate-x-[26px]',
+				'lg:-translate-x-0'
+			]}
+		>
+			<enhanced:img
+				src="$lib/assets/DC_8new 1.png?w=358;420;716;840"
+				alt=""
+				sizes="(min-width: 640px) 420px, 358px"
+				class={['h-auto w-[358px]', 'sm:w-[420px]']}
+				draggable="false"
+			/>
+			<a
+				href="https://pailletteco.substack.com"
+				class={[
+					'font-evolventa border-black-sheep text-black-sheep rounded-full border px-[37px] py-[19px] text-center text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px]',
+					'sm:translate-x-[53px] sm:-translate-y-[88px] sm:self-end sm:text-lg/6',
+					'lg:translate-x-[95px]'
+				]}>Read our<br /> latest articles</a
+			>
+		</div>
+	</div>
+</section>
