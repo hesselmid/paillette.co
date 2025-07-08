@@ -108,7 +108,7 @@
 	</div>
 </div>
 
-<div class={['bg-white py-16', 'lg:py-20']}>
+<div class={['space-y-16 bg-white py-16', 'lg:space-y-20 lg:py-20']}>
 	<div
 		class={[
 			'flex flex-col items-center gap-y-9',
@@ -154,6 +154,33 @@
 			class={['h-auto w-[358px]', 'sm:w-[492px]', '2xl:w-[566px]']}
 			draggable="false"
 		/>
+	</div>
+
+	<div>
+		<h2
+			class={[
+				'font-apfel-grotezk text-black-sheep text-center text-4xl/[46px]',
+				'sm:text-5xl/[62px]',
+				'md:text-6xl/[77px]'
+			]}
+		>
+			Meet our Paillette<br /> Ambassadors
+		</h2>
+		<div class="mt-[19px] flex flex-col items-center gap-y-[11px]">
+			<button
+				class="font-apfel-grotezk-brukt text-black-sheep rotate-90 cursor-pointer text-[112px]/[114px]"
+				>&lt;</button
+			>
+			<div class="flex flex-col items-center gap-y-5">
+				<div class="size-[296px] rounded-[10px] shadow-[5px_5px_20px_rgba(0,0,0,0.05)]"></div>
+				<div class="size-[296px] shadow-[5px_5px_20px_rgba(0,0,0,0.05)]"></div>
+				<div class="size-[296px] rounded-[10px] bg-[#fff4cf] p-4"></div>
+			</div>
+			<button
+				class="font-apfel-grotezk-brukt text-black-sheep rotate-90 cursor-pointer text-[112px]/[114px]"
+				>&gt;</button
+			>
+		</div>
 	</div>
 </div>
 
