@@ -157,6 +157,45 @@
 	</div>
 </div>
 
+<div class={['bg-enoki py-16', 'lg:py-20']}>
+	<div
+		class={[
+			'flex flex-col items-center gap-y-9',
+			'lg:-ml-[11px] lg:flex-row-reverse lg:justify-center lg:gap-x-[98px] lg:gap-y-0',
+			'xl:ml-0 xl:gap-x-[308px]',
+			'2xl:ml-[4px] 2xl:gap-x-[360px]'
+		]}
+	>
+		<enhanced:img
+			src="$lib/assets/NRAL BW Logo Mid 3.png?w=305;416;610;832"
+			alt=""
+			sizes="(min-width: 1280px) 416px, 305px"
+			class={['h-auto w-[305px]', 'xl:w-[416px]']}
+			draggable="false"
+		/>
+		<div class={['flex flex-col items-center gap-y-9', 'md:gap-y-0']}>
+			<p
+				class={[
+					'font-cormorant text-black-sheep max-w-[270px] text-center text-4xl/[64px] font-light',
+					'sm:max-w-[428px] sm:text-5xl/[64px]',
+					'md:max-w-[428px] md:text-left'
+				]}
+			>
+				"Looking for fresh inspiration? Follow Never Reading Always Looking."
+			</p>
+			<a
+				href="https://www.instagram.com/neverreadingalwayslooking/"
+				target="_blank"
+				class={[
+					'font-evolventa border-black-sheep text-black-sheep rounded-full border px-[37px] py-[19px] text-center text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px]',
+					'sm:text-lg/6',
+					'md:self-end'
+				]}>Go to NRAL<br />instagram</a
+			>
+		</div>
+	</div>
+</div>
+
 <section class={['bg-white py-16', 'lg:py-20']}>
 	<div
 		class={[
