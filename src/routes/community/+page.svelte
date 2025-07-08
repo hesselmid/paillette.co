@@ -163,7 +163,7 @@
 			'flex flex-col items-center gap-y-16',
 			'lg:gap-y-20',
 			'xl:flex-row xl:justify-center xl:gap-x-[141px] xl:gap-y-0',
-			'2xl:-mr-[7px] 2xl:gap-x-[193px]'
+			'2xl:ml-[7px] 2xl:gap-x-[193px]'
 		]}
 	>
 		<div class={['flex flex-col items-center gap-y-9', 'lg:gap-y-12']}>
