@@ -5,6 +5,10 @@
 
 <svelte:head>
 	<title>Community | Paillette</title>
+	<meta
+		name="description"
+		content="Advance your print design career in Paillette’s Community. Level up, earn more, and access guides, mentorship and exclusive events for emerging designers."
+	/>
 </svelte:head>
 
 <div class={['bg-white py-16', 'lg:py-20']}>
@@ -152,6 +156,84 @@
 		/>
 	</div>
 </div>
+
+<section class={['bg-white py-16', 'lg:py-20']}>
+	<div
+		class={[
+			'flex flex-col items-center gap-y-16',
+			'lg:gap-y-20',
+			'xl:flex-row xl:justify-center xl:gap-x-[141px] xl:gap-y-0',
+			'2xl:-mr-[7px] 2xl:gap-x-[193px]'
+		]}
+	>
+		<div class={['flex flex-col items-center gap-y-9', 'lg:gap-y-12']}>
+			<h2
+				class={[
+					'text-black-sheep font-apfel-grotezk max-w-[390px] text-center text-5xl/[62px]',
+					'sm:max-w-[395px] sm:text-6xl/[77px]'
+				]}
+			>
+				Exciting Events Coming Soon!
+			</h2>
+			<p
+				class={[
+					'text-black-sheep font-evolventa max-w-[358px] text-center text-lg/[24px]',
+					'sm:max-x-[452px] sm:text-2xl/[32px]',
+					'md:max-w-[535px]'
+				]}
+			>
+				At Paillette, we’re not just a platform—we’re building a vibrant community. Stay tuned for
+				upcoming events designed to connect, inspire, and empower our talented designers. From
+				workshops and industry panels to creative meet-ups, there’s so much in store. Sign up for
+				updates and be the first to know when the next event is announced. Let’s create, connect,
+				and grow together!
+			</p>
+		</div>
+		<div class={['space-y-9', 'lg:space-y-12']}>
+			<h3
+				class={[
+					'font-apfel-grotezk-brukt text-black-sheep max-w-[358px] text-center text-5xl/[62px]',
+					'sm:max-w-none sm:text-6xl/[77px]'
+				]}
+			>
+				Get our newsletter.
+			</h3>
+			<form class={['mx-auto flex max-w-[358px] flex-col gap-y-5', 'sm:max-w-[456px]']}>
+				<div>
+					<label for="fname" class="sr-only">First Name</label>
+					<input
+						type="text"
+						name="fname"
+						id="fname"
+						placeholder="first name*"
+						class={[
+							'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full border-0 px-[38px] py-[20px] text-2xl/[32px]'
+						]}
+					/>
+				</div>
+				<div>
+					<label for="email" class="sr-only">Email</label>
+					<input
+						type="email"
+						name="email"
+						id="email"
+						placeholder="email address*"
+						class={[
+							'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full border-0 px-[38px] py-[20px] text-2xl/[32px]'
+						]}
+					/>
+				</div>
+				<button
+					type="submit"
+					class={[
+						'font-evolventa border-black-sheep text-black-sheep cursor-pointer self-end rounded-full border px-[37px] py-[19px] text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px] disabled:cursor-not-allowed disabled:border disabled:bg-[#ececec] disabled:px-[37px] disabled:py-[19px]',
+						'sm:text-lg/6'
+					]}>Send</button
+				>
+			</form>
+		</div>
+	</div>
+</section>
 
 <section class={['bg-enoki py-16', 'lg:py-20']}>
 	<div
