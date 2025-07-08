@@ -1,6 +1,25 @@
 <script lang="ts">
 	import levels from './levels.json';
 	import Paillette from './Paillette.svelte';
+
+	import larissa from '../about/profiles/larissa.jpg?enhanced';
+	import linde from '../about/profiles/linde.jpg?enhanced';
+	import workLarissa from '../about/work/larissa.jpg?enhanced';
+	import workLinde from '../about/work/linde.jpg?enhanced';
+
+	const bios = {
+		larissa: `<p>As a Dutch-Singaporean designer raised between two continents I bring a global perspective of cultures, textures and traditions to my design practice. With a background in fashion and a love for textile design, I explore how colour, texture, and illustration come together to create expressive, otherworldly prints.<p>During my time studying Fashion for a bachelors, did my love for drawing and illustration truly take root, and it continues to be a core part of my creative process today. It is grounded in observation , intuition, and tactile experimentation. Drawing from life capturing fleeting moments, and often using photo references to further explore detail and nuance, I blend both analogue and digital tools to create richly layered prints often playing with an array of colour.<p>If you're looking to bring bold, story-rich prints to life, then my prints are the perfect fit!`,
+		linde: `<p>As a Belgian designer with a background in fashion and a love for crossing creative boundaries, I bring an interdisciplinary spirit to my print design practice. During my studies at KASK in Ghent, I was drawn to collaboration and experimentation—developing textiles alongside the Philippe Vandenberg Foundation for my bachelor’s collection, and working as a studio assistant to artist Peter Buggenhout during my master’s research.<p>My approach to print design is rooted in this same playful curiosity. Inspired by my environment, I combine paint, pencil, collage, and photography to build vibrant, graphic compositions—always seeking out a sense of loving chaos. Blurring the lines between mediums and embracing soft imperfection, I create prints that feel intuitive, layered, and alive.<p>If you're looking to inject boldness, personality, and a touch of poetic disorder into your project, my prints offer just that.`
+	};
+
+	let ambassador = $state('larissa');
+
+	function toggleAmbassador() {
+		ambassador = ambassador === 'larissa' ? 'linde' : 'larissa';
+	}
+
+	let shownProfilePic = $derived.by(() => (ambassador === 'larissa' ? larissa : linde));
+	let shownWorkPic = $derived.by(() => (ambassador === 'larissa' ? workLarissa : workLinde));
 </script>
 
 <svelte:head>
@@ -166,19 +185,87 @@
 		>
 			Meet our Paillette<br /> Ambassadors
 		</h2>
-		<div class="mt-[19px] flex flex-col items-center gap-y-[11px]">
+
+		<div
+			class={[
+				'mt-[19px] flex flex-col items-center gap-y-[11px]',
+				'sm:mt-9',
+				'md:mt-[68px] md:flex-row md:justify-center md:gap-x-8',
+				'lg:mt-[46px]',
+				'xl:mt-12'
+			]}
+		>
 			<button
-				class="font-apfel-grotezk-brukt text-black-sheep rotate-90 cursor-pointer text-[112px]/[114px]"
-				>&lt;</button
+				class={[
+					'font-apfel-grotezk-brukt text-black-sheep rotate-90 cursor-pointer text-[112px]/[114px]',
+					'md:rotate-0'
+				]}
+				onclick={toggleAmbassador}>&lt;</button
 			>
-			<div class="flex flex-col items-center gap-y-5">
-				<div class="size-[296px] rounded-[10px] shadow-[5px_5px_20px_rgba(0,0,0,0.05)]"></div>
-				<div class="size-[296px] shadow-[5px_5px_20px_rgba(0,0,0,0.05)]"></div>
-				<div class="size-[296px] rounded-[10px] bg-[#fff4cf] p-4"></div>
+			<div
+				class={[
+					'flex flex-col items-center gap-y-5',
+					'xl:flex-row xl:gap-x-6 xl:gap-y-0',
+					'2xl:gap-x-8'
+				]}
+			>
+				<div
+					class={[
+						'size-[296px] rounded-[10px] shadow-[5px_5px_20px_rgba(0,0,0,0.05)]',
+						'sm:size-[524px]',
+						'xl:size-[320px]',
+						'2xl:size-[380px]'
+					]}
+				>
+					<enhanced:img
+						src={shownWorkPic}
+						alt="Larissa's work"
+						class="h-full w-full rounded-[10px] object-cover object-center"
+						draggable="false"
+					/>
+				</div>
+				<div
+					class={[
+						'size-[296px] shadow-[5px_5px_20px_rgba(0,0,0,0.05)]',
+						'sm:size-[524px]',
+						'xl:size-[320px]',
+						'2xl:size-[380px]'
+					]}
+				>
+					<enhanced:img
+						src={shownProfilePic}
+						alt=""
+						class="h-[216px] w-full object-cover object-center sm:h-[396px] xl:h-[236px] 2xl:h-[284px]"
+						draggable="false"
+					/>
+					<div
+						class={[
+							'font-evolventa text-black-sheep rounded-b-[10px] bg-[#cdc526] px-4 pt-8 pb-4 text-2xl/[32px]',
+							'sm:pt-20',
+							'xl:pt-9',
+							'2xl:pt-12'
+						]}
+					>
+						{ambassador === 'larissa' ? 'Larissa' : 'Linde'}
+					</div>
+				</div>
+				<div
+					class={[
+						'font-evolventa text-black-sheep size-[296px] space-y-[21px] overflow-y-scroll rounded-[10px] bg-[#fff4cf] p-4 text-base/[21px] [&::-webkit-scrollbar]:w-6 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#cdc526] [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:border [&::-webkit-scrollbar-track]:border-[#cdc526] [&::-webkit-scrollbar-track]:bg-[#fff4cf]',
+						'sm:size-[524px]',
+						'xl:size-[320px]',
+						'2xl:size-[380px]'
+					]}
+				>
+					{@html bios[ambassador]}
+				</div>
 			</div>
 			<button
-				class="font-apfel-grotezk-brukt text-black-sheep rotate-90 cursor-pointer text-[112px]/[114px]"
-				>&gt;</button
+				class={[
+					'font-apfel-grotezk-brukt text-black-sheep rotate-90 cursor-pointer text-[112px]/[114px]',
+					'md:rotate-0'
+				]}
+				onclick={toggleAmbassador}>&gt;</button
 			>
 		</div>
 	</div>
