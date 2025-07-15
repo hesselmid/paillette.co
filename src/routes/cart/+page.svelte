@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { slide } from 'svelte/transition';
 
 	let { data, form } = $props();
 
@@ -31,10 +30,12 @@
 			<hr class={['border-black-sheep mt-9 border-t', 'lg:mt-12']} />
 
 			{#if form?.removedItem}
-				<div class="flex items-center gap-x-[59px] py-9" transition:slide={{ duration: 300 }}>
-					<div
-						class="size-[115px] shrink-0 rounded-[10px] bg-[#d9d9d9] shadow-[5px_5px_20px_rgba(0,0,0,0.05)]"
-					></div>
+				<div class="flex items-center gap-x-[59px] py-9">
+					<img
+						src={form.removedItem.imageUrl}
+						alt="Image of {form.removedItem.printName}"
+						class="size-[115px] shrink-0 rounded-[10px] object-cover shadow-[5px_5px_20px_rgba(0,0,0,0.05)]"
+					/>
 
 					<div>
 						<div class="font-evolventa text-black-sheep text-xl/[27px]">
@@ -48,7 +49,7 @@
 							<button
 								type="submit"
 								class={[
-									'font-evolventa text-black-sheep mt-3 text-xs/[16px] underline',
+									'font-evolventa text-black-sheep mt-3 cursor-pointer text-xs/[16px]',
 									'sm:mt-1.5'
 								]}>Undo</button
 							>
@@ -61,7 +62,7 @@
 			{#if data.cartItems.length > 0}
 				<div class={['mt-9 flex flex-col gap-y-9', 'lg:mt-12 lg:gap-y-12']}>
 					{#each data.cartItems as item (item.printId)}
-						<div class="flex items-center gap-x-[63px]" transition:slide|local>
+						<div class="flex items-center gap-x-[63px]">
 							<a
 								href={`/shop/${item.printId}`}
 								class="block size-[151px] shrink-0 rounded-[10px] bg-[#d9d9d9] shadow-[5px_5px_20px_rgba(0,0,0,0.05)] sm:size-[200px]"
@@ -75,28 +76,22 @@
 								{/if}
 							</a>
 
-							<div>
+							<div class="flex flex-col gap-y-1.5">
 								<div class="font-evolventa text-black-sheep text-xl/[27px]">
 									{item.printName}
 								</div>
-								<p class="font-evolventa text-black-sheep text-lg/[24px]">
-									{item.priceFormatted}
-								</p>
-								<div class="mt-1.5 flex gap-x-4">
-									<form method="POST" action="?/remove" use:enhance>
-										<input type="hidden" name="printId" value={item.printId} />
-										<button
-											type="submit"
-											class="font-evolventa text-black-sheep text-xs/[16px] underline"
-											>Remove from bag</button
-										>
-									</form>
-									<a
-										href={`/wishlist?add=${item.printId}`}
-										class="font-evolventa text-black-sheep text-xs/[16px] underline"
-										>Add to wishlist</a
+								<form method="POST" action="?/remove" use:enhance>
+									<input type="hidden" name="printId" value={item.printId} />
+									<button
+										type="submit"
+										class="font-evolventa text-black-sheep cursor-pointer text-xs/[16px]"
+										>Remove from bag</button
 									>
-								</div>
+								</form>
+								<a
+									href={`/wishlist?add=${item.printId}`}
+									class="font-evolventa text-black-sheep text-xs/[16px]">Add to wishlist</a
+								>
 							</div>
 						</div>
 					{/each}

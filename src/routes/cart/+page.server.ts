@@ -72,11 +72,29 @@ export const actions: Actions = {
 
 		if (isNaN(printId)) return fail(400, { message: 'Invalid Print ID' });
 
-		// Fetch item details before deleting to return for "undo" feature
+		// Subquery to get the first image URL for a print
+		const firstColorwaySubquery = db.$with('first_colorway').as(
+			db
+				.select({
+					printId: colorwaysTable.printId,
+					imageUrl: sql<string>`min(${colorwaysTable.imageUrl})`.as('imageUrl')
+				})
+				.from(colorwaysTable)
+				.where(sql`${colorwaysTable.imageUrl} IS NOT NULL`)
+				.groupBy(colorwaysTable.printId)
+		);
+
+		// Fetch item details including the image URL before deleting
 		const itemToRemove = await db
-			.select({ printName: printsTable.name, printId: printsTable.id })
+			.with(firstColorwaySubquery)
+			.select({
+				printName: printsTable.name,
+				printId: printsTable.id,
+				imageUrl: firstColorwaySubquery.imageUrl
+			})
 			.from(cartItemsTable)
 			.innerJoin(printsTable, eq(cartItemsTable.printId, printsTable.id))
+			.leftJoin(firstColorwaySubquery, eq(printsTable.id, firstColorwaySubquery.printId))
 			.where(and(eq(cartItemsTable.userId, userId), eq(cartItemsTable.printId, printId)))
 			.limit(1);
 
