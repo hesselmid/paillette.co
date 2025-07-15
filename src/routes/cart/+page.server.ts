@@ -55,7 +55,7 @@ export const load = async ({ locals }) => {
 
 		return {
 			cartItems: formattedCart,
-			footerColor: 'white'
+			footerColor: 'enoki'
 		};
 	} catch (e) {
 		console.error(`Error fetching cart for user ID ${userId}:`, e);
