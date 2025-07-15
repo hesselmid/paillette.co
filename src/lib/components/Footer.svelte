@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
+
+	let { user } = $props();
 </script>
 
 <footer class={['py-8', page.data.footerColor === 'white' ? 'bg-white' : 'bg-enoki']}>
@@ -29,7 +31,10 @@
 				<div class="flex flex-col items-start gap-y-4">
 					<h3 class="font-evolventa text-xs/[16px] text-[#b1b2ae] uppercase">Textiles</h3>
 					<a href="/faq" class="font-evolventa text-black-sheep text-base/[21px]">FAQ</a>
-					<a href="/login" class="font-evolventa text-black-sheep text-base/[21px]">Shop</a>
+					<a
+						href={user && user.role === 'customer' ? '/shop' : '/login'}
+						class="font-evolventa text-black-sheep text-base/[21px]">Shop</a
+					>
 				</div>
 				<div class={['flex flex-col items-start gap-y-4', 'lg:order-4']}>
 					<h3 class="font-evolventa text-xs/[16px] text-[#b1b2ae] uppercase">Contact</h3>

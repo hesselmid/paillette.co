@@ -12,4 +12,4 @@
 	{@render children()}
 </main>
 
-<Footer />
+<Footer user={data.user} />
