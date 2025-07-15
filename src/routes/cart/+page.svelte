@@ -19,7 +19,10 @@
 
 			<div class={['flex items-center gap-x-[59px] py-9', 'lg:pt-[45px] lg:pb-[46px]']}>
 				<div
-					class="size-[115px] shrink-0 rounded-[10px] bg-[#d9d9d9] shadow-[5px_5px_20px_rgba(0,0,0,0.05)]"
+					class={[
+						'size-[115px] shrink-0 rounded-[10px] bg-[#d9d9d9] shadow-[5px_5px_20px_rgba(0,0,0,0.05)]',
+						'sm:size-[151px] sm:gap-x-[63px]'
+					]}
 				></div>
 
 				<div>
@@ -27,17 +30,53 @@
 					<p class="font-evolventa text-black-sheep mt-1.5 text-xs/[16px]">
 						You have removed this item from your shopping bag
 					</p>
-					<button type="button" class="font-evolventa text-black-sheep mt-3 text-xs/[16px]"
+					<button
+						type="button"
+						class={['font-evolventa text-black-sheep mt-3 text-xs/[16px]', 'sm:mt-1.5']}
 						>Undo</button
 					>
 				</div>
 			</div>
 
 			<hr class="border-black-sheep border-t" />
+
+			<div class={['mt-9 flex flex-col gap-y-9', 'lg:mt-12 lg:gap-y-12']}>
+				{#each { length: 2 }}
+					<div class={['flex items-center gap-x-[63px]', 'sm:gap-x-[80px]']}>
+						<div
+							class={[
+								'size-[151px] shrink-0 rounded-[10px] bg-[#d9d9d9] shadow-[5px_5px_20px_rgba(0,0,0,0.05)]',
+								'sm:size-[300px]'
+							]}
+						></div>
+
+						<div>
+							<div class="font-evolventa text-black-sheep text-xl/[27px]">Print name</div>
+							<button type="button" class="font-evolventa text-black-sheep mt-1.5 text-xs/[16px]"
+								>Remove from bag</button
+							><button type="button" class="font-evolventa text-black-sheep mt-1.5 text-xs/[16px]"
+								>Add to wishlist</button
+							>
+						</div>
+					</div>
+				{/each}
+			</div>
 		</div>
 
 		<div class={['lg:w-[299px]', 'xl:w-[442px]']}>
 			<h2 class="font-cormorant text-black-sheep text-4xl/[44px] font-light">Order summary</h2>
+
+			<div class={['mt-9 flex items-center justify-between', 'lg:mt-12']}>
+				<div class="font-evolventa text-black-sheep text-xl/[27px]">Number of items</div>
+				<div class="font-evolventa text-black-sheep text-xl/[27px]">2</div>
+			</div>
+
+			<hr class="border-black-sheep my-[28px] border-t" />
+
+			<div class="flex items-center justify-between">
+				<div class="font-evolventa text-black-sheep text-xl/[27px]">Item subtotal</div>
+				<div class="font-evolventa text-black-sheep text-xl/[27px]">€4000</div>
+			</div>
 
 			<button
 				type="submit"
