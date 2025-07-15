@@ -1,6 +1,12 @@
 import { error, fail } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
-import { printsTable, colorwaysTable, usersTable, wishlistItemsTable } from '$lib/server/db/schema';
+import {
+	printsTable,
+	colorwaysTable,
+	usersTable,
+	wishlistItemsTable,
+	cartItemsTable
+} from '$lib/server/db/schema';
 import { eq, and } from 'drizzle-orm';
 import type { Actions } from './$types';
 
@@ -54,7 +60,18 @@ export const load = async ({ params, locals }) => {
 			.where(and(eq(wishlistItemsTable.userId, userId), eq(wishlistItemsTable.printId, printId)))
 			.limit(1);
 
-		const [results, wishlistCheck] = await Promise.all([resultsPromise, wishlistCheckPromise]);
+		let isInCart = false;
+		const cartCheckPromise = db
+			.select({ printId: cartItemsTable.printId })
+			.from(cartItemsTable)
+			.where(and(eq(cartItemsTable.userId, userId), eq(cartItemsTable.printId, printId)))
+			.limit(1);
+
+		const [results, wishlistCheck, cartCheck] = await Promise.all([
+			resultsPromise,
+			wishlistCheckPromise,
+			cartCheckPromise
+		]);
 
 		if (results.length === 0) {
 			error(404, 'Print not found');
@@ -62,6 +79,10 @@ export const load = async ({ params, locals }) => {
 
 		if (wishlistCheck.length > 0) {
 			isInWishlist = true;
+		}
+
+		if (cartCheck.length > 0) {
+			isInCart = true;
 		}
 
 		const firstResult = results[0];
@@ -93,6 +114,7 @@ export const load = async ({ params, locals }) => {
 			print: printDetails,
 			colorways: uniqueColorways,
 			isInWishlist,
+			isInCart,
 			footerColor: 'white'
 		};
 	} catch (e) {
@@ -150,6 +172,39 @@ export const actions = {
 		} catch (e) {
 			console.error(`Error removing print ${printId} from wishlist for user ${userId}:`, e);
 			return fail(500, { message: 'Could not remove from wishlist.' });
+		}
+	},
+
+	addToCart: async ({ params, locals }) => {
+		if (!locals.user || locals.user.role !== 'customer') {
+			return fail(403, { message: 'Forbidden' });
+		}
+		const printId = parseInt(params.printId, 10);
+		if (isNaN(printId)) {
+			return fail(400, { message: 'Invalid Print ID' });
+		}
+		const userId = locals.user.id;
+
+		try {
+			const printExists = await db
+				.select({ id: printsTable.id, isSold: printsTable.isSold })
+				.from(printsTable)
+				.where(eq(printsTable.id, printId))
+				.limit(1);
+
+			if (!printExists.length) {
+				return fail(404, { message: 'Print not found' });
+			}
+			if (printExists[0].isSold) {
+				return fail(400, { message: 'This print is already sold.' });
+			}
+
+			await db.insert(cartItemsTable).values({ userId, printId }).onConflictDoNothing();
+
+			return { success: true, addedToCart: true };
+		} catch (e) {
+			console.error(`Error adding print ${printId} to cart for user ${userId}:`, e);
+			return fail(500, { message: 'Could not add to cart.' });
 		}
 	}
 } satisfies Actions;

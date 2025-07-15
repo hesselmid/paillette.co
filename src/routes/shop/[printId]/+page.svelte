@@ -20,6 +20,9 @@
 	let isInWishlist = $derived(data.isInWishlist);
 	let wishlistActionInProgress = $state(false);
 
+	let isInCart = $derived(data.isInCart);
+	let cartActionInProgress = $state(false);
+
 	// Effect to initialize and update main image based on URL or data
 	$effect(() => {
 		const colorwayIdFromUrlString = page.url.searchParams.get('colorway');
@@ -51,6 +54,11 @@
 	$effect(() => {
 		// Update wishlist status when data changes
 		isInWishlist = data.isInWishlist;
+	});
+
+	$effect(() => {
+		// Update cart status when data changes
+		isInCart = data.isInCart;
 	});
 
 	// Prepare items for the "Colorways" Carousel
@@ -189,14 +197,37 @@
 								'sm:text-lg/6'
 							]}>Sold Out</button
 						>
-					{:else}
-						<button
-							type="button"
+					{:else if isInCart}
+						<a
+							href="/cart"
 							class={[
-								'font-evolventa text-black-sheep bg-enoki border-black-sheep flex w-full cursor-pointer justify-center rounded-full border py-[19px] text-base/[21px] lowercase shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:py-[15px]',
+								'font-evolventa text-black-sheep bg-enoki border-dementer-green flex w-full cursor-pointer justify-center rounded-full border py-[19px] text-base/[21px] lowercase shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:py-[15px]',
 								'sm:text-lg/6'
-							]}>Add to bag</button
+							]}>In bag - View Cart</a
 						>
+					{:else}
+						<form
+							method="POST"
+							action="?/addToCart"
+							use:enhance={() => {
+								cartActionInProgress = true;
+								return async ({ update }) => {
+									await update();
+									cartActionInProgress = false;
+								};
+							}}
+						>
+							<button
+								type="submit"
+								disabled={cartActionInProgress}
+								class={[
+									'font-evolventa text-black-sheep bg-enoki border-black-sheep flex w-full cursor-pointer justify-center rounded-full border py-[19px] text-base/[21px] lowercase shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:py-[15px]',
+									'sm:text-lg/6'
+								]}
+							>
+								{#if cartActionInProgress}Adding...{:else}Add to bag{/if}
+							</button>
+						</form>
 
 						{#if isInWishlist}
 							<form
