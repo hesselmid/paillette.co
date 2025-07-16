@@ -31,6 +31,8 @@ export const customerProfilesTable = sqliteTable('customer_profiles', {
 		.primaryKey()
 		.references(() => usersTable.id, { onDelete: 'cascade' }),
 	companyName: text('company_name'),
+	invoiceEmail: text('invoice_email'),
+	vatNumber: text('vat_number'),
 	...addressFields,
 	createdAt: integer('created_at', { mode: 'timestamp_ms' })
 		.notNull()

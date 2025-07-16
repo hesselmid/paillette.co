@@ -6,3 +6,5 @@ export * from './categories';
 export * from './color_attributes';
 export * from './wishlist';
 export * from './cart';
+export * from './orders';
+export * from './order_items';
