@@ -111,6 +111,9 @@ export const actions = {
 		}
 
 		const form = await superValidate(request, zod(checkoutSchema));
+
+		console.log(form);
+
 		if (!form.valid) {
 			return fail(400, { form });
 		}
@@ -169,8 +172,6 @@ export const actions = {
 			}
 
 			// --- MOLLIE INTEGRATION WOULD GO HERE ---
-			// For now, redirecting to a success page
-			redirect(303, `/account/orders/${newOrder.id}`);
 		} catch (e) {
 			console.error('Checkout error:', e);
 			return fail(500, { form, message: 'An unexpected error occurred during checkout.' });
