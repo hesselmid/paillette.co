@@ -102,7 +102,7 @@
 		<form method="POST" action="/logout" class={['mt-9 flex justify-center', 'lg:mt-10']}>
 			<button
 				type="submit"
-				class="border-black-sheep font-apfel-grotezk-brukt text-black-sheep border-b pb-1 text-3xl/[38px]"
+				class="border-black-sheep font-apfel-grotezk-brukt text-black-sheep cursor-pointer border-b pb-1 text-3xl/[38px]"
 				>Sign Out</button
 			>
 		</form>

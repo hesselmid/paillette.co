@@ -48,7 +48,7 @@
 				'xl:max-w-[630px] xl:text-left'
 			]}
 		>
-			“Paillette bridging emerging talent with forward thinking brands”
+			“Paillette: bridging emerging talent with forward thinking brands”
 		</h1>
 		<enhanced:img
 			src="$lib/assets/AboutUs_10.png?w=358;448;654;806;490;562;716;896;1308;1612;980;1124"
@@ -94,8 +94,8 @@
 			<p>
 				In an industry where fresh perspectives and quality craftsmanship can set a brand apart,
 				Paillette offers a unique source of exclusive, one-of-a-kind prints created by rising design
-				talent. After years running my own design studio as a textile developer and Head of design
-				at a textile company for both high street and high-end brands, I founded Paillette to
+				talent. After years running my own design studio as a textile developer and Head of Design
+				at a textile company for both high-street and high-end brands, I founded Paillette to
 				address a gap I often saw: access to original, thoughtful design that connects brand
 				identity with impactful storytelling. I wanted to create a space that brings together
 				ambitious designers and visionary brands, empowering both to elevate their craft.
@@ -146,7 +146,7 @@
 		At Paillette, we believe meaningful design starts with the people behind it. From our founder to
 		our ambassadors and emerging designers, each person brings a unique perspective and shared
 		commitment to reimagining how creativity moves through the fashion industry. Meet the
-		individuals shaping Paillette — and the future of print.
+		individuals shaping Paillette — and the future of print design.
 	</p>
 </div>
 
@@ -305,7 +305,7 @@
 		</p>
 		<p>
 			As Paillette grows, this community remains at its core — driving new connections, fresh ideas,
-			and shaping the future of print.
+			and shaping the future of print design.
 		</p>
 	</div>
 </section>

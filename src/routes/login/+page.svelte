@@ -37,7 +37,7 @@
 				name="email"
 				id="email"
 				bind:value={$form.email}
-				placeholder="Email"
+				placeholder="email address"
 				required
 				disabled={$submitting}
 				aria-invalid={$errors.email ? 'true' : undefined}
@@ -65,7 +65,7 @@
 				'sm:text-lg/6'
 			]}
 		>
-			{#if $submitting}Sending OTP...{:else}Send OTP{/if}
+			{#if $submitting}Sending code...{:else}Continue{/if}
 		</button>
 	</form>
 </div>

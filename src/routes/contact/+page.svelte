@@ -100,7 +100,7 @@
 				name="company"
 				id="company"
 				bind:value={$form.company}
-				placeholder="which company do you represent*"
+				placeholder="company*"
 				aria-invalid={$errors.company ? 'true' : undefined}
 				class={[
 					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full border-0 px-[38px] py-[20px] text-base/[21px]',
@@ -126,7 +126,7 @@
 				name="email"
 				id="email"
 				bind:value={$form.email}
-				placeholder="e-mail address*"
+				placeholder="email address*"
 				aria-invalid={$errors.email ? 'true' : undefined}
 				class={[
 					'font-evolventa bg-foundation-white text-black-sheep placeholder:text-black-sheep w-full rounded-full border-0 px-[38px] py-[20px] text-base/[21px]',

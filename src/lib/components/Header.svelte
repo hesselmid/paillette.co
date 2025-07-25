@@ -6,13 +6,12 @@
 	let isOpen = $state(false);
 
 	const navLinks = [
-		{ href: '/', label: 'Home' },
 		{ href: '/services', label: 'Services' },
 		{ href: '/about', label: 'About' },
 		{ href: '/community', label: 'Community' },
 		{ href: 'https://pailletteco.substack.com', label: 'Threads & Thoughts' },
-		{ href: '/contact', label: 'Contact' },
-		{ href: '/faq', label: 'FAQ' }
+		{ href: '/faq', label: 'FAQ' },
+		{ href: '/contact', label: 'Contact' }
 	];
 
 	const loginInfo = $derived.by(() => {
@@ -137,6 +136,22 @@
 			]}
 		>
 			<ul class={['mx-[10px] mt-[10px] rounded-[10px] bg-white px-[30px] py-[10px]', 'md:flex']}>
+				<li>
+					<a
+						href="/"
+						class="font-evolventa text-black-sheep hover:bg-enoki inline-block rounded-[10px] px-[10px] pt-[6px] pb-[7px] text-base/[21px]"
+						>Home</a
+					>
+				</li>
+				{#if user && user.role === 'customer'}
+					<li>
+						<a
+							href="/shop"
+							class="font-evolventa text-black-sheep hover:bg-enoki inline-block rounded-[10px] px-[10px] pt-[6px] pb-[7px] text-base/[21px]"
+							>Shop</a
+						>
+					</li>
+				{/if}
 				{#each navLinks as link (link.href)}
 					<li>
 						<a

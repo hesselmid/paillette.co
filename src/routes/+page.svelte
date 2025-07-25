@@ -3,32 +3,32 @@
 
 	const faqs = [
 		{
-			question: 'Exclusive Designs, Made by Emerging Talent',
+			question: 'Exclusive designs, made by emerging talent',
 			answer:
 				'Every print at Paillette is a one-of-a-kind creation, crafted by emerging designers with fresh perspectives. When you buy a design, it’s yours alone—no repeats, no duplicates. Your brand gains a unique story to tell.'
 		},
 		{
-			question: 'A Distinctive Brand Aesthetic',
+			question: 'A distinctive brand aesthetic',
 			answer:
 				'From curated collections to seasonal trends, Paillette offers a visually cohesive selection that’s both unique and timeless. Let your brand stand out with designs that capture the spirit of now, shaped by tomorrow’s talent.'
 		},
 		{
-			question: 'Guided by Expertise, Shaped by Passion',
+			question: 'Guided by expertise, shaped by passion',
 			answer:
 				'At Paillette, each young designer is personally mentored by an industry expert, ensuring high-quality designs that balance innovation with market-ready execution. Your brand benefits from the energy of emerging talent, backed by a wealth of experience.'
 		},
 		{
-			question: 'Exclusive Rights and Full Creative Freedom',
+			question: 'Exclusive rights and full creative freedom',
 			answer:
-				'Our designs come with full exclusivity rights, including colorways and high-resolution files in repeat. For custom projects, collaborate with us from the beginning to create something uniquely tailored to your brand’s vision.'
+				'Our designs come with full exclusivity rights, several colorways and high-resolution files. For custom projects, collaborate with us from the beginning to create something uniquely tailored to your brand’s vision.'
 		},
 		{
-			question: 'Ethical and Impactful Collaboration',
+			question: 'Ethical and impactful collaboration',
 			answer:
 				'When you choose Paillette, you’re investing in the next generation of designers. Every purchase supports young creatives, providing them with fair pay, real-world experience, and visibility. Partner with us to make a meaningful impact in the design industry.'
 		},
 		{
-			question: 'Flexible Access to Fresh Talent Ready to Hire when your Ready',
+			question: 'Flexible access to fresh talent ready to hire when you’re ready',
 			answer:
 				'Through Paillette, brands can collaborate with an evolving talent pool of design students and recent graduates, gaining access to innovative print designs without the constraints of permanent contracts. If you’re impressed by a designer’s work and decide to hire them, it’s a perfect outcome—a young creative finds their path, and your brand benefits from a skilled designer who knows your vision and aesthetic.'
 		}
@@ -39,7 +39,7 @@
 	<title>Exclusive Print Designs | Paillette</title>
 	<meta
 		name="description"
-		content="Add a little shine to your story with exclusive, one-of-a-kind textile prints crafted by emerging designers. Shop or commission bespoke designs at Paillette."
+		content="Add a little shine to your story with exclusive, one-of-a-kind prints crafted by emerging designers. Shop or commission bespoke designs at Paillette."
 	/>
 </svelte:head>
 
@@ -69,7 +69,7 @@
 			/>
 			<h1
 				class={[
-					'font-cormorant text-black-sheep text-center text-4xl/[44px] font-light',
+					'font-cormorant text-black-sheep text-center text-4xl/[44px] font-light italic',
 					'sm:text-5xl/[58px]',
 					'md:text-6xl/[73px]',
 					'lg:text-left',
@@ -77,7 +77,7 @@
 					'2xl:text-8xl/[116px]'
 				]}
 			>
-				“add a little shine<br /> to your story”
+				“Add a little shine<br /> to your story”
 			</h1>
 		</div>
 	</div>

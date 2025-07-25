@@ -3,9 +3,9 @@
 
 	const brandFaqs = [
 		{
-			question: 'Do you show your collection at any textile fair?',
+			question: 'Do you show your collection at a textile fair?',
 			answer:
-				'Currently we do not show at any textile fair. At the moment, all our designs are digital, allowing our clients total freedom to bring our designs from the digital world to the physical world. We do offer a service to advise on material.'
+				'Currently we do not show at a textile fair. At the moment, all our designs are digital, allowing our clients total freedom to bring our designs from the digital world to the physical world. We do offer a service to advise on material use.'
 		},
 		{
 			question: 'Could a representative of Paillette come by our office for an in-person meeting?',
@@ -20,7 +20,7 @@
 		{
 			question: 'Are the designs sold in full exclusivity to the client?',
 			answer:
-				'Yes, when you purchase a design, it is sold exclusively to you and will no longer be available to other clients. We believe in providing unique, one-of-a-kind designs to each brand.'
+				'Yes, when you purchase a design, it is sold exclusively to you and will no longer be available for purchase. We believe in providing unique, one-of-a-kind designs to each brand.'
 		},
 		{
 			question: 'Can you modify the design/colorway according to the client’s need?',
@@ -34,14 +34,14 @@
 		},
 		{
 			question:
-				'Can you do a custom design for a client, based on the client’s briefing/moodboard?',
+				'Can you do a custom design for a client, based on the client’s moodboard/briefing?',
 			answer:
-				'Absolutely! We offer custom design services where we work closely with you to create a print that aligns with your vision. Send us your mood board or briefing, and we’ll take care of the rest.'
+				'Absolutely! We offer custom design services where we work closely with you to create a print that aligns with your vision. Send us your moodboard or briefing, and we’ll take care of the rest.'
 		},
 		{
 			question: 'How do you deliver the files?',
 			answer:
-				'Files are delivered in high-resolution formats such as 300dpi RGB TIFF files with color separations, in repeat. We ensure all files are print-ready and organized for easy use.'
+				'Files are delivered in high-resolution formats such as 300dpi RGB TIFF files with color separations, in repeat. We ensure all files are print-ready and organized for ease of use.'
 		},
 		{
 			question: 'Can you follow up on the sampling/development of the printed fabrics for us?',
@@ -56,7 +56,7 @@
 		{
 			question: 'What if I want to hire a designer directly after working together?',
 			answer:
-				"We’re thrilled when our designers find full-time opportunities through Paillette. To make this transition smooth, we ask brands to either begin with an initial project through Paillette or pay a hiring fee, supporting our platform's investment in talent development."
+				"We’re thrilled when our designers find full-time opportunities through Paillette. To make this transition smooth, we ask brands to either begin with an initial project through Paillette or pay a commission fee, supporting our platform's investment in talent development."
 		}
 	];
 
@@ -73,7 +73,7 @@
 				'Yes, we carefully curate our community of designers. The selection process involves reviewing your portfolio to ensure your work aligns with Paillette’s aesthetic and quality standards.'
 		},
 		{
-			question: 'Do I have to pay an amount to become part of the Paillette community?',
+			question: 'Do I have to pay to become part of the Paillette community?',
 			answer:
 				'No, designers do not need to pay to join Paillette. Our goal is to create a space where talented designers can thrive without financial barriers.'
 		},
@@ -89,7 +89,7 @@
 		},
 		{
 			question: 'Is it possible to discuss percentage rates?',
-			answer: `To keep things fair, we work with a Tier System that rewards designers as they progress.\n\nLevels:\n\nPaillette Beginner - 35% designer, 65% platform.\nPaillette Rising Talent - 40% designer, 60% platform.\nPaillette Pro - 50% designer, 50% platform.\nPaillette Master - 60% designer, 40% platform.\n\nHere (link) you can find more in-depth information on what each tier entails.`
+			answer: `To keep things fair, we work with a tier system that rewards designers as they progress. Levels: Paillette Beginner - 35% designer, 65% platform.\nPaillette Rising Talent - 40% designer, 60% platform. Paillette Pro - 50% designer, 50% platform.\nPaillette Master - 60% designer, 40% platform.`
 		},
 		{
 			question: 'What can I expect to learn from the coaching sessions?',
@@ -99,7 +99,7 @@
 		{
 			question: 'Can I get in touch with previous members to hear their testimonials?',
 			answer:
-				'At Paillette, we work with ambassadors who share their experiences. You can find their testimonials here. If you have further questions, email ambassadors@paillette.com, and we can connect you with one of them personally.'
+				'At Paillette, we work with ambassadors who share their experiences. You can find their testimonials on the Community page. If you have further questions, email info@paillette.com, and we can connect you with one of them personally.'
 		}
 	];
 

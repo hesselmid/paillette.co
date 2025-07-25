@@ -304,7 +304,7 @@
 					'font-evolventa border-black-sheep text-black-sheep rounded-full border px-[37px] py-[19px] text-center text-base/[21px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:border-[5px] hover:px-[33px] hover:py-[15px]',
 					'sm:text-lg/6',
 					'md:self-end'
-				]}>Go to NRAL<br />instagram</a
+				]}>Go to NRAL<br />Instagram</a
 			>
 		</div>
 	</div>
